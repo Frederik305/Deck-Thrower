@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lootScreen = GameObject.FindGameObjectWithTag("Loot Screen");
+        //lootScreen = GameObject.FindGameObjectWithTag("Loot Screen");
 
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
         numKills = 0;
 
-        endWave();
+        //endWave();
     }
 
     private void Update()
@@ -69,10 +69,10 @@ public class GameManager : MonoBehaviour
         numKills++;
 
         //If there are no more enemies, end the wave
-        if (numEnemies <= 0)
+        /*if (numEnemies <= 0)
         {
             endWave();
-        }
+        }*/
     }
 
     public void gameOver ()
@@ -99,8 +99,8 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    private void endWave () {
-        lootScreen.GetComponent<LootScreen>().activate(cardTypes);
+    /*private void endWave () {
+        //lootScreen.GetComponent<LootScreen>().activate(cardTypes);
 
         player.GetComponent<shoot>().setEnableShooting(false);
 
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<shoot>().setEnableShooting(true);
 
         //Adds the card the player chose to their inventory
-        player.GetComponent<shoot>().addCard(selectedCard.GetComponent<LootOption>().getTypeIndex());
+        //player.GetComponent<shoot>().addCard(selectedCard.GetComponent<LootOption>().getTypeIndex());
 
         spawnEnemies();
 
@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<playerMovement>().resetInvincibilityCounter();
         //Also, give them one extra health
         player.GetComponent<playerMovement>().raiseHealth();
-    }
+    }*/
 
     public void spawnEnemies ()
     {
