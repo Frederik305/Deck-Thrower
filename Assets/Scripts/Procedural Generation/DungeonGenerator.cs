@@ -41,23 +41,34 @@ public class DungeonGenerator : MonoBehaviour
             foreach (var exit in placedRoom.roomData.exits)
             {
                 RoomData newRoom = roomPrefabs[Random.Range(0, roomPrefabs.Count)];
-                List<RoomData.ExitPoint> matchingExits = FindMatchingExits(newRoom, exit);
 
-                if (matchingExits.Count == 0) continue;
+                // Group door positions for the placed room for this exit's direction.
+                List<List<Vector2Int>> placedGroups = GetExitGroups(placedRoom.roomData, exit.direction);
+                // Find the group that contains the current exit's position.
+                List<Vector2Int> placedGroup = placedGroups.Find(g => g.Contains(exit.position));
+                if (placedGroup == null)
+                    continue;
+                Vector2Int placedCenter = GetExitCenter(placedGroup);
 
-                List<Vector2Int> exitPositions = GetExitPositions(placedRoom.roomData, exit.direction);
-                List<Vector2Int> matchingPositions = GetExitPositions(newRoom, GetOppositeDirection(exit.direction));
-
-                Vector2Int newRoomPosition = placedRoom.gridPosition + GetDoorOffset(exit.direction, exitPositions, matchingPositions);
-
-                if (!Overlaps(newRoom, newRoomPosition))
+                // For the new room, get groups of door positions in the opposite direction.
+                List<List<Vector2Int>> newRoomGroups = GetExitGroups(newRoom, GetOppositeDirection(exit.direction));
+                foreach (var newRoomGroup in newRoomGroups)
                 {
-                    PlaceRoom(newRoom, newRoomPosition);
-                    return;
+                    Vector2Int newRoomCenter = GetExitCenter(newRoomGroup);
+                    Vector2Int newRoomPosition = placedRoom.gridPosition + GetDoorOffset(exit.direction, placedCenter, newRoomCenter);
+
+                    if (!Overlaps(newRoom, newRoomPosition))
+                    {
+                        PlaceRoom(newRoom, newRoomPosition);
+                        return;
+                    }
                 }
             }
         }
     }
+
+
+
 
     private List<Vector2Int> GetExitPositions(RoomData room, RoomData.Direction direction)
     {
@@ -114,27 +125,75 @@ public class DungeonGenerator : MonoBehaviour
     }
 
 
-    private Vector2Int GetDoorOffset(RoomData.Direction dir, List<Vector2Int> exitPositions, List<Vector2Int> matchingExitPositions)
+    private Vector2Int GetDoorOffset(RoomData.Direction dir, Vector2Int placedCenter, Vector2Int matchingCenter)
     {
-        Vector2Int exitCenter = GetExitCenter(exitPositions);
-        Vector2Int matchingCenter = GetExitCenter(matchingExitPositions);
-
-        return exitCenter - matchingCenter + GetDirectionalOffset(dir);
+        return placedCenter - matchingCenter + GetDirectionalOffset(dir);
     }
 
-    private Vector2Int GetExitCenter(List<Vector2Int> exitPositions)
+    private List<List<Vector2Int>> GetExitGroups(RoomData room, RoomData.Direction direction)
     {
-        if (exitPositions.Count == 1) return exitPositions[0];
+        // Get all door positions for the given direction
+        List<Vector2Int> positions = room.exits
+            .FindAll(exit => exit.direction == direction)
+            .ConvertAll(exit => exit.position);
 
+        // Sort positions based on direction
+        if (direction == RoomData.Direction.North || direction == RoomData.Direction.South)
+            positions.Sort((a, b) => a.x.CompareTo(b.x));
+        else
+            positions.Sort((a, b) => a.y.CompareTo(b.y));
+
+        List<List<Vector2Int>> groups = new List<List<Vector2Int>>();
+        List<Vector2Int> currentGroup = new List<Vector2Int>();
+
+        foreach (var pos in positions)
+        {
+            if (currentGroup.Count == 0)
+            {
+                currentGroup.Add(pos);
+            }
+            else
+            {
+                Vector2Int lastPos = currentGroup[currentGroup.Count - 1];
+                bool isContiguous = false;
+
+                // For North/South, group by adjacent x values
+                if (direction == RoomData.Direction.North || direction == RoomData.Direction.South)
+                    isContiguous = (pos.x == lastPos.x + 1);
+                // For East/West, group by adjacent y values
+                else
+                    isContiguous = (pos.y == lastPos.y + 1);
+
+                if (isContiguous)
+                {
+                    currentGroup.Add(pos);
+                }
+                else
+                {
+                    groups.Add(new List<Vector2Int>(currentGroup));
+                    currentGroup.Clear();
+                    currentGroup.Add(pos);
+                }
+            }
+        }
+        if (currentGroup.Count > 0)
+            groups.Add(currentGroup);
+
+        return groups;
+    }
+
+
+    private Vector2Int GetExitCenter(List<Vector2Int> group)
+    {
         int sumX = 0, sumY = 0;
-        foreach (var pos in exitPositions)
+        foreach (var pos in group)
         {
             sumX += pos.x;
             sumY += pos.y;
         }
-
-        return new Vector2Int(sumX / exitPositions.Count, sumY / exitPositions.Count);
+        return new Vector2Int(sumX / group.Count, sumY / group.Count);
     }
+
 
     private Vector2Int GetDirectionalOffset(RoomData.Direction dir)
     {
