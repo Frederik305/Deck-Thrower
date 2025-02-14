@@ -40,14 +40,15 @@ public class DungeonGenerator : MonoBehaviour
         {
             foreach (var exit in placedRoom.roomData.exits)
             {
-                // Find matching room
                 RoomData newRoom = roomPrefabs[Random.Range(0, roomPrefabs.Count)];
-                RoomData.ExitPoint matchingExit = FindMatchingExit(newRoom, exit.direction);
+                List<RoomData.ExitPoint> matchingExits = FindMatchingExits(newRoom, exit);
 
-                if (matchingExit == null) continue;
+                if (matchingExits.Count == 0) continue;
 
-                // Calculate new position
-                Vector2Int newRoomPosition = placedRoom.gridPosition + GetDoorOffset(exit.direction, exit.position, matchingExit.position);
+                List<Vector2Int> exitPositions = GetExitPositions(placedRoom.roomData, exit.direction);
+                List<Vector2Int> matchingPositions = GetExitPositions(newRoom, GetOppositeDirection(exit.direction));
+
+                Vector2Int newRoomPosition = placedRoom.gridPosition + GetDoorOffset(exit.direction, exitPositions, matchingPositions);
 
                 if (!Overlaps(newRoom, newRoomPosition))
                 {
@@ -57,6 +58,14 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
     }
+
+    private List<Vector2Int> GetExitPositions(RoomData room, RoomData.Direction direction)
+    {
+        return room.exits.FindAll(exit => exit.direction == direction).ConvertAll(exit => exit.position);
+    }
+
+
+
 
     private void PlaceRoom(RoomData roomData, Vector2Int gridPos)
     {
@@ -84,28 +93,62 @@ public class DungeonGenerator : MonoBehaviour
     {
         foreach (var tile in room.tiles)
         {
-            if (occupiedTiles.Contains(pos + tile.position))
+            Vector2Int checkPos = pos + tile.position;
+
+            if (!room.exits.Exists(exit => exit.position == tile.position) && occupiedTiles.Contains(checkPos))
                 return true;
         }
         return false;
     }
 
-    private RoomData.ExitPoint FindMatchingExit(RoomData room, RoomData.Direction direction)
+
+    private List<RoomData.ExitPoint> FindMatchingExits(RoomData room, RoomData.ExitPoint targetExit)
     {
-        return room.exits.Find(exit => exit.direction == GetOppositeDirection(direction));
+        RoomData.Direction oppositeDir = GetOppositeDirection(targetExit.direction);
+
+        List<RoomData.ExitPoint> matchingExits = room.exits.FindAll(exit =>
+            exit.direction == oppositeDir
+        );
+
+        return matchingExits;
     }
 
-    private Vector2Int GetDoorOffset(RoomData.Direction dir, Vector2Int exitPos, Vector2Int matchingPos)
+
+    private Vector2Int GetDoorOffset(RoomData.Direction dir, List<Vector2Int> exitPositions, List<Vector2Int> matchingExitPositions)
     {
-        switch (dir)
-        {
-            case RoomData.Direction.North: return new Vector2Int(exitPos.x - matchingPos.x, exitPos.y + 1 - matchingPos.y);
-            case RoomData.Direction.South: return new Vector2Int(exitPos.x - matchingPos.x, exitPos.y - 1 - matchingPos.y);
-            case RoomData.Direction.East: return new Vector2Int(exitPos.x + 1 - matchingPos.x, exitPos.y - matchingPos.y);
-            case RoomData.Direction.West: return new Vector2Int(exitPos.x - 1 - matchingPos.x, exitPos.y - matchingPos.y);
-            default: return Vector2Int.zero;
-        }
+        Vector2Int exitCenter = GetExitCenter(exitPositions);
+        Vector2Int matchingCenter = GetExitCenter(matchingExitPositions);
+
+        return exitCenter - matchingCenter + GetDirectionalOffset(dir);
     }
+
+    private Vector2Int GetExitCenter(List<Vector2Int> exitPositions)
+    {
+        if (exitPositions.Count == 1) return exitPositions[0];
+
+        int sumX = 0, sumY = 0;
+        foreach (var pos in exitPositions)
+        {
+            sumX += pos.x;
+            sumY += pos.y;
+        }
+
+        return new Vector2Int(sumX / exitPositions.Count, sumY / exitPositions.Count);
+    }
+
+    private Vector2Int GetDirectionalOffset(RoomData.Direction dir)
+    {
+        return dir switch
+        {
+            RoomData.Direction.North => new Vector2Int(0, 1),
+            RoomData.Direction.South => new Vector2Int(0, -1),
+            RoomData.Direction.East => new Vector2Int(1, 0),
+            RoomData.Direction.West => new Vector2Int(-1, 0),
+            _ => Vector2Int.zero
+        };
+    }
+
+
 
     private RoomData.Direction GetOppositeDirection(RoomData.Direction dir)
     {
