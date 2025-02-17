@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     bool roundEnd;
 
     private GameObject gameOverScreen;
+    private ScoreManager scoreManager;
 
     private int numKills;
 
@@ -36,11 +37,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //lootScreen = GameObject.FindGameObjectWithTag("Loot Screen");
+        scoreManager = GetComponent<ScoreManager>();
+        lootScreen = GameObject.FindGameObjectWithTag("Loot Screen");
 
         player = GameObject.FindGameObjectWithTag("Player");
 
-        cardTypes = player.GetComponent<shoot>().cards;
+        cardTypes = player.GetComponent<Shoot>().cards;
 
         gameOverScreen = GameObject.FindGameObjectWithTag("Game Over");
         gameOverScreen.gameObject.SetActive(false);
@@ -48,6 +50,8 @@ public class GameManager : MonoBehaviour
         currentWave = 1;
 
         numKills = 0;
+
+        spawnEnemies();
 
         //endWave();
     }
@@ -59,6 +63,10 @@ public class GameManager : MonoBehaviour
         {
             player.SetActive(false);
             gameOver();
+        }
+        if(scoreManager.GetScore()>100){
+            
+            //lootScreen.GetComponent<LootScreen>().activate(cardTypes);
         }
     }
 

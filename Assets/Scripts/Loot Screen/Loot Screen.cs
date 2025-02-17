@@ -2,42 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LootScreen : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public List<int> unlockedCards = new List<int>(); // Liste des cartes débloquées
+    public Shoot shootScript; // Référence au script Shoot
+
     void Start()
     {
-        //Sets container of the cards to inactive so they don't show
-        //gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 
-    public void activate(GameObject[] cardTypes) {
-        //Sets cardHolder to the empty object holding each loot card
+    public void activate(GameObject[] cardTypes)
+    {
         GameObject cardHolder = gameObject.transform.GetChild(0).gameObject;
 
-        //Creates an arraylist of each card type's index in the main array. This is so we can prevent showing the same type twice.
-        ArrayList indexes = new ArrayList();
-        indexes.AddRange(Enumerable.Range(0, cardTypes.Length).ToArray());
+        List<int> lockedCards = Enumerable.Range(0, cardTypes.Length)
+                                          .Where(index => !unlockedCards.Contains(index))
+                                          .ToList();
 
-        //Sets container of the cards to active so they display
+        if (lockedCards.Count < 3)
+        {
+            Debug.LogWarning("Pas assez de cartes verrouillées disponibles !");
+            return;
+        }
+
+        lockedCards = lockedCards.OrderBy(_ => Random.value).Take(3).ToList();
+
         cardHolder.SetActive(true);
 
-        //Goes through each card and randomly assigns it a card type
-        for (int x = 0; x < 3; x++) {
-            GameObject card = cardHolder.transform.GetChild(x).gameObject;
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject card = cardHolder.transform.GetChild(i).gameObject;
+            int index = lockedCards[i];
 
-            //The index of the array list we want to access
-            int indexIndex = Random.Range(0, indexes.Count);
-            //Put the stores index as our cardType index
-            int index = (int)indexes[indexIndex];
-            //Remove that cardType index so we don't draw it again
-            indexes.RemoveAt(indexIndex);
-
-            //Set the loot card's sprite to the card type's
-            card.GetComponent<UnityEngine.UI.Image>().sprite = cardTypes[index].GetComponent<SpriteRenderer>().sprite;
-            //Store the value of the card type's index in the array so we can access it later after clicking on the loot card
+            card.GetComponent<Image>().sprite = cardTypes[index].GetComponent<SpriteRenderer>().sprite;
             card.GetComponent<LootOption>().setTypeIndex(index);
+
+            // Ajoute un bouton pour débloquer la carte
+            int selectedCardIndex = index;
+            card.GetComponent<Button>().onClick.AddListener(() => UnlockCard(cardTypes[selectedCardIndex]));
         }
+    }
+
+    public void UnlockCard(GameObject newCard)
+    {
     }
 }

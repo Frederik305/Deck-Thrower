@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class shoot : MonoBehaviour
+public class Shoot : MonoBehaviour
 {
-    public GameObject[] cards = new GameObject[4]; // Liste de cartes possibles
+
+    public GameObject[] cards;
+    //public GameObject baseCards; // Cartes de base
+    
+    private List<GameObject> availableCards= new List<GameObject>();
+    
     public int magazineSize = 5; // Nombre de cartes dans le chargeur
     private List<GameObject> magazine = new List<GameObject>();
 
@@ -13,7 +18,6 @@ public class shoot : MonoBehaviour
     public float iconSelectedSize = 1.1f;
     public float iconWidth = 40f;
 
-    public Color disabledColor;
     
     private bool enableShooting = true;
 
@@ -22,6 +26,7 @@ public class shoot : MonoBehaviour
 
     void Start()
     {
+        availableCards.Add(cards[5]); // Commence avec seulement les cartes de base
         FillMagazine(); // Remplit le chargeur immédiatement au début
     }
 
@@ -54,7 +59,7 @@ public class shoot : MonoBehaviour
         newCard.transform.position = transform.position;
         newCard.transform.rotation = transform.rotation;
 
-        FindObjectOfType<AudioManager>().playSound("Card Throw");
+        FindFirstObjectByType<AudioManager>().playSound("Card Throw");
     }
 
     IEnumerator ReloadMagazine()
@@ -72,22 +77,34 @@ public class shoot : MonoBehaviour
         magazine.Clear();
         for (int i = 0; i < magazineSize; i++)
         {
-            int randomIndex = Random.Range(0, cards.Length);
-            magazine.Add(cards[randomIndex]);
+            int randomIndex = Random.Range(0, availableCards.Count);
+            magazine.Add(availableCards[randomIndex]);
         }
 
         Debug.Log("Magasin rechargé !");
         isReloading = false;
         enableShooting = true;
     }
+    
     void FillMagazine()
     {
         magazine.Clear();
         for (int i = 0; i < magazineSize; i++)
         {
-            int randomIndex = Random.Range(0, cards.Length);
-            magazine.Add(cards[randomIndex]);
+            int randomIndex = Random.Range(0, availableCards.Count);
+            magazine.Add(availableCards[randomIndex]);
         }
         Debug.Log("Chargeur initial rempli !");
     }
+
+    public void UnlockCard(GameObject newCard)
+    {
+        if (!availableCards.Contains(newCard))
+        {
+            availableCards.Add(newCard);
+            Debug.Log("Nouvelle carte ajoutée au chargeur : " + newCard.name);
+             FillMagazine(); // Remplit le chargeur immédiatement au début
+        }
+    }
+
 }

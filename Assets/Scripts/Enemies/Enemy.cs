@@ -8,11 +8,13 @@ public class Enemy : MonoBehaviour
     public int health = 10;
 
     private GameManager gameManager;
+    private ScoreManager scoreManager;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        scoreManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoreManager>();
     }
 
     public void takeDamage (int damage)
@@ -24,6 +26,7 @@ public class Enemy : MonoBehaviour
         {
             gameManager.updateEnemyCount();
 
+            scoreManager.AddScore(100);
             GameObject.Destroy(gameObject);
         }
     }

@@ -53,7 +53,9 @@ public class cardMovement : MonoBehaviour
         }
         if (other.gameObject.tag == "Enemy")
         {
+            Debug.Log("OUCHHHH");
             other.gameObject.GetComponent<Enemy>().takeDamage(damage);
+            Destroy(gameObject);
         }
         if (other.gameObject.tag == "Bullet")
         {
