@@ -13,9 +13,10 @@ public class LootScreen : MonoBehaviour
     {
         gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
-
+    //LS
     public void activate(GameObject[] cardTypes)
     {
+        shootScript.setEnableShooting(false);
         GameObject cardHolder = gameObject.transform.GetChild(0).gameObject;
 
         List<int> lockedCards = Enumerable.Range(0, cardTypes.Length)
@@ -45,8 +46,13 @@ public class LootScreen : MonoBehaviour
             card.GetComponent<Button>().onClick.AddListener(() => UnlockCard(cardTypes[selectedCardIndex]));
         }
     }
-
+    //LS
     public void UnlockCard(GameObject newCard)
     {
+        shootScript.UnlockCard(newCard);
+        Time.timeScale = 1f;
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        shootScript.setEnableShooting(true);
+
     }
 }

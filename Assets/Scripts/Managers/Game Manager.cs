@@ -55,20 +55,29 @@ public class GameManager : MonoBehaviour
 
         //endWave();
     }
+    
+private int nextThreshold = 5; // Prochain palier de score
 
-    private void Update()
+//LS
+private void Update()
+{
+    // Si le joueur appuie sur Échap, terminer la partie
+    if (Input.GetKeyDown(KeyCode.Escape))
     {
-        //If the user presses escape during the game, end the current game
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            player.SetActive(false);
-            gameOver();
-        }
-        if(scoreManager.GetScore()>100){
-            
-            //lootScreen.GetComponent<LootScreen>().activate(cardTypes);
-        }
+        player.SetActive(false);
+        gameOver();
     }
+
+    // Vérifier si le score a dépassé le seuil actuel
+    if (scoreManager.GetScore() >= nextThreshold)
+    {
+        lootScreen.GetComponent<LootScreen>().activate(cardTypes);
+        Time.timeScale = 0f;
+
+        // Augmenter le seuil pour la prochaine activation
+        nextThreshold += 5;
+    }
+}
 
     public void updateEnemyCount()
     {
@@ -77,10 +86,10 @@ public class GameManager : MonoBehaviour
         numKills++;
 
         //If there are no more enemies, end the wave
-        /*if (numEnemies <= 0)
+        if (numEnemies <= 0)
         {
-            endWave();
-        }*/
+            spawnEnemies();
+        }
     }
 
     public void gameOver ()
@@ -155,7 +164,7 @@ public class GameManager : MonoBehaviour
             spawnPoints.Add(spawner.GetChild(x));
         }
 
-        numEnemies = currentWave * 2;
+        numEnemies = 5;
 
         for (int x = 0; x < numEnemies; x++)
         {

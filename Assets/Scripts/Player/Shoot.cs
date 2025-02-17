@@ -23,17 +23,27 @@ public class Shoot : MonoBehaviour
 
     public float reloadTime = 2f; // Temps de rechargement en secondes
     private bool isReloading = false;
+    public Slider reloadBar; // Référence à la barre de progression UI
 
     void Start()
     {
-        availableCards.Add(cards[5]); // Commence avec seulement les cartes de base
+        availableCards.Add(cards[0]); // Commence avec seulement les cartes de base
         FillMagazine(); // Remplit le chargeur immédiatement au début
+        if (reloadBar != null)
+        {
+            reloadBar.gameObject.SetActive(false); // Cache la barre au début
+        }
     }
 
     void Update()
-    {
-        if (Input.GetMouseButtonDown(0) && enableShooting)
-        {
+    {   
+        if (magazine.Count == 0)
+            {
+                StartCoroutine(ReloadMagazine());
+                return;
+            }
+        else if (Input.GetMouseButtonDown(0) && enableShooting)
+        {      
             throwRandomCard();
         }
     }
@@ -42,14 +52,10 @@ public class Shoot : MonoBehaviour
     {
         enableShooting = newState;
     }
-
+    //LS
     void throwRandomCard()
     {
-        if (magazine.Count == 0)
-        {
-            StartCoroutine(ReloadMagazine());
-            return;
-        }
+        
 
         // Prendre la première carte du chargeur et la lancer
         GameObject selectedCard = magazine[0];
@@ -61,7 +67,7 @@ public class Shoot : MonoBehaviour
 
         FindFirstObjectByType<AudioManager>().playSound("Card Throw");
     }
-
+    //LS
     IEnumerator ReloadMagazine()
     {
         if (isReloading) yield break; // Empêche un rechargement multiple
@@ -69,10 +75,21 @@ public class Shoot : MonoBehaviour
         isReloading = true;
         enableShooting = false;
 
-        Debug.Log("Rechargement en cours...");
-        //FindObjectOfType<AudioManager>().playSound("Reload");
+        if (reloadBar != null)
+        {
+            reloadBar.gameObject.SetActive(true); // Affiche la barre
+            reloadBar.value = 0f; // Initialise la barre à 0
+        }
 
-        yield return new WaitForSeconds(reloadTime);
+        float elapsedTime = 0f;
+        while (elapsedTime < reloadTime)
+        {
+            elapsedTime += Time.deltaTime;
+            if (reloadBar != null)
+                reloadBar.value = elapsedTime / reloadTime; // Met à jour la progression
+
+            yield return null;
+        }
 
         magazine.Clear();
         for (int i = 0; i < magazineSize; i++)
@@ -84,8 +101,14 @@ public class Shoot : MonoBehaviour
         Debug.Log("Magasin rechargé !");
         isReloading = false;
         enableShooting = true;
+
+        if (reloadBar != null)
+        {
+            reloadBar.gameObject.SetActive(false); // Cache la barre une fois le rechargement terminé
+        }
     }
-    
+
+    //LS
     void FillMagazine()
     {
         magazine.Clear();
@@ -97,6 +120,7 @@ public class Shoot : MonoBehaviour
         Debug.Log("Chargeur initial rempli !");
     }
 
+    //LS
     public void UnlockCard(GameObject newCard)
     {
         if (!availableCards.Contains(newCard))

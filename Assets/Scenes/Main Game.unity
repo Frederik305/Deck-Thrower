@@ -2157,7 +2157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unlockedCards: 
-  shootScript: {fileID: 0}
+  shootScript: {fileID: 1687262616}
 --- !u!1 &1407418179
 GameObject:
   m_ObjectHideFlags: 0
@@ -2976,7 +2976,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  diagnolLimiter: 0.7
+  dashSpeed: 20
+  dashDuration: 0.2
+  dashCooldown: 1
   health: 5
   invincibilityTime: 1
 --- !u!1 &1807312192
