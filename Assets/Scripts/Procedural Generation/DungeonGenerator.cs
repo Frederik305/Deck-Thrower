@@ -1,11 +1,12 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class DungeonGenerator : MonoBehaviour
 {
     [SerializeField] private List<RoomData> roomPrefabs;
     [SerializeField] private Tilemap tilemap;
+    [SerializeField] private Tilemap tilemapCollisions;
     [SerializeField] private List<TileBase> tileReferences;
     [SerializeField] private int maxRooms = 10;
 
@@ -21,17 +22,20 @@ public class DungeonGenerator : MonoBehaviour
     {
         if (roomPrefabs.Count == 0) return;
 
-        // Start with the first room at (0,0)
         RoomData startRoom = roomPrefabs[0];
         PlaceRoom(startRoom, Vector2Int.zero);
 
-        // Generate additional rooms
+        // Try to add additional rooms using your current placement logic.
         for (int i = 1; i < maxRooms; i++)
         {
             TryPlaceNextRoom();
         }
 
-        Debug.Log($"Dungeon Generated with {placedRooms.Count} rooms.");
+        // After placing the regular rooms, check each exit.
+        // If an exit is blocked by a wall, try to fill it with a new room.
+        FillBlockedExits();
+
+        //Debug.Log($"Dungeon Generated with {placedRooms.Count} rooms.");
     }
 
     private void TryPlaceNextRoom()
@@ -67,63 +71,122 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Iterates over each placed room and its exits. If an exit is blocked by a wall tile,
+    /// this method attempts to place another room that has a matching door on the opposite side.
+    /// </summary>
+    private void FillBlockedExits()
+    {
+        List<RoomInstance> currentRooms = new(placedRooms);
 
+        foreach (var placedRoom in currentRooms)
+        {
+            foreach (var exit in placedRoom.roomData.exits)
+            {
+                Vector2Int exitWorldPos = placedRoom.gridPosition + exit.position;
+                Vector3Int worldPos = new Vector3Int(exitWorldPos.x, exitWorldPos.y, 0);
 
+                // Check if the exit is blocked by a wall tile
+                if (tilemapCollisions.GetTile(worldPos) != null)
+                {
+                    // Select a new room to try to connect here.
+                    RoomData newRoom = roomPrefabs[Random.Range(0, roomPrefabs.Count)];
+
+                    // Get door groups for the new room with a door facing back toward the current room.
+                    List<List<Vector2Int>> newRoomGroups = GetExitGroups(newRoom, GetOppositeDirection(exit.direction));
+                    foreach (var newRoomGroup in newRoomGroups)
+                    {
+                        Vector2Int newRoomCenter = GetExitCenter(newRoomGroup);
+                        // Calculate the position for the new room so that the door centers align.
+                        Vector2Int newRoomPosition = placedRoom.gridPosition + GetDoorOffset(exit.direction, exit.position, newRoomCenter);
+
+                        if (!Overlaps(newRoom, newRoomPosition))
+                        {
+                            PlaceRoom(newRoom, newRoomPosition);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     private List<Vector2Int> GetExitPositions(RoomData room, RoomData.Direction direction)
     {
         return room.exits.FindAll(exit => exit.direction == direction).ConvertAll(exit => exit.position);
     }
 
-
-
-
     private void PlaceRoom(RoomData roomData, Vector2Int gridPos)
     {
-        // Store occupied tiles
-        foreach (var tileData in roomData.tiles)
+        // Mark all tiles as occupied.
+        foreach (var tile in roomData.tiles)
         {
-            occupiedTiles.Add(gridPos + tileData.position);
+            occupiedTiles.Add(gridPos + tile.position);
         }
 
         placedRooms.Add(new RoomInstance(roomData, gridPos));
 
-        // Render room
-        foreach (var tileData in roomData.tiles)
+        // Render room and collision tiles.
+        foreach (var tile in roomData.tiles)
         {
-            TileBase tile = GetTileByName(tileData.tileName);
-            if (tile != null)
+            Vector3Int worldPos = new Vector3Int(gridPos.x + tile.position.x, gridPos.y + tile.position.y, 0);
+            TileBase tileBase = GetTileByName(tile.tileName);
+            if (tile.tileName.Contains("wall"))
             {
-                Vector3Int worldPos = new Vector3Int(gridPos.x + tileData.position.x, gridPos.y + tileData.position.y, 0);
-                tilemap.SetTile(worldPos, tile);
+                tilemapCollisions.SetTile(worldPos, tileBase);
+            }
+            else if (tileBase != null)
+            {
+                tilemap.SetTile(worldPos, tileBase);
             }
         }
     }
 
-    private bool Overlaps(RoomData room, Vector2Int pos)
+    private bool IsExitBlocked(RoomData room, Vector2Int pos)
     {
-        foreach (var tile in room.tiles)
+        foreach (var exit in room.exits)
         {
-            Vector2Int checkPos = pos + tile.position;
+            // Compute absolute world position of exit
+            Vector2Int exitPos = pos + exit.position;
+            Vector3Int worldPos = new Vector3Int(exitPos.x, exitPos.y, 0);
 
-            if (!room.exits.Exists(exit => exit.position == tile.position) && occupiedTiles.Contains(checkPos))
-                return true;
+            // Check if exit is blocked by a wall
+            if (tilemapCollisions.GetTile(worldPos) != null)
+            {
+                return true; // Exit is directly blocked
+            }
+
+            // Check if there's a wall in front of the exit
+            Vector2Int frontPos = exitPos + GetDirectionalOffset(exit.direction);
+            Vector3Int frontWorldPos = new Vector3Int(frontPos.x, frontPos.y, 0);
+            if (tilemapCollisions.GetTile(frontWorldPos) != null)
+            {
+                return true; // A wall is directly in front of the exit
+            }
         }
         return false;
     }
 
 
-    private List<RoomData.ExitPoint> FindMatchingExits(RoomData room, RoomData.ExitPoint targetExit)
+    private bool Overlaps(RoomData room, Vector2Int pos)
     {
-        RoomData.Direction oppositeDir = GetOppositeDirection(targetExit.direction);
+        // If any door would be blocked, we treat this as an overlap.
+        if (IsExitBlocked(room, pos))
+        {
+            return true;
+        }
 
-        List<RoomData.ExitPoint> matchingExits = room.exits.FindAll(exit =>
-            exit.direction == oppositeDir
-        );
-
-        return matchingExits;
+        // Check for overlap with already occupied tiles.
+        foreach (var tile in room.tiles)
+        {
+            Vector2Int checkPos = pos + tile.position;
+            if (room.exits.Exists(exit => exit.position == tile.position))
+                continue;
+            if (occupiedTiles.Contains(checkPos))
+                return true;
+        }
+        return false;
     }
-
 
     private Vector2Int GetDoorOffset(RoomData.Direction dir, Vector2Int placedCenter, Vector2Int matchingCenter)
     {
@@ -132,12 +195,11 @@ public class DungeonGenerator : MonoBehaviour
 
     private List<List<Vector2Int>> GetExitGroups(RoomData room, RoomData.Direction direction)
     {
-        // Get all door positions for the given direction
         List<Vector2Int> positions = room.exits
             .FindAll(exit => exit.direction == direction)
             .ConvertAll(exit => exit.position);
 
-        // Sort positions based on direction
+        // Sort positions based on door orientation.
         if (direction == RoomData.Direction.North || direction == RoomData.Direction.South)
             positions.Sort((a, b) => a.x.CompareTo(b.x));
         else
@@ -156,11 +218,8 @@ public class DungeonGenerator : MonoBehaviour
             {
                 Vector2Int lastPos = currentGroup[currentGroup.Count - 1];
                 bool isContiguous = false;
-
-                // For North/South, group by adjacent x values
                 if (direction == RoomData.Direction.North || direction == RoomData.Direction.South)
                     isContiguous = (pos.x == lastPos.x + 1);
-                // For East/West, group by adjacent y values
                 else
                     isContiguous = (pos.y == lastPos.y + 1);
 
@@ -182,7 +241,6 @@ public class DungeonGenerator : MonoBehaviour
         return groups;
     }
 
-
     private Vector2Int GetExitCenter(List<Vector2Int> group)
     {
         int sumX = 0, sumY = 0;
@@ -194,7 +252,6 @@ public class DungeonGenerator : MonoBehaviour
         return new Vector2Int(sumX / group.Count, sumY / group.Count);
     }
 
-
     private Vector2Int GetDirectionalOffset(RoomData.Direction dir)
     {
         return dir switch
@@ -203,11 +260,9 @@ public class DungeonGenerator : MonoBehaviour
             RoomData.Direction.South => new Vector2Int(0, -1),
             RoomData.Direction.East => new Vector2Int(1, 0),
             RoomData.Direction.West => new Vector2Int(-1, 0),
-            _ => Vector2Int.zero
+            _ => Vector2Int.zero,
         };
     }
-
-
 
     private RoomData.Direction GetOppositeDirection(RoomData.Direction dir)
     {
@@ -217,7 +272,7 @@ public class DungeonGenerator : MonoBehaviour
             RoomData.Direction.South => RoomData.Direction.North,
             RoomData.Direction.East => RoomData.Direction.West,
             RoomData.Direction.West => RoomData.Direction.East,
-            _ => dir
+            _ => dir,
         };
     }
 
