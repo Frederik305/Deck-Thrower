@@ -13,6 +13,38 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    //Opens the Rules panel
+    /*public void openRules ()
+    {
+        FindObjectOfType<AudioManager>().playSound("Button Click");
+
+        Panel.GameObject.SetActive(true);   //TODO Mettre le nom du panel
+    }*/
+
+    //Closes the Rules panel
+    /*public void closeRules ()
+    {
+        FindObjectOfType<AudioManager>().playSound("Button Click");
+
+        Panel.GameObject.SetActive(false);  //TODO Mettre le nom du panel
+    }*/
+
+    //Opens the Options panel
+    /*public void openOptions ()
+    {
+        FindObjectOfType<AudioManager>().playSound("Button Click");
+
+        Panel.GameObject.SetActive(true);   //TODO Mettre le nom du panel
+    }*/
+
+    //Closes the Options panel
+    /*public void closeOptions ()
+    {
+        FindObjectOfType<AudioManager>().playSound("Button Click");
+
+        Panel.GameObject.SetActive(false);  //TODO Mettre le nom du panel
+    }*/
+
     //Closes the game
     public void quit ()
     {
