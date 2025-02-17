@@ -6,6 +6,7 @@ public class TrackingCard : MonoBehaviour
     public float homingAmount = 5f;
     public float detectionRadius = 10f;
     public float cardSpeed = 5f;
+    public float rotationSpeed = 5f;
     
     private Transform target;
 
@@ -19,8 +20,22 @@ public class TrackingCard : MonoBehaviour
     {
         if (target != null)
         {
+            // Calculer la direction vers l'ennemi
             Vector2 direction = (target.position - transform.position).normalized;
+
+            // Calculer l'angle pour que l'objet pointe vers l'ennemi
+            float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            // Interpoler entre l'angle actuel et l'angle cible pour une rotation plus douce
+            float smoothAngle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle - 90f, Time.deltaTime * rotationSpeed);
+
+            // Appliquer la rotation douce
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, smoothAngle));
+
+            // Appliquer la vitesse dans cette direction
             rb.linearVelocity = direction * cardSpeed;
+
+            // Ajouter une force pour suivre l'ennemi
             rb.AddForce(direction * homingAmount * Time.deltaTime);
         }
         else

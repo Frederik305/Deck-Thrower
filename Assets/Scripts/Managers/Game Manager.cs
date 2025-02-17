@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
 
         numKills = 0;
 
-        spawnEnemies();
+        SpawnEnemies();
 
         //endWave();
     }
@@ -65,7 +65,7 @@ private void Update()
     if (Input.GetKeyDown(KeyCode.Escape))
     {
         player.SetActive(false);
-        gameOver();
+        GameOver();
     }
 
     // Vérifier si le score a dépassé le seuil actuel
@@ -79,7 +79,7 @@ private void Update()
     }
 }
 
-    public void updateEnemyCount()
+    public void UpdateEnemyCount()
     {
         numEnemies--;
 
@@ -88,11 +88,11 @@ private void Update()
         //If there are no more enemies, end the wave
         if (numEnemies <= 0)
         {
-            spawnEnemies();
+            SpawnEnemies();
         }
     }
 
-    public void gameOver ()
+    public void GameOver ()
     {
         //Show game over screen
         gameOverScreen.gameObject.SetActive(true);
@@ -102,14 +102,14 @@ private void Update()
         killDisplay.text = numKills.ToString();
     }
 
-    public void backToMenu()
+    public void BackToMenu()
     {
         FindObjectOfType<AudioManager>().playSound("Button Click");
 
         SceneManager.LoadScene(0);
     }
 
-    public void restart()
+    public void Restart()
     {
         FindObjectOfType<AudioManager>().playSound("Button Click");
 
@@ -152,7 +152,7 @@ private void Update()
         player.GetComponent<playerMovement>().raiseHealth();
     }*/
 
-    public void spawnEnemies ()
+    public void SpawnEnemies ()
     {
         Transform spawner = GameObject.FindGameObjectWithTag("Spawn").transform;
 

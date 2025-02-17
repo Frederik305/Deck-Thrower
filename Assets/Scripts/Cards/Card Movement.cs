@@ -54,7 +54,7 @@ public class cardMovement : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             Debug.Log("OUCHHHH");
-            other.gameObject.GetComponent<Enemy>().takeDamage(damage);
+            other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
             Destroy(gameObject);
         }
         if (other.gameObject.tag == "Bullet")

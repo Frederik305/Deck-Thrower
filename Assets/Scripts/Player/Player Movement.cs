@@ -100,7 +100,7 @@ public class playerMovement : MonoBehaviour
 
         if (health <= 0)
         {
-            gameManager.gameOver();
+            gameManager.GameOver();
             gameObject.SetActive(false);
         }
     }
