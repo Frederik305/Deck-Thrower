@@ -13,6 +13,14 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void openCredit ()
+    {
+        FindObjectOfType<AudioManager>().playSound("Button Click");
+
+        SceneManager.LoadScene(2);
+    }
+
+
     //Opens the Rules panel
     /*public void openRules ()
     {
