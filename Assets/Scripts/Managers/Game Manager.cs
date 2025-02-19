@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         //endWave();
     }
     
-private int nextThreshold = 5; // Prochain palier de score
+private int nextThreshold = 3; // Prochain palier de score
 
 //LS
 private void Update()
@@ -72,10 +72,10 @@ private void Update()
     if (scoreManager.GetScore() >= nextThreshold)
     {
         lootScreen.GetComponent<LootScreen>().activate(cardTypes);
-        Time.timeScale = 0f;
+        
 
         // Augmenter le seuil pour la prochaine activation
-        nextThreshold += 5;
+        nextThreshold += 4;
     }
 }
 

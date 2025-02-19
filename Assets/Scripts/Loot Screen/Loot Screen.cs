@@ -8,51 +8,72 @@ public class LootScreen : MonoBehaviour
 {
     public List<int> unlockedCards = new List<int>(); // Liste des cartes débloquées
     public Shoot shootScript; // Référence au script Shoot
+    public GameObject lootCard;
+    private Canvas canvasLoot;
+    private Transform canvasLootTransform;
+    private List<GameObject> cardsInstance = new List<GameObject>();
 
     void Start()
     {
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        canvasLoot=gameObject.GetComponent<Canvas>();
+        canvasLootTransform = gameObject.GetComponent<Transform>();
+        unlockedCards.Add(0);
+        //gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
     //LS
     public void activate(GameObject[] cardTypes)
     {
-        shootScript.setEnableShooting(false);
-        GameObject cardHolder = gameObject.transform.GetChild(0).gameObject;
-
         List<int> lockedCards = Enumerable.Range(0, cardTypes.Length)
-                                          .Where(index => !unlockedCards.Contains(index))
-                                          .ToList();
+                                              .Where(index => !unlockedCards.Contains(index))
+                                              .ToList();
+        Debug.Log(lockedCards.Count);
+        if (lockedCards.Count>0) {
+            Time.timeScale = 0f;
 
-        if (lockedCards.Count < 3)
-        {
-            Debug.LogWarning("Pas assez de cartes verrouillées disponibles !");
-            return;
-        }
 
-        lockedCards = lockedCards.OrderBy(_ => Random.value).Take(3).ToList();
 
-        cardHolder.SetActive(true);
 
-        for (int i = 0; i < 3; i++)
-        {
-            GameObject card = cardHolder.transform.GetChild(i).gameObject;
-            int index = lockedCards[i];
+            shootScript.setEnableShooting(false);
+            canvasLoot.enabled = true;
 
-            card.GetComponent<Image>().sprite = cardTypes[index].GetComponent<SpriteRenderer>().sprite;
-            card.GetComponent<LootOption>().setTypeIndex(index);
+            lockedCards = lockedCards.OrderBy(_ => Random.value).Take(3).ToList();
+            int cardLockedToDisplay = lockedCards.Count() < 3 ? lockedCards.Count : 3;
 
-            // Ajoute un bouton pour débloquer la carte
-            int selectedCardIndex = index;
-            card.GetComponent<Button>().onClick.AddListener(() => UnlockCard(cardTypes[selectedCardIndex]));
+
+            for (int i = 0; i < cardLockedToDisplay; i++)
+            {
+                GameObject card = Instantiate(lootCard, canvasLootTransform);
+                cardsInstance.Add(card);
+
+                int index = lockedCards[i];
+
+                card.GetComponent<Image>().sprite = cardTypes[index].GetComponent<SpriteRenderer>().sprite;
+                card.GetComponent<LootOption>().setTypeIndex(index);
+
+                // Ajoute un bouton pour débloquer la carte
+                int selectedCardIndex = index;
+                card.GetComponent<Button>().onClick.AddListener(() => UnlockCard(cardTypes[selectedCardIndex], index));
+            }
         }
     }
     //LS
-    public void UnlockCard(GameObject newCard)
+    public void UnlockCard(GameObject newCard,int index)
     {
+        unlockedCards.Add(index);
         shootScript.UnlockCard(newCard);
         Time.timeScale = 1f;
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        canvasLoot.enabled = false;
         shootScript.setEnableShooting(true);
+
+        foreach (GameObject instance in cardsInstance)
+        {
+            if (instance != null)
+            {
+                Destroy(instance); // Détruire chaque instance
+            }
+        }
+        // Vider la liste après avoir détruit toutes les instances
+        cardsInstance.Clear();
 
     }
 }
