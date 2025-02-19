@@ -43,10 +43,12 @@ public class DungeonGenerator : MonoBehaviour
             foreach (var exit in placedRoom.roomData.exits)
             {
                 RoomData newRoom = roomPrefabs[Random.Range(0, roomPrefabs.Count)];
+                newRoom = RotateTiles(newRoom, GetRandomRotationDegree());
 
                 // Group door positions for the placed room for this exit's direction.
                 List<List<Vector2Int>> placedGroups = GetExitGroups(placedRoom.roomData, exit.direction);
                 // Find the group that contains the current exit's position.
+
                 List<Vector2Int> placedGroup = placedGroups.Find(g => g.Contains(exit.position));
                 if (placedGroup == null)
                     continue;
@@ -54,6 +56,7 @@ public class DungeonGenerator : MonoBehaviour
 
                 // For the new room, get groups of door positions in the opposite direction.
                 List<List<Vector2Int>> newRoomGroups = GetExitGroups(newRoom, GetOppositeDirection(exit.direction));
+
                 foreach (var newRoomGroup in newRoomGroups)
                 {
                     Vector2Int newRoomCenter = GetExitCenter(newRoomGroup);
@@ -109,7 +112,7 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    public int GetRandomRotationDegree()
+    private int GetRandomRotationDegree()
     {
         int[] validDegrees = { 0, 90, 180, 270 };
 
@@ -119,27 +122,50 @@ public class DungeonGenerator : MonoBehaviour
     }
 
 
-    public void RotateTiles(RoomData roomData, int degrees)
+    private RoomData RotateTiles(RoomData roomData, int degrees)
     {
-        if (degrees != 90 && degrees != 180 && degrees != 270)
-            return;
+        if (degrees != 180)
+            return roomData;
 
         int numRotations = degrees / 90;
 
-        for (int i = 0; i < roomData.tiles.Count; i++)
+        // Create a new RoomData to hold the rotated data.
+        RoomData rotatedRoomData = new RoomData
         {
-            Vector2Int tilePos = roomData.tiles[i].position;
+            tiles = new List<RoomData.TileData>(),
+            exits = new List<RoomData.ExitPoint>()
+        };
 
-            for (int j = 0; j < numRotations; j++)
+        // Rotate tiles and store them in the new RoomData
+        foreach (var tile in roomData.tiles)
+        {
+            Vector2Int rotatedTilePos = tile.position;
+            for (int i = 0; i < numRotations; i++)
             {
-                tilePos = new Vector2Int(-tilePos.y, tilePos.x);
+                rotatedTilePos = new Vector2Int(-rotatedTilePos.y, rotatedTilePos.x);
             }
 
-            roomData.tiles[i].position = tilePos;
+            rotatedRoomData.tiles.Add(new RoomData.TileData
+            {
+                position = rotatedTilePos,
+                tileName = tile.tileName
+            });
         }
 
-        RotateExits(roomData, numRotations);
+        // Rotate exits and store them in the new RoomData
+        foreach (var exit in roomData.exits)
+        {
+            RoomData.Direction rotatedExitDirection = (RoomData.Direction)(((int)exit.direction + numRotations) % 4);
+            rotatedRoomData.exits.Add(new RoomData.ExitPoint
+            {
+                direction = rotatedExitDirection,
+                position = exit.position
+            });
+        }
+
+        return rotatedRoomData;  // Return the newly created rotated RoomData
     }
+
 
     private void RotateExits(RoomData roomData, int numRotations)
     {
@@ -320,8 +346,8 @@ public class DungeonGenerator : MonoBehaviour
         public Vector2Int gridPosition;
         public RoomInstance(RoomData room, Vector2Int pos)
         {
-            roomData = room;
-            gridPosition = pos;
+            this.roomData = room;
+            this.gridPosition = pos;
         }
     }
 }
