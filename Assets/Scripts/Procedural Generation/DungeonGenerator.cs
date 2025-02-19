@@ -34,8 +34,6 @@ public class DungeonGenerator : MonoBehaviour
         // After placing the regular rooms, check each exit.
         // If an exit is blocked by a wall, try to fill it with a new room.
         FillBlockedExits();
-
-        //Debug.Log($"Dungeon Generated with {placedRooms.Count} rooms.");
     }
 
     private void TryPlaceNextRoom()
@@ -111,9 +109,44 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    private List<Vector2Int> GetExitPositions(RoomData room, RoomData.Direction direction)
+    public int GetRandomRotationDegree()
     {
-        return room.exits.FindAll(exit => exit.direction == direction).ConvertAll(exit => exit.position);
+        int[] validDegrees = { 0, 90, 180, 270 };
+
+        int randomIndex = UnityEngine.Random.Range(0, validDegrees.Length);
+
+        return validDegrees[randomIndex];
+    }
+
+
+    public void RotateTiles(RoomData roomData, int degrees)
+    {
+        if (degrees != 90 && degrees != 180 && degrees != 270)
+            return;
+
+        int numRotations = degrees / 90;
+
+        for (int i = 0; i < roomData.tiles.Count; i++)
+        {
+            Vector2Int tilePos = roomData.tiles[i].position;
+
+            for (int j = 0; j < numRotations; j++)
+            {
+                tilePos = new Vector2Int(-tilePos.y, tilePos.x);
+            }
+
+            roomData.tiles[i].position = tilePos;
+        }
+
+        RotateExits(roomData, numRotations);
+    }
+
+    private void RotateExits(RoomData roomData, int numRotations)
+    {
+        for (int i = 0; i < roomData.exits.Count; i++)
+        {
+            roomData.exits[i].direction = (RoomData.Direction)(((int)roomData.exits[i].direction + numRotations) % 4);
+        }
     }
 
     private void PlaceRoom(RoomData roomData, Vector2Int gridPos)
