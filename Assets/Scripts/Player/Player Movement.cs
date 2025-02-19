@@ -60,13 +60,14 @@ public class playerMovement : MonoBehaviour
         {
             if (speed < 11f)
             {
-                speed = 50f;
+                speed = 35f;
             }
         }
         // Gradually remove the dash speed each frame until the speed is normal
         if (speed > 10f)
         {
-            speed = speed - 0.25f;
+            speed -= (35f - 10f) / 0.75f * Time.deltaTime; // Dash fades over 0.75 seconds
+            speed = Mathf.Max(speed, 10f); // Ensure speed doesn't go below 10
         }
 
         //Track player and mouse coords
