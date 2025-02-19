@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 3302341218639318829}
   - component: {fileID: 5186614387470594313}
   - component: {fileID: 3302341218639318828}
-  - component: {fileID: 7524223097247000782}
+  - component: {fileID: 5809806084296689423}
+  - component: {fileID: 4237823993424244445}
   m_Layer: 7
-  m_Name: Bouncy Card
+  m_Name: Target Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8033727637103802450, guid: 0a8ae4c40a5f3fc4481e52180ae87306, type: 3}
+  m_Sprite: {fileID: -4119334708683220384, guid: 04c86973d225e6145ae7263501e76b94, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,10 +104,10 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0.1
-  m_AngularDamping: 0.4
+  m_LinearDamping: 0.3
+  m_AngularDamping: 0
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: 2bb1a160820812946b62b60710ef7acb, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -129,11 +130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ff506089906d8446b9bb29841f94055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardSpeed: 40
-  cardTorque: 1000
+  cardSpeed: 10
+  cardTorque: 0
   collisionTimer: 0.5
   damage: 5
---- !u!61 &7524223097247000782
+--- !u!61 &5809806084296689423
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,7 +172,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 7.68}
+    oldSize: {x: 0.07876923, y: 0.11815385}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -179,3 +180,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.1, y: 0.12}
   m_EdgeRadius: 0
+--- !u!114 &4237823993424244445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302341218639318831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694a802ad4ddede468a0b14b3e4e3e0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  homingAmount: 2
+  detectionRadius: 5
+  cardSpeed: 10
