@@ -43,6 +43,22 @@ public class playerMovement : MonoBehaviour
     {
         hor = Input.GetAxis("Horizontal");
         ver = Input.GetAxis("Vertical");
+
+        // Dash mouvement when the player press the space bar (JPL)
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (speed < 11f)
+            {
+                speed = 50f;
+            }
+        }
+        // Gradually remove the dash speed each frame until the speed is normal
+        if (speed > 10f)
+        {
+            speed = speed - 0.25f;
+        }
+
+        //Track player and mouse coords
         playerPos = Camera.main.WorldToScreenPoint(transform.position);
         mousePos = Input.mousePosition;
         invincibilityCounter += Time.deltaTime;
