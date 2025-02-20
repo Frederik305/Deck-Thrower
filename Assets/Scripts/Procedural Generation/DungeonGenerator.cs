@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static RoomData;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -22,7 +23,12 @@ public class DungeonGenerator : MonoBehaviour
     {
         if (roomPrefabs.Count == 0) return;
 
-        RoomData startRoom = roomPrefabs[0];
+        // Filter only starting rooms
+        List<RoomData> startRooms = roomPrefabs.FindAll(room => room.roomType == RoomType.StartingRoom);
+        if (startRooms.Count == 0) return; // Ensure there is at least one starting room
+
+        // Select a random start room
+        RoomData startRoom = startRooms[Random.Range(0, startRooms.Count)];
         PlaceRoom(startRoom, Vector2Int.zero);
 
         // Try to add additional rooms using your current placement logic.
@@ -31,10 +37,101 @@ public class DungeonGenerator : MonoBehaviour
             TryPlaceNextRoom();
         }
 
-        // After placing the regular rooms, check each exit.
-        // If an exit is blocked by a wall, try to fill it with a new room.
-        FillBlockedExits();
+        // Attempt to place BossRoom if possible, otherwise place EndRoom
+        if (!PlaceBossRoom())
+        {
+            // If BossRoom can't be placed, place EndRoom instead.
+            PlaceEndRoom();
+        }
     }
+
+    /// <summary>
+    /// Attempts to place a BossRoom by trying different flip variations until a door aligns with an exit of the last placed room.
+    /// Returns true if the BossRoom was placed, false otherwise.
+    /// </summary>
+    private bool PlaceBossRoom()
+    {
+        List<RoomData> bossRooms = roomPrefabs.FindAll(room => room.roomType == RoomType.BossRoom);
+        if (bossRooms.Count == 0) return false; // No boss rooms available, return false
+
+        // Pick a random boss room.
+        RoomData bossRoomOriginal = bossRooms[Random.Range(0, bossRooms.Count)];
+
+        // Use the last placed room as the connection point.
+        RoomInstance lastRoom = placedRooms[placedRooms.Count - 1];
+
+        // Try a few flip variations. (Expand this list if you need more rotations.)
+        bool[] flipOptions = new bool[] { false, true };
+        foreach (bool flipHorizontal in flipOptions)
+        {
+            foreach (bool flipVertical in flipOptions)
+            {
+                // Rotate/flip the boss room variant.
+                RoomData bossRoomVariant = RotateTiles(bossRoomOriginal, false, flipHorizontal, flipVertical);
+
+                // For each exit on the last room, see if we can align a door.
+                foreach (var exit in lastRoom.roomData.exits)
+                {
+                    // Get door groups for the boss room facing the opposite direction.
+                    List<List<Vector2Int>> bossDoorGroups = GetExitGroups(bossRoomVariant, GetOppositeDirection(exit.direction));
+                    foreach (var bossDoorGroup in bossDoorGroups)
+                    {
+                        Vector2Int bossDoorCenter = GetExitCenter(bossDoorGroup);
+                        // Calculate the position where the boss room should be placed.
+                        Vector2Int bossRoomPosition = lastRoom.gridPosition + GetDoorOffset(exit.direction, exit.position, bossDoorCenter);
+
+                        if (!Overlaps(bossRoomVariant, bossRoomPosition))
+                        {
+                            PlaceRoom(bossRoomVariant, bossRoomPosition);
+                            return true; // Successfully placed the BossRoom
+                        }
+                    }
+                }
+            }
+        }
+        return false; // Couldn't place the BossRoom, return false
+    }
+
+    /// <summary>
+    /// If there isn’t enough space for a BossRoom, attempts to place an EndRoom instead, aligning its door(s) with the last room.
+    /// </summary>
+    private void PlaceEndRoom()
+    {
+        List<RoomData> endRooms = roomPrefabs.FindAll(room => room.roomType == RoomType.EndRoom);
+        if (endRooms.Count == 0) return;
+
+        // Pick a random EndRoom.
+        RoomData endRoomOriginal = endRooms[Random.Range(0, endRooms.Count)];
+
+        // Use the last placed room as the connection point.
+        RoomInstance lastRoom = placedRooms[placedRooms.Count - 1];
+
+        // Try several flip variations.
+        bool[] flipOptions = new bool[] { false, true };
+        foreach (bool flipHorizontal in flipOptions)
+        {
+            foreach (bool flipVertical in flipOptions)
+            {
+                RoomData endRoomVariant = RotateTiles(endRoomOriginal, false, flipHorizontal, flipVertical);
+                foreach (var exit in lastRoom.roomData.exits)
+                {
+                    List<List<Vector2Int>> endDoorGroups = GetExitGroups(endRoomVariant, GetOppositeDirection(exit.direction));
+                    foreach (var endDoorGroup in endDoorGroups)
+                    {
+                        Vector2Int endDoorCenter = GetExitCenter(endDoorGroup);
+                        Vector2Int endRoomPosition = lastRoom.gridPosition + GetDoorOffset(exit.direction, exit.position, endDoorCenter);
+
+                        if (!Overlaps(endRoomVariant, endRoomPosition))
+                        {
+                            PlaceRoom(endRoomVariant, endRoomPosition);
+                            return; // Exit after placing the EndRoom
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     private void TryPlaceNextRoom()
     {
@@ -42,13 +139,17 @@ public class DungeonGenerator : MonoBehaviour
         {
             foreach (var exit in placedRoom.roomData.exits)
             {
-                RoomData newRoom = roomPrefabs[Random.Range(0, roomPrefabs.Count)];
-                newRoom = RotateTiles(newRoom, GetRandomRotationDegree());
+                // Pick a RegularRoom
+                List<RoomData> regularRooms = roomPrefabs.FindAll(room => room.roomType == RoomType.RegularRoom);
+                if (regularRooms.Count == 0) return;
+
+                RoomData newRoom = regularRooms[Random.Range(0, regularRooms.Count)];
+                newRoom = RotateTiles(newRoom, false/*GetRandomFlip()*/, GetRandomFlip(), GetRandomFlip());
 
                 // Group door positions for the placed room for this exit's direction.
                 List<List<Vector2Int>> placedGroups = GetExitGroups(placedRoom.roomData, exit.direction);
-                // Find the group that contains the current exit's position.
 
+                // Find the group that contains the current exit's position.
                 List<Vector2Int> placedGroup = placedGroups.Find(g => g.Contains(exit.position));
                 if (placedGroup == null)
                     continue;
@@ -64,47 +165,31 @@ public class DungeonGenerator : MonoBehaviour
 
                     if (!Overlaps(newRoom, newRoomPosition))
                     {
-                        PlaceRoom(newRoom, newRoomPosition);
-                        return;
-                    }
-                }
-            }
-        }
-    }
+                        // Check if the exit is blocked by a wall tile.
+                        Vector2Int exitWorldPos = placedRoom.gridPosition + exit.position;
+                        Vector3Int worldPos = new Vector3Int(exitWorldPos.x, exitWorldPos.y, 0);
 
-    /// <summary>
-    /// Iterates over each placed room and its exits. If an exit is blocked by a wall tile,
-    /// this method attempts to place another room that has a matching door on the opposite side.
-    /// </summary>
-    private void FillBlockedExits()
-    {
-        List<RoomInstance> currentRooms = new(placedRooms);
-
-        foreach (var placedRoom in currentRooms)
-        {
-            foreach (var exit in placedRoom.roomData.exits)
-            {
-                Vector2Int exitWorldPos = placedRoom.gridPosition + exit.position;
-                Vector3Int worldPos = new Vector3Int(exitWorldPos.x, exitWorldPos.y, 0);
-
-                // Check if the exit is blocked by a wall tile
-                if (tilemapCollisions.GetTile(worldPos) != null)
-                {
-                    // Select a new room to try to connect here.
-                    RoomData newRoom = roomPrefabs[Random.Range(0, roomPrefabs.Count)];
-
-                    // Get door groups for the new room with a door facing back toward the current room.
-                    List<List<Vector2Int>> newRoomGroups = GetExitGroups(newRoom, GetOppositeDirection(exit.direction));
-                    foreach (var newRoomGroup in newRoomGroups)
-                    {
-                        Vector2Int newRoomCenter = GetExitCenter(newRoomGroup);
-                        // Calculate the position for the new room so that the door centers align.
-                        Vector2Int newRoomPosition = placedRoom.gridPosition + GetDoorOffset(exit.direction, exit.position, newRoomCenter);
-
-                        if (!Overlaps(newRoom, newRoomPosition))
+                        if (tilemapCollisions.GetTile(worldPos) != null)
                         {
+                            // Try to unblock the exit with a variant of the room.
+                            List<List<Vector2Int>> newRoomExitGroups = GetExitGroups(newRoom, GetOppositeDirection(exit.direction));
+                            foreach (var newRoomExitGroup in newRoomExitGroups)
+                            {
+                                Vector2Int newRoomExitCenter = GetExitCenter(newRoomExitGroup);
+                                Vector2Int newRoomExitPosition = placedRoom.gridPosition + GetDoorOffset(exit.direction, exit.position, newRoomExitCenter);
+
+                                if (!Overlaps(newRoom, newRoomExitPosition))
+                                {
+                                    PlaceRoom(newRoom, newRoomExitPosition);
+                                    return; // Exit early after placing the new room
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Place the room normally.
                             PlaceRoom(newRoom, newRoomPosition);
-                            break;
+                            return;
                         }
                     }
                 }
@@ -112,68 +197,123 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    private int GetRandomRotationDegree()
+    /// <summary>
+    /// Checks if there is at least one exit in the last room that could align with a BossRoom.
+    /// </summary>
+    private bool CanPlaceBossRoom()
     {
-        int[] validDegrees = { 0, 90, 180, 270 };
+        // You can extend this check with more sophisticated logic if needed.
+        // For now, we assume that if there is at least one exit on the last room, then there's a chance.
+        return placedRooms.Count > 0 && placedRooms[placedRooms.Count - 1].roomData.exits.Count > 0;
+    }
 
-        int randomIndex = UnityEngine.Random.Range(0, validDegrees.Length);
-
-        return validDegrees[randomIndex];
+    private bool GetRandomFlip()
+    {
+        return Random.value > 0.5f;
     }
 
 
-    private RoomData RotateTiles(RoomData roomData, int degrees)
+    private RoomData RotateTiles(RoomData roomData, bool isRotated, bool flipX, bool flipY)
     {
-        if (degrees != 180)
-            return roomData;
-
-        int numRotations = degrees / 90;
-
-        // Create a new RoomData to hold the rotated data.
-        RoomData rotatedRoomData = new RoomData
+        RoomData transformedRoomData = new RoomData
         {
+            roomType = roomData.roomType,
+            size = roomData.size,
             tiles = new List<RoomData.TileData>(),
             exits = new List<RoomData.ExitPoint>()
         };
 
-        // Rotate tiles and store them in the new RoomData
+        Vector2Int size = roomData.size;
+
+        // Transform tile positions
         foreach (var tile in roomData.tiles)
         {
-            Vector2Int rotatedTilePos = tile.position;
-            for (int i = 0; i < numRotations; i++)
-            {
-                rotatedTilePos = new Vector2Int(-rotatedTilePos.y, rotatedTilePos.x);
-            }
+            Vector2Int transformedPos = tile.position;
 
-            rotatedRoomData.tiles.Add(new RoomData.TileData
+            // Apply 90-degree clockwise rotation
+            if (isRotated) transformedPos = new Vector2Int(transformedPos.y, size.x - 1 - transformedPos.x);
+
+            // Apply flipping within bounds
+            if (flipX) transformedPos.x = size.x - 1 - transformedPos.x;
+            if (flipY) transformedPos.y = size.y - 1 - transformedPos.y;
+
+            transformedRoomData.tiles.Add(new RoomData.TileData
             {
-                position = rotatedTilePos,
+                position = transformedPos,
                 tileName = tile.tileName
             });
         }
 
-        // Rotate exits and store them in the new RoomData
+        // Transform exit positions and directions
         foreach (var exit in roomData.exits)
         {
-            RoomData.Direction rotatedExitDirection = (RoomData.Direction)(((int)exit.direction + numRotations) % 4);
-            rotatedRoomData.exits.Add(new RoomData.ExitPoint
+            Vector2Int transformedExitPos = exit.position;
+            RoomData.Direction newDirection = exit.direction;
+
+            // Apply rotation
+            if (isRotated)
             {
-                direction = rotatedExitDirection,
-                position = exit.position
+                transformedExitPos = new Vector2Int(transformedExitPos.y, size.x - 1 - transformedExitPos.x);
+                newDirection = RotateDirectionClockwise(exit.direction);
+            }
+
+            // Apply flipping
+            if (flipX)
+            {
+                transformedExitPos.x = size.x - 1 - transformedExitPos.x;
+                newDirection = FlipDirectionX(newDirection);
+            }
+            if (flipY)
+            {
+                transformedExitPos.y = size.y - 1 - transformedExitPos.y;
+                newDirection = FlipDirectionY(newDirection);
+            }
+
+            transformedRoomData.exits.Add(new RoomData.ExitPoint
+            {
+                position = transformedExitPos,
+                direction = newDirection
             });
         }
 
-        return rotatedRoomData;  // Return the newly created rotated RoomData
+        return transformedRoomData;
     }
 
-
-    private void RotateExits(RoomData roomData, int numRotations)
+    // Rotates direction 90 degrees clockwise
+    private RoomData.Direction RotateDirectionClockwise(RoomData.Direction dir)
     {
-        for (int i = 0; i < roomData.exits.Count; i++)
+        return dir switch
         {
-            roomData.exits[i].direction = (RoomData.Direction)(((int)roomData.exits[i].direction + numRotations) % 4);
-        }
+            RoomData.Direction.North => RoomData.Direction.East,
+            RoomData.Direction.East => RoomData.Direction.South,
+            RoomData.Direction.South => RoomData.Direction.West,
+            RoomData.Direction.West => RoomData.Direction.North,
+            _ => dir
+        };
     }
+
+    // Mirrors direction across the X-axis
+    private RoomData.Direction FlipDirectionX(RoomData.Direction dir)
+    {
+        return dir switch
+        {
+            RoomData.Direction.East => RoomData.Direction.West,
+            RoomData.Direction.West => RoomData.Direction.East,
+            _ => dir
+        };
+    }
+
+    // Mirrors direction across the Y-axis
+    private RoomData.Direction FlipDirectionY(RoomData.Direction dir)
+    {
+        return dir switch
+        {
+            RoomData.Direction.North => RoomData.Direction.South,
+            RoomData.Direction.South => RoomData.Direction.North,
+            _ => dir
+        };
+    }
+
 
     private void PlaceRoom(RoomData roomData, Vector2Int gridPos)
     {
