@@ -62,28 +62,31 @@ public class DungeonGenerator : MonoBehaviour
 
         // Try a few flip variations. (Expand this list if you need more rotations.)
         bool[] flipOptions = new bool[] { false, true };
-        foreach (bool flipHorizontal in flipOptions)
+        foreach (bool rotate in flipOptions)
         {
-            foreach (bool flipVertical in flipOptions)
+            foreach (bool flipHorizontal in flipOptions)
             {
-                // Rotate/flip the boss room variant.
-                RoomData bossRoomVariant = RotateTiles(bossRoomOriginal, false, flipHorizontal, flipVertical);
-
-                // For each exit on the last room, see if we can align a door.
-                foreach (var exit in lastRoom.roomData.exits)
+                foreach (bool flipVertical in flipOptions)
                 {
-                    // Get door groups for the boss room facing the opposite direction.
-                    List<List<Vector2Int>> bossDoorGroups = GetExitGroups(bossRoomVariant, GetOppositeDirection(exit.direction));
-                    foreach (var bossDoorGroup in bossDoorGroups)
-                    {
-                        Vector2Int bossDoorCenter = GetExitCenter(bossDoorGroup);
-                        // Calculate the position where the boss room should be placed.
-                        Vector2Int bossRoomPosition = lastRoom.gridPosition + GetDoorOffset(exit.direction, exit.position, bossDoorCenter);
+                    // Rotate/flip the boss room variant.
+                    RoomData bossRoomVariant = RotateTiles(bossRoomOriginal, rotate, flipHorizontal, flipVertical);
 
-                        if (!Overlaps(bossRoomVariant, bossRoomPosition))
+                    // For each exit on the last room, see if we can align a door.
+                    foreach (var exit in lastRoom.roomData.exits)
+                    {
+                        // Get door groups for the boss room facing the opposite direction.
+                        List<List<Vector2Int>> bossDoorGroups = GetExitGroups(bossRoomVariant, GetOppositeDirection(exit.direction));
+                        foreach (var bossDoorGroup in bossDoorGroups)
                         {
-                            PlaceRoom(bossRoomVariant, bossRoomPosition);
-                            return true; // Successfully placed the BossRoom
+                            Vector2Int bossDoorCenter = GetExitCenter(bossDoorGroup);
+                            // Calculate the position where the boss room should be placed.
+                            Vector2Int bossRoomPosition = lastRoom.gridPosition + GetDoorOffset(exit.direction, exit.position, bossDoorCenter);
+
+                            if (!Overlaps(bossRoomVariant, bossRoomPosition))
+                            {
+                                PlaceRoom(bossRoomVariant, bossRoomPosition);
+                                return true; // Successfully placed the BossRoom
+                            }
                         }
                     }
                 }
@@ -108,23 +111,26 @@ public class DungeonGenerator : MonoBehaviour
 
         // Try several flip variations.
         bool[] flipOptions = new bool[] { false, true };
-        foreach (bool flipHorizontal in flipOptions)
+        foreach (bool rotate in flipOptions)
         {
-            foreach (bool flipVertical in flipOptions)
+            foreach (bool flipHorizontal in flipOptions)
             {
-                RoomData endRoomVariant = RotateTiles(endRoomOriginal, false, flipHorizontal, flipVertical);
-                foreach (var exit in lastRoom.roomData.exits)
+                foreach (bool flipVertical in flipOptions)
                 {
-                    List<List<Vector2Int>> endDoorGroups = GetExitGroups(endRoomVariant, GetOppositeDirection(exit.direction));
-                    foreach (var endDoorGroup in endDoorGroups)
+                    RoomData endRoomVariant = RotateTiles(endRoomOriginal, rotate, flipHorizontal, flipVertical);
+                    foreach (var exit in lastRoom.roomData.exits)
                     {
-                        Vector2Int endDoorCenter = GetExitCenter(endDoorGroup);
-                        Vector2Int endRoomPosition = lastRoom.gridPosition + GetDoorOffset(exit.direction, exit.position, endDoorCenter);
-
-                        if (!Overlaps(endRoomVariant, endRoomPosition))
+                        List<List<Vector2Int>> endDoorGroups = GetExitGroups(endRoomVariant, GetOppositeDirection(exit.direction));
+                        foreach (var endDoorGroup in endDoorGroups)
                         {
-                            PlaceRoom(endRoomVariant, endRoomPosition);
-                            return; // Exit after placing the EndRoom
+                            Vector2Int endDoorCenter = GetExitCenter(endDoorGroup);
+                            Vector2Int endRoomPosition = lastRoom.gridPosition + GetDoorOffset(exit.direction, exit.position, endDoorCenter);
+
+                            if (!Overlaps(endRoomVariant, endRoomPosition))
+                            {
+                                PlaceRoom(endRoomVariant, endRoomPosition);
+                                return; // Exit after placing the EndRoom
+                            }
                         }
                     }
                 }
