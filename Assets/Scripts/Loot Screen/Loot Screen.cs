@@ -2,42 +2,78 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LootScreen : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public List<int> unlockedCards = new List<int>(); // Liste des cartes débloquées
+    public Shoot shootScript; // Référence au script Shoot
+    public GameObject lootCard;
+    private Canvas canvasLoot;
+    private Transform canvasLootTransform;
+    private List<GameObject> cardsInstance = new List<GameObject>();
+
     void Start()
     {
-        //Sets container of the cards to inactive so they don't show
+        canvasLoot=gameObject.GetComponent<Canvas>();
+        canvasLootTransform = gameObject.GetComponent<Transform>();
+        unlockedCards.Add(0);
         //gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
+    //LS
+    public void activate(GameObject[] cardTypes)
+    {
+        List<int> lockedCards = Enumerable.Range(0, cardTypes.Length)
+                                              .Where(index => !unlockedCards.Contains(index))
+                                              .ToList();
+        Debug.Log(lockedCards.Count);
+        if (lockedCards.Count>0) {
+            Time.timeScale = 0f;
 
-    public void activate(GameObject[] cardTypes) {
-        //Sets cardHolder to the empty object holding each loot card
-        GameObject cardHolder = gameObject.transform.GetChild(0).gameObject;
 
-        //Creates an arraylist of each card type's index in the main array. This is so we can prevent showing the same type twice.
-        ArrayList indexes = new ArrayList();
-        indexes.AddRange(Enumerable.Range(0, cardTypes.Length).ToArray());
 
-        //Sets container of the cards to active so they display
-        cardHolder.SetActive(true);
 
-        //Goes through each card and randomly assigns it a card type
-        for (int x = 0; x < 3; x++) {
-            GameObject card = cardHolder.transform.GetChild(x).gameObject;
+            shootScript.setEnableShooting(false);
+            canvasLoot.enabled = true;
 
-            //The index of the array list we want to access
-            int indexIndex = Random.Range(0, indexes.Count);
-            //Put the stores index as our cardType index
-            int index = (int)indexes[indexIndex];
-            //Remove that cardType index so we don't draw it again
-            indexes.RemoveAt(indexIndex);
+            lockedCards = lockedCards.OrderBy(_ => Random.value).Take(3).ToList();
+            int cardLockedToDisplay = lockedCards.Count() < 3 ? lockedCards.Count : 3;
 
-            //Set the loot card's sprite to the card type's
-            card.GetComponent<UnityEngine.UI.Image>().sprite = cardTypes[index].GetComponent<SpriteRenderer>().sprite;
-            //Store the value of the card type's index in the array so we can access it later after clicking on the loot card
-            card.GetComponent<LootOption>().setTypeIndex(index);
+
+            for (int i = 0; i < cardLockedToDisplay; i++)
+            {
+                GameObject card = Instantiate(lootCard, canvasLootTransform);
+                cardsInstance.Add(card);
+
+                int index = lockedCards[i];
+
+                card.GetComponent<Image>().sprite = cardTypes[index].GetComponent<SpriteRenderer>().sprite;
+                card.GetComponent<LootOption>().setTypeIndex(index);
+
+                // Ajoute un bouton pour débloquer la carte
+                int selectedCardIndex = index;
+                card.GetComponent<Button>().onClick.AddListener(() => UnlockCard(cardTypes[selectedCardIndex], index));
+            }
         }
+    }
+    //LS
+    public void UnlockCard(GameObject newCard,int index)
+    {
+        unlockedCards.Add(index);
+        shootScript.UnlockCard(newCard);
+        Time.timeScale = 1f;
+        canvasLoot.enabled = false;
+        shootScript.setEnableShooting(true);
+
+        foreach (GameObject instance in cardsInstance)
+        {
+            if (instance != null)
+            {
+                Destroy(instance); // Détruire chaque instance
+            }
+        }
+        // Vider la liste après avoir détruit toutes les instances
+        cardsInstance.Clear();
+
     }
 }

@@ -32,6 +32,8 @@ public class cardMovement : MonoBehaviour
         rb.AddTorque(cardTorque);
 
         timeAlive = 0;
+
+        StartCoroutine(DestroyAfterTime(4f));
     }
 
     private void Update() {
@@ -46,12 +48,14 @@ public class cardMovement : MonoBehaviour
         //If the player touches the card, they pick it up and put it back in their inventory
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<shoot>().pickupCard(inventoryIndex);
+           
             GameObject.Destroy(gameObject);
         }
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<Enemy>().takeDamage(damage);
+            Debug.Log("OUCHHHH");
+            other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+            Destroy(gameObject);
         }
         if (other.gameObject.tag == "Bullet")
         {
@@ -61,8 +65,13 @@ public class cardMovement : MonoBehaviour
         FindObjectOfType<AudioManager>().playSound("Card Bounce");
     }
 
-    public void setIndex (int index)
+    public void SetIndex (int index)
     {
         inventoryIndex = index;
+    }
+    IEnumerator DestroyAfterTime(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }
