@@ -8,6 +8,7 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private List<RoomData> roomPrefabs;
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Tilemap tilemapCollisions;
+    [SerializeField] private Tilemap doorsCollisions;
     [SerializeField] private List<TileBase> tileReferences;
     [SerializeField] private int maxRooms = 10;
 
@@ -96,7 +97,7 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// If there isn’t enough space for a BossRoom, attempts to place an EndRoom instead, aligning its door(s) with the last room.
+    /// If there isnï¿½t enough space for a BossRoom, attempts to place an EndRoom instead, aligning its door(s) with the last room.
     /// </summary>
     private void PlaceEndRoom()
     {
@@ -339,6 +340,10 @@ public class DungeonGenerator : MonoBehaviour
             if (tile.tileName.Contains("wall"))
             {
                 tilemapCollisions.SetTile(worldPos, tileBase);
+            }
+            if (tile.tileName.Contains("Door"))
+            {
+                doorsCollisions.SetTile(worldPos, tileBase);
             }
             else if (tileBase != null)
             {
