@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 409831641}
   - component: {fileID: 409831640}
   - component: {fileID: 409831639}
+  - component: {fileID: 409831644}
   m_Layer: 0
   m_Name: Tilemap Doors Collisions
   m_TagString: Untagged
@@ -357,6 +358,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &409831644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409831637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 800fcc86ce6044c4897def32c49655cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 409831643}
 --- !u!1 &701843262
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,8 +4,9 @@ using UnityEngine.Tilemaps;
 public class DetectPlayer : MonoBehaviour
 {
     [SerializeField] private Tilemap tilemap;
-    void OnTriggerExit2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("TEST");
         if (other.gameObject.CompareTag("Player"))
         {
             Vector3 playerPosition = other.transform.position;
