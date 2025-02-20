@@ -9,6 +9,7 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Tilemap tilemapCollisions;
     [SerializeField] private Tilemap doorsCollisions;
+    [SerializeField] private Tilemap portalCollisions;
     [SerializeField] private List<TileBase> tileReferences;
     [SerializeField] private int maxRooms = 10;
 
@@ -344,6 +345,10 @@ public class DungeonGenerator : MonoBehaviour
             if (tile.tileName.Contains("Door"))
             {
                 doorsCollisions.SetTile(worldPos, tileBase);
+            }
+            if (tile.tileName.Contains("Portal"))
+            {
+                portalCollisions.SetTile(worldPos, tileBase);
             }
             else if (tileBase != null)
             {
