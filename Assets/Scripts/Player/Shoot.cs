@@ -18,7 +18,7 @@ public class Shoot : MonoBehaviour
     public float iconSelectedSize = 1.1f;
     public float iconWidth = 40f;
 
-    
+    public CardsMagazine cardsMagazine;
     private bool enableShooting = true;
 
     public float reloadTime = 2f; // Temps de rechargement en secondes
@@ -60,11 +60,12 @@ public class Shoot : MonoBehaviour
         // Prendre la première carte du chargeur et la lancer
         GameObject selectedCard = magazine[0];
         magazine.RemoveAt(0);
+        cardsMagazine.RemoveLastCard();
 
         GameObject newCard = Instantiate(selectedCard);
         newCard.transform.position = transform.position;
         newCard.transform.rotation = transform.rotation;
-
+        
         FindFirstObjectByType<AudioManager>().playSound("Card Throw");
     }
     //LS
@@ -91,13 +92,8 @@ public class Shoot : MonoBehaviour
             yield return null;
         }
 
-        magazine.Clear();
-        for (int i = 0; i < magazineSize; i++)
-        {
-            int randomIndex = Random.Range(0, availableCards.Count);
-            magazine.Add(availableCards[randomIndex]);
-        }
-
+        
+        FillMagazine();
         Debug.Log("Magasin rechargé !");
         isReloading = false;
         enableShooting = true;
@@ -118,6 +114,7 @@ public class Shoot : MonoBehaviour
             magazine.Add(availableCards[randomIndex]);
         }
         Debug.Log("Chargeur initial rempli !");
+        cardsMagazine.DisplayCardsMagazine(magazine);
     }
 
     //LS
