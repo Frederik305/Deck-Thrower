@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using static RoomData;
@@ -13,8 +14,13 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private List<TileBase> tileReferences;
     [SerializeField] private int maxRooms = 10;
 
+    [Header("Rooms probabilities (0.5 = 50%)")]
+    [SerializeField] private float chancesBossRoom = 0.0f;
+
+
     private HashSet<Vector2Int> occupiedTiles = new();
     private List<RoomInstance> placedRooms = new();
+    private Queue<int> lastPickedRoomIds = new();
 
     private void Start()
     {
@@ -38,11 +44,17 @@ public class DungeonGenerator : MonoBehaviour
         {
             TryPlaceNextRoom();
         }
-
-        // Attempt to place BossRoom if possible, otherwise place EndRoom
-        if (!PlaceBossRoom())
+        if (Random.value < chancesBossRoom)
         {
-            // If BossRoom can't be placed, place EndRoom instead.
+            // Attempt to place BossRoom if possible, otherwise place EndRoom
+            if (!PlaceBossRoom())
+            {
+                // If BossRoom can't be placed, place EndRoom instead.
+                PlaceEndRoom();
+            }
+        }
+        else
+        {
             PlaceEndRoom();
         }
     }
@@ -139,8 +151,6 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
     }
-
-
     private void TryPlaceNextRoom()
     {
         foreach (var placedRoom in placedRooms)
@@ -151,8 +161,10 @@ public class DungeonGenerator : MonoBehaviour
                 List<RoomData> regularRooms = roomPrefabs.FindAll(room => room.roomType == RoomType.RegularRoom);
                 if (regularRooms.Count == 0) return;
 
-                RoomData newRoom = regularRooms[Random.Range(0, regularRooms.Count)];
-                newRoom = RotateTiles(newRoom, false/*GetRandomFlip()*/, GetRandomFlip(), GetRandomFlip());
+                // Get a random index using your weighted method.
+                int randomIndex = GetWeightedRandomIndex(regularRooms);
+                RoomData newRoom = regularRooms[randomIndex];
+                newRoom = RotateTiles(newRoom, false /*GetRandomFlip()*/, GetRandomFlip(), GetRandomFlip());
 
                 // Group door positions for the placed room for this exit's direction.
                 List<List<Vector2Int>> placedGroups = GetExitGroups(placedRoom.roomData, exit.direction);
@@ -189,6 +201,12 @@ public class DungeonGenerator : MonoBehaviour
                                 if (!Overlaps(newRoom, newRoomExitPosition))
                                 {
                                     PlaceRoom(newRoom, newRoomExitPosition);
+                                    // Only update history when placement is successful:
+                                    lastPickedRoomIds.Enqueue(randomIndex);
+                                    if (lastPickedRoomIds.Count > 3)
+                                    {
+                                        lastPickedRoomIds.Dequeue();
+                                    }
                                     return; // Exit early after placing the new room
                                 }
                             }
@@ -197,6 +215,12 @@ public class DungeonGenerator : MonoBehaviour
                         {
                             // Place the room normally.
                             PlaceRoom(newRoom, newRoomPosition);
+                            // Only update history when placement is successful:
+                            lastPickedRoomIds.Enqueue(randomIndex);
+                            if (lastPickedRoomIds.Count > 3)
+                            {
+                                lastPickedRoomIds.Dequeue();
+                            }
                             return;
                         }
                     }
@@ -205,14 +229,32 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Checks if there is at least one exit in the last room that could align with a BossRoom.
-    /// </summary>
-    private bool CanPlaceBossRoom()
+
+    int GetWeightedRandomIndex(List<RoomData> rooms)
     {
-        // You can extend this check with more sophisticated logic if needed.
-        // For now, we assume that if there is at least one exit on the last room, then there's a chance.
-        return placedRooms.Count > 0 && placedRooms[placedRooms.Count - 1].roomData.exits.Count > 0;
+        List<float> weights = new List<float>();
+
+        // Calculate weights
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            int timesPicked = lastPickedRoomIds.Count(id => id == i);
+            float weight = Mathf.Pow(0.25f, timesPicked); // Exponential decay factor
+            weights.Add(weight);
+        }
+
+        // Select based on weights
+        float totalWeight = weights.Sum();
+        float randomPoint = Random.value * totalWeight;
+
+        float currentSum = 0;
+        for (int i = 0; i < weights.Count; i++)
+        {
+            currentSum += weights[i];
+            if (randomPoint <= currentSum)
+                return i;
+        }
+
+        return 0; // Fallback (should never happen)
     }
 
     private bool GetRandomFlip()
@@ -338,7 +380,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             Vector3Int worldPos = new Vector3Int(gridPos.x + tile.position.x, gridPos.y + tile.position.y, 0);
             TileBase tileBase = GetTileByName(tile.tileName);
-            if (tile.tileName.Contains("wall"))
+            if (tile.tileName.Contains("Wall"))
             {
                 tilemapCollisions.SetTile(worldPos, tileBase);
             }
@@ -350,7 +392,7 @@ public class DungeonGenerator : MonoBehaviour
             {
                 portalCollisions.SetTile(worldPos, tileBase);
             }
-            else if (tileBase != null)
+            else if (tileBase != null && !tile.tileName.Contains("Wall") && !tile.tileName.Contains("Door") && !tile.tileName.Contains("Portal"))
             {
                 tilemap.SetTile(worldPos, tileBase);
             }

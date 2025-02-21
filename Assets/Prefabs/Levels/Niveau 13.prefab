@@ -4200,51 +4200,51 @@ MonoBehaviour:
     direction: 0
   tiles:
   - position: {x: 0, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 2}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 3}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 4}
     tileName: Door Tile
   - position: {x: 0, y: 5}
     tileName: Door Tile
   - position: {x: 0, y: 6}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 7}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 8}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 11}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 12}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 13}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 14}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 15}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 16}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 17}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 18}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 1, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 1, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 1, y: 2}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 1, y: 3}
     tileName: Level Layout_42
   - position: {x: 1, y: 4}
@@ -4278,11 +4278,11 @@ MonoBehaviour:
   - position: {x: 1, y: 18}
     tileName: Level Layout_42
   - position: {x: 1, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 2, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 2, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 2, y: 2}
     tileName: Level Layout_42
   - position: {x: 2, y: 3}
@@ -4296,9 +4296,9 @@ MonoBehaviour:
   - position: {x: 2, y: 7}
     tileName: Level Layout_42
   - position: {x: 2, y: 8}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 2, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 2, y: 10}
     tileName: Level Layout_42
   - position: {x: 2, y: 11}
@@ -4318,11 +4318,11 @@ MonoBehaviour:
   - position: {x: 2, y: 18}
     tileName: Level Layout_42
   - position: {x: 2, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 3, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 3, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 3, y: 2}
     tileName: Level Layout_42
   - position: {x: 3, y: 3}
@@ -4336,9 +4336,9 @@ MonoBehaviour:
   - position: {x: 3, y: 7}
     tileName: Level Layout_42
   - position: {x: 3, y: 8}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 3, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 3, y: 10}
     tileName: Level Layout_42
   - position: {x: 3, y: 11}
@@ -4358,15 +4358,15 @@ MonoBehaviour:
   - position: {x: 3, y: 18}
     tileName: Level Layout_42
   - position: {x: 3, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 4, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 4, y: 1}
     tileName: Level Layout_42
   - position: {x: 4, y: 2}
     tileName: Level Layout_42
   - position: {x: 4, y: 3}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 4, y: 4}
     tileName: Level Layout_42
   - position: {x: 4, y: 5}
@@ -4390,7 +4390,7 @@ MonoBehaviour:
   - position: {x: 4, y: 14}
     tileName: Level Layout_42
   - position: {x: 4, y: 15}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 4, y: 16}
     tileName: Level Layout_42
   - position: {x: 4, y: 17}
@@ -4398,15 +4398,15 @@ MonoBehaviour:
   - position: {x: 4, y: 18}
     tileName: Level Layout_42
   - position: {x: 4, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 5, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 5, y: 1}
     tileName: Level Layout_42
   - position: {x: 5, y: 2}
     tileName: Level Layout_42
   - position: {x: 5, y: 3}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 5, y: 4}
     tileName: Level Layout_42
   - position: {x: 5, y: 5}
@@ -4430,7 +4430,7 @@ MonoBehaviour:
   - position: {x: 5, y: 14}
     tileName: Level Layout_42
   - position: {x: 5, y: 15}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 5, y: 16}
     tileName: Level Layout_42
   - position: {x: 5, y: 17}
@@ -4438,15 +4438,15 @@ MonoBehaviour:
   - position: {x: 5, y: 18}
     tileName: Level Layout_42
   - position: {x: 5, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 6, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 6, y: 1}
     tileName: Level Layout_42
   - position: {x: 6, y: 2}
     tileName: Level Layout_42
   - position: {x: 6, y: 3}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 6, y: 4}
     tileName: Level Layout_42
   - position: {x: 6, y: 5}
@@ -4470,23 +4470,23 @@ MonoBehaviour:
   - position: {x: 6, y: 14}
     tileName: Level Layout_42
   - position: {x: 6, y: 15}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 6, y: 16}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 6, y: 17}
     tileName: Level Layout_42
   - position: {x: 6, y: 18}
     tileName: Level Layout_42
   - position: {x: 6, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 7, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 7, y: 1}
     tileName: Level Layout_42
   - position: {x: 7, y: 2}
     tileName: Level Layout_42
   - position: {x: 7, y: 3}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 7, y: 4}
     tileName: Level Layout_42
   - position: {x: 7, y: 5}
@@ -4500,11 +4500,11 @@ MonoBehaviour:
   - position: {x: 7, y: 9}
     tileName: Level Layout_42
   - position: {x: 7, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 7, y: 11}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 7, y: 12}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 7, y: 13}
     tileName: Level Layout_42
   - position: {x: 7, y: 14}
@@ -4518,9 +4518,9 @@ MonoBehaviour:
   - position: {x: 7, y: 18}
     tileName: Level Layout_42
   - position: {x: 7, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 8, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 8, y: 1}
     tileName: Level Layout_42
   - position: {x: 8, y: 2}
@@ -4532,9 +4532,9 @@ MonoBehaviour:
   - position: {x: 8, y: 5}
     tileName: Level Layout_42
   - position: {x: 8, y: 6}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 8, y: 7}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 8, y: 8}
     tileName: Level Layout_42
   - position: {x: 8, y: 9}
@@ -4544,7 +4544,7 @@ MonoBehaviour:
   - position: {x: 8, y: 11}
     tileName: Level Layout_42
   - position: {x: 8, y: 12}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 8, y: 13}
     tileName: Level Layout_42
   - position: {x: 8, y: 14}
@@ -4558,9 +4558,9 @@ MonoBehaviour:
   - position: {x: 8, y: 18}
     tileName: Level Layout_42
   - position: {x: 8, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 1}
     tileName: Level Layout_42
   - position: {x: 9, y: 2}
@@ -4572,7 +4572,7 @@ MonoBehaviour:
   - position: {x: 9, y: 5}
     tileName: Level Layout_42
   - position: {x: 9, y: 6}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 7}
     tileName: Level Layout_42
   - position: {x: 9, y: 8}
@@ -4600,7 +4600,7 @@ MonoBehaviour:
   - position: {x: 9, y: 19}
     tileName: Door Tile
   - position: {x: 10, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 10, y: 1}
     tileName: Level Layout_42
   - position: {x: 10, y: 2}
@@ -4612,7 +4612,7 @@ MonoBehaviour:
   - position: {x: 10, y: 5}
     tileName: Level Layout_42
   - position: {x: 10, y: 6}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 10, y: 7}
     tileName: Level Layout_42
   - position: {x: 10, y: 8}
@@ -4628,9 +4628,9 @@ MonoBehaviour:
   - position: {x: 10, y: 13}
     tileName: Level Layout_42
   - position: {x: 10, y: 14}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 10, y: 15}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 10, y: 16}
     tileName: Level Layout_42
   - position: {x: 10, y: 17}
@@ -4640,7 +4640,7 @@ MonoBehaviour:
   - position: {x: 10, y: 19}
     tileName: Door Tile
   - position: {x: 11, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 11, y: 1}
     tileName: Level Layout_42
   - position: {x: 11, y: 2}
@@ -4658,7 +4658,7 @@ MonoBehaviour:
   - position: {x: 11, y: 8}
     tileName: Level Layout_42
   - position: {x: 11, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 11, y: 10}
     tileName: Level Layout_42
   - position: {x: 11, y: 11}
@@ -4670,17 +4670,17 @@ MonoBehaviour:
   - position: {x: 11, y: 14}
     tileName: Level Layout_42
   - position: {x: 11, y: 15}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 11, y: 16}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 11, y: 17}
     tileName: Level Layout_42
   - position: {x: 11, y: 18}
     tileName: Level Layout_42
   - position: {x: 11, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 12, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 12, y: 1}
     tileName: Level Layout_42
   - position: {x: 12, y: 2}
@@ -4698,9 +4698,9 @@ MonoBehaviour:
   - position: {x: 12, y: 8}
     tileName: Level Layout_42
   - position: {x: 12, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 12, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 12, y: 11}
     tileName: Level Layout_42
   - position: {x: 12, y: 12}
@@ -4718,11 +4718,11 @@ MonoBehaviour:
   - position: {x: 12, y: 18}
     tileName: Level Layout_42
   - position: {x: 12, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 13, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 13, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 13, y: 2}
     tileName: Level Layout_42
   - position: {x: 13, y: 3}
@@ -4740,7 +4740,7 @@ MonoBehaviour:
   - position: {x: 13, y: 9}
     tileName: Level Layout_42
   - position: {x: 13, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 13, y: 11}
     tileName: Level Layout_42
   - position: {x: 13, y: 12}
@@ -4758,11 +4758,11 @@ MonoBehaviour:
   - position: {x: 13, y: 18}
     tileName: Level Layout_42
   - position: {x: 13, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 14, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 14, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 14, y: 2}
     tileName: Level Layout_42
   - position: {x: 14, y: 3}
@@ -4772,7 +4772,7 @@ MonoBehaviour:
   - position: {x: 14, y: 5}
     tileName: Level Layout_42
   - position: {x: 14, y: 6}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 14, y: 7}
     tileName: Level Layout_42
   - position: {x: 14, y: 8}
@@ -4798,11 +4798,11 @@ MonoBehaviour:
   - position: {x: 14, y: 18}
     tileName: Level Layout_42
   - position: {x: 14, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 15, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 15, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 15, y: 2}
     tileName: Level Layout_42
   - position: {x: 15, y: 3}
@@ -4812,9 +4812,9 @@ MonoBehaviour:
   - position: {x: 15, y: 5}
     tileName: Level Layout_42
   - position: {x: 15, y: 6}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 15, y: 7}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 15, y: 8}
     tileName: Level Layout_42
   - position: {x: 15, y: 9}
@@ -4830,7 +4830,7 @@ MonoBehaviour:
   - position: {x: 15, y: 14}
     tileName: Level Layout_42
   - position: {x: 15, y: 15}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 15, y: 16}
     tileName: Level Layout_42
   - position: {x: 15, y: 17}
@@ -4838,11 +4838,11 @@ MonoBehaviour:
   - position: {x: 15, y: 18}
     tileName: Level Layout_42
   - position: {x: 15, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 16, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 16, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 16, y: 2}
     tileName: Level Layout_42
   - position: {x: 16, y: 3}
@@ -4852,7 +4852,7 @@ MonoBehaviour:
   - position: {x: 16, y: 5}
     tileName: Level Layout_42
   - position: {x: 16, y: 6}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 16, y: 7}
     tileName: Level Layout_42
   - position: {x: 16, y: 8}
@@ -4868,9 +4868,9 @@ MonoBehaviour:
   - position: {x: 16, y: 13}
     tileName: Level Layout_42
   - position: {x: 16, y: 14}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 16, y: 15}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 16, y: 16}
     tileName: Level Layout_42
   - position: {x: 16, y: 17}
@@ -4878,15 +4878,15 @@ MonoBehaviour:
   - position: {x: 16, y: 18}
     tileName: Level Layout_42
   - position: {x: 16, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 17, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 17, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 17, y: 2}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 17, y: 3}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 17, y: 4}
     tileName: Level Layout_42
   - position: {x: 17, y: 5}
@@ -4910,7 +4910,7 @@ MonoBehaviour:
   - position: {x: 17, y: 14}
     tileName: Level Layout_42
   - position: {x: 17, y: 15}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 17, y: 16}
     tileName: Level Layout_42
   - position: {x: 17, y: 17}
@@ -4918,19 +4918,19 @@ MonoBehaviour:
   - position: {x: 17, y: 18}
     tileName: Level Layout_42
   - position: {x: 17, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 18, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 18, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 18, y: 2}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 18, y: 3}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 18, y: 4}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 18, y: 5}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 18, y: 6}
     tileName: Level Layout_42
   - position: {x: 18, y: 7}
@@ -4958,48 +4958,49 @@ MonoBehaviour:
   - position: {x: 18, y: 18}
     tileName: Level Layout_42
   - position: {x: 18, y: 19}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 2}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 3}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 4}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 5}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 6}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 7}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 8}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 11}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 12}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 13}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 14}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 15}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 16}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 17}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 18}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 19}
-    tileName: Brick wall
-  spawnPoints: []
+    tileName: Brick Wall
+  spawnPoints:
+  - {x: 0, y: 0}
 --- !u!1001 &7265907715723230811
 PrefabInstance:
   m_ObjectHideFlags: 0

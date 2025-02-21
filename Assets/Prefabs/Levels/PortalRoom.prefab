@@ -1181,27 +1181,27 @@ MonoBehaviour:
     direction: 0
   tiles:
   - position: {x: 0, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 2}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 3}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 4}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 5}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 6}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 7}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 8}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 1, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 1, y: 1}
     tileName: Level Layout_42
   - position: {x: 1, y: 2}
@@ -1219,9 +1219,9 @@ MonoBehaviour:
   - position: {x: 1, y: 8}
     tileName: Level Layout_42
   - position: {x: 1, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 2, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 2, y: 1}
     tileName: Level Layout_42
   - position: {x: 2, y: 2}
@@ -1239,9 +1239,9 @@ MonoBehaviour:
   - position: {x: 2, y: 8}
     tileName: Level Layout_42
   - position: {x: 2, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 3, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 3, y: 1}
     tileName: Level Layout_42
   - position: {x: 3, y: 2}
@@ -1259,9 +1259,9 @@ MonoBehaviour:
   - position: {x: 3, y: 8}
     tileName: Level Layout_42
   - position: {x: 3, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 4, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 4, y: 1}
     tileName: Level Layout_42
   - position: {x: 4, y: 2}
@@ -1281,7 +1281,7 @@ MonoBehaviour:
   - position: {x: 4, y: 9}
     tileName: Door Tile
   - position: {x: 5, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 5, y: 1}
     tileName: Level Layout_42
   - position: {x: 5, y: 2}
@@ -1301,7 +1301,7 @@ MonoBehaviour:
   - position: {x: 5, y: 9}
     tileName: Door Tile
   - position: {x: 6, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 6, y: 1}
     tileName: Level Layout_42
   - position: {x: 6, y: 2}
@@ -1319,9 +1319,9 @@ MonoBehaviour:
   - position: {x: 6, y: 8}
     tileName: Level Layout_42
   - position: {x: 6, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 7, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 7, y: 1}
     tileName: Level Layout_42
   - position: {x: 7, y: 2}
@@ -1339,9 +1339,9 @@ MonoBehaviour:
   - position: {x: 7, y: 8}
     tileName: Level Layout_42
   - position: {x: 7, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 8, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 8, y: 1}
     tileName: Level Layout_42
   - position: {x: 8, y: 2}
@@ -1359,25 +1359,25 @@ MonoBehaviour:
   - position: {x: 8, y: 8}
     tileName: Level Layout_42
   - position: {x: 8, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 0}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 2}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 3}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 4}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 5}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 6}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 7}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 8}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   spawnPoints: []
