@@ -108,23 +108,57 @@ public class Shoot : MonoBehaviour
     void FillMagazine()
     {
         magazine.Clear();
+
+        // Mélanger les cartes disponibles
+        ShuffleDeck(availableCards);
+
+        // Ajouter les cartes mélangées au magazine
         for (int i = 0; i < magazineSize; i++)
         {
-            int randomIndex = Random.Range(0, availableCards.Count);
-            magazine.Add(availableCards[randomIndex]);
+            // Assure-toi que la liste availableCards contient suffisamment d'éléments
+            if (i < availableCards.Count)
+            {
+                magazine.Add(availableCards[i]);
+            }
+            else
+            {
+                Debug.LogWarning("Il n'y a pas assez de cartes dans availableCards pour remplir le magazine !");
+                break;
+            }
         }
         Debug.Log("Chargeur initial rempli !");
         cardsMagazine.DisplayCardsMagazine(magazine);
     }
 
     //LS
-    public void UnlockCard(GameObject newCard)
+    /*public void UnlockCard(GameObject newCard)
     {
         if (!availableCards.Contains(newCard))
         {
             availableCards.Add(newCard);
             Debug.Log("Nouvelle carte ajoutée au chargeur : " + newCard.name);
              FillMagazine(); // Remplit le chargeur immédiatement au début
+        }
+    }*/
+
+    public void SwitchCard(GameObject cardToDrop, GameObject cardToAdd)
+    {
+        int index = availableCards.IndexOf(cardToDrop);
+        availableCards[index] = cardToAdd;
+
+    }
+
+    void ShuffleDeck(List<GameObject> list)
+    {
+        System.Random rng = new System.Random();
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            GameObject value = list[k];
+            list[k] = list[n];
+            list[n] = value;
         }
     }
 
