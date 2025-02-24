@@ -471,7 +471,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b3698c1845c948b46b3af511fd4bd6f5, type: 3}
+  m_Sprite: {fileID: 661413570170886605, guid: 2cc734a6084f7054c89e1def44feb5ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -520,7 +520,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.12, y: 0.12}
+    oldSize: {x: 0.26, y: 0.24}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -541,9 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  gameManager: {fileID: 0}
   healthBar: {fileID: 6955990436954280444}
-  scoreManager: {fileID: 0}
 --- !u!114 &-3564525842379285192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,9 +555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  gameManager: {fileID: 0}
   healthBar: {fileID: 6955990436954280444}
-  scoreManager: {fileID: 0}
   shootTime: 4
   bullet: {fileID: 8630619459524828284, guid: 4dbf167ffc7dc7f4bafa646fb6374b43, type: 3}
   bulletForce: 1000
