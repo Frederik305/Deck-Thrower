@@ -728,7 +728,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2080265707}
   - {fileID: 1086004857}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2215,6 +2214,85 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.6013377, y: 0.8015895}
   m_EdgeRadius: 0
+--- !u!1 &1061977603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1061977604}
+  - component: {fileID: 1061977606}
+  - component: {fileID: 1061977605}
+  m_Layer: 5
+  m_Name: CardsChoiceDisplay (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1061977604
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061977603}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6429767313063863419}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 835.5, y: -710.63245}
+  m_SizeDelta: {x: 1424.895, y: 193.5243}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1061977605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061977603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 80
+    m_Right: 80
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &1061977606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061977603}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e6fdf73fb76a34388880679b258af6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unlockedCards: 
+  shootScript: {fileID: 1687262616}
+  lootCard: {fileID: 3134027376963875453, guid: a413e3629de18b04dae5e342bf7c1ec1, type: 3}
+  canvasLootTransform: {fileID: 0}
 --- !u!1 &1086004856
 GameObject:
   m_ObjectHideFlags: 0
@@ -3508,6 +3586,85 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 312796249554619220, guid: b372f44c6a8c2a540ac768c0896cfd6b, type: 3}
   m_PrefabInstance: {fileID: 1664783840}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1686356234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1686356235}
+  - component: {fileID: 1686356237}
+  - component: {fileID: 1686356236}
+  m_Layer: 5
+  m_Name: CardsChoiceDisplay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1686356235
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686356234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6429767313063863419}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 835.5, y: -408}
+  m_SizeDelta: {x: 1424.895, y: 411.7478}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1686356236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686356234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 80
+    m_Right: 80
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &1686356237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686356234}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e6fdf73fb76a34388880679b258af6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unlockedCards: 
+  shootScript: {fileID: 1687262616}
+  lootCard: {fileID: 3134027376963875453, guid: a413e3629de18b04dae5e342bf7c1ec1, type: 3}
+  canvasLootTransform: {fileID: 0}
 --- !u!114 &1687262616 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1777653787549274912, guid: 026f1bf22f1b62e43b2a32c2864ec3dc, type: 3}
@@ -3868,41 +4025,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 12.801839, y: 0.7993331}
   m_EdgeRadius: 0
---- !u!1 &2080265706
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2080265707}
-  m_Layer: 5
-  m_Name: Game Over Screen
-  m_TagString: Game Over
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2080265707
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2080265706}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 421544953}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &23083697091344976
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4082,12 +4204,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3380793248221427184, guid: b7a220024e5ff7d4a998ad7b9d73d706, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380793248221427184, guid: b7a220024e5ff7d4a998ad7b9d73d706, type: 3}
       propertyPath: shootScript
       value: 
       objectReference: {fileID: 1687262616}
+    - target: {fileID: 3380793248221427184, guid: b7a220024e5ff7d4a998ad7b9d73d706, type: 3}
+      propertyPath: canvasLootTransform
+      value: 
+      objectReference: {fileID: 1686356235}
     - target: {fileID: 5543665935493823050, guid: b7a220024e5ff7d4a998ad7b9d73d706, type: 3}
       propertyPath: m_Name
       value: Canvas Loot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076835805206916998, guid: b7a220024e5ff7d4a998ad7b9d73d706, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8631793801951954189, guid: b7a220024e5ff7d4a998ad7b9d73d706, type: 3}
       propertyPath: m_Pivot.x
@@ -4183,9 +4317,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8631793801951954189, guid: b7a220024e5ff7d4a998ad7b9d73d706, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1686356235}
+    - targetCorrespondingSourceObject: {fileID: 8631793801951954189, guid: b7a220024e5ff7d4a998ad7b9d73d706, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1061977604}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7a220024e5ff7d4a998ad7b9d73d706, type: 3}
+--- !u!224 &6429767313063863419 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8631793801951954189, guid: b7a220024e5ff7d4a998ad7b9d73d706, type: 3}
+  m_PrefabInstance: {fileID: 6429767313063863418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7131888890633875448
 PrefabInstance:
   m_ObjectHideFlags: 0
