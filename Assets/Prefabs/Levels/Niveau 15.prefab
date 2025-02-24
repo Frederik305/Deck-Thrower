@@ -21790,6 +21790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e410cd3b9c9b29f488a84f737f2359e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomType: 3
   size: {x: 77, y: 62}
   exits:
   - position: {x: 24, y: 35}

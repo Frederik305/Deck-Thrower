@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     bool roundEnd;
 
     private GameObject gameOverScreen;
+    private ScoreManager scoreManager;
 
     private int numKills;
 
@@ -36,11 +37,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scoreManager = GetComponent<ScoreManager>();
         lootScreen = GameObject.FindGameObjectWithTag("Loot Screen");
 
         player = GameObject.FindGameObjectWithTag("Player");
 
-        cardTypes = player.GetComponent<shoot>().cards;
+        cardTypes = player.GetComponent<Shoot>().cards;
 
         gameOverScreen = GameObject.FindGameObjectWithTag("Game Over");
         gameOverScreen.gameObject.SetActive(false);
@@ -49,20 +51,35 @@ public class GameManager : MonoBehaviour
 
         numKills = 0;
 
-        endWave();
-    }
+        SpawnEnemies();
 
-    private void Update()
+        //endWave();
+    }
+    
+private int nextThreshold = 3; // Prochain palier de score
+
+//LS
+private void Update()
+{
+    // Si le joueur appuie sur Échap, terminer la partie
+    if (Input.GetKeyDown(KeyCode.Escape))
     {
-        //If the user presses escape during the game, end the current game
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            player.SetActive(false);
-            gameOver();
-        }
+        player.SetActive(false);
+        GameOver();
     }
 
-    public void updateEnemyCount()
+    // Vérifier si le score a dépassé le seuil actuel
+    if (scoreManager.GetScore() >= nextThreshold)
+    {
+        lootScreen.GetComponent<LootScreen>().activate(cardTypes);
+        
+
+        // Augmenter le seuil pour la prochaine activation
+        nextThreshold += 4;
+    }
+}
+
+    public void UpdateEnemyCount()
     {
         numEnemies--;
 
@@ -71,11 +88,11 @@ public class GameManager : MonoBehaviour
         //If there are no more enemies, end the wave
         if (numEnemies <= 0)
         {
-            endWave();
+            SpawnEnemies();
         }
     }
 
-    public void gameOver ()
+    public void GameOver ()
     {
         //Show game over screen
         gameOverScreen.gameObject.SetActive(true);
@@ -85,22 +102,22 @@ public class GameManager : MonoBehaviour
         killDisplay.text = numKills.ToString();
     }
 
-    public void backToMenu()
+    public void BackToMenu()
     {
         FindObjectOfType<AudioManager>().playSound("Button Click");
 
         SceneManager.LoadScene(0);
     }
 
-    public void restart()
+    public void Restart()
     {
         FindObjectOfType<AudioManager>().playSound("Button Click");
 
         SceneManager.LoadScene(1);
     }
 
-    private void endWave () {
-        lootScreen.GetComponent<LootScreen>().activate(cardTypes);
+    /*private void endWave () {
+        //lootScreen.GetComponent<LootScreen>().activate(cardTypes);
 
         player.GetComponent<shoot>().setEnableShooting(false);
 
@@ -121,7 +138,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<shoot>().setEnableShooting(true);
 
         //Adds the card the player chose to their inventory
-        player.GetComponent<shoot>().addCard(selectedCard.GetComponent<LootOption>().getTypeIndex());
+        //player.GetComponent<shoot>().addCard(selectedCard.GetComponent<LootOption>().getTypeIndex());
 
         spawnEnemies();
 
@@ -133,9 +150,9 @@ public class GameManager : MonoBehaviour
         player.GetComponent<playerMovement>().resetInvincibilityCounter();
         //Also, give them one extra health
         player.GetComponent<playerMovement>().raiseHealth();
-    }
+    }*/
 
-    public void spawnEnemies ()
+    public void SpawnEnemies ()
     {
         Transform spawner = GameObject.FindGameObjectWithTag("Spawn").transform;
 
@@ -147,7 +164,7 @@ public class GameManager : MonoBehaviour
             spawnPoints.Add(spawner.GetChild(x));
         }
 
-        numEnemies = currentWave * 2;
+        numEnemies = 5;
 
         for (int x = 0; x < numEnemies; x++)
         {
