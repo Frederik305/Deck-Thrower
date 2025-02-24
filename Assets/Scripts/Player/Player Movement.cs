@@ -55,6 +55,21 @@ public class playerMovement : MonoBehaviour
         hor = Input.GetAxis("Horizontal");
         ver = Input.GetAxis("Vertical");
 
+        // Dash mouvement when the player press the space bar (JPL)
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (speed < 11f)
+            {
+                speed = 35f;
+            }
+        }
+        // Gradually remove the dash speed each frame until the speed is normal
+        if (speed > 10f)
+        {
+            speed -= (35f - 10f) / 0.75f * Time.deltaTime; // Dash fades over 0.75 seconds
+            speed = Mathf.Max(speed, 10f); // Ensure speed doesn't go below 10
+        }
+
         //Track player and mouse coords
         playerPos = Camera.main.WorldToScreenPoint(transform.position);
         mousePos = Input.mousePosition;
@@ -71,7 +86,7 @@ public class playerMovement : MonoBehaviour
         }
 
         //Sets the player's velocity based on input (setting velocity means that we won't move through walls)
-        rb.velocity = new Vector2(hor * speed, ver * speed);
+        rb.linearVelocity = new Vector2(hor * speed, ver * speed);
 
         //Calculates the angle from the player to the mouse (Atan2 returns a radian, so we must convert it to degrees)
         float playerAngle = Mathf.Atan2(mousePos.x - playerPos.x, mousePos.y - playerPos.y) * Mathf.Rad2Deg * -1;

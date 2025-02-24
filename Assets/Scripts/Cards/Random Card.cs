@@ -17,7 +17,7 @@ public class RandomCard : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         transform = GetComponent<Transform>();
 
-        rb.velocity = transform.up * Random.Range(speedLow, speedHigh);
+        rb.linearVelocity = transform.up * Random.Range(speedLow, speedHigh);
 
         transform.localScale *= Random.Range(sizeLow, sizeHigh);
 

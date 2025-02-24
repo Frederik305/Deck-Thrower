@@ -17,7 +17,7 @@ public class Bouncer : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         transform.Rotate(0, 0, Random.Range(0, 360));
-        rb.velocity = transform.up * speed;
+        rb.linearVelocity = transform.up * speed;
 
         rb.AddTorque(torque);
     }

@@ -9,9 +9,9 @@ The game was developed from October 18th to October 20th independently by [@Jaco
 
 ## Gameplay
 
-Fight waves of enemies and build up you deck with killer cards. Throw these cards at your enemies to defeat them and live to see another round.
+Fight rooms full of enemies and build up your deck with killer cards. Throw these cards at your enemies to defeat them and live to see another round.
 
-At the start of each round, select a card to add to your inventory, then fight off the randomly spawned wave of enemies. After losing all of your health, the game is over!
+In the dungeon you can find a merchant who will trade you card to build your perfect deck of cards.
 
 #### There are multiple card types with unique abilities:
 - <img src="https://github.com/user-attachments/assets/900e52da-4cd0-4d53-998b-424cff1c1213"> The Default- The classic, no frills card that gets the job done
@@ -31,7 +31,7 @@ At the start of each round, select a card to add to your inventory, then fight o
 
 - WASD to move around
 - Left click to fire a card
-- Scroll or NUMKEYS to select the current card
+- Mouse to aim the cards
 ## Installation
 
 [Click here](https://gamerhtml.itch.io/deck-thrower) to play the game in the browser or download the compiled game at Itch.io.
