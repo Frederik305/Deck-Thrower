@@ -404,6 +404,7 @@ GameObject:
   - component: {fileID: 7397003448775736192}
   - component: {fileID: 7397003448775736317}
   - component: {fileID: -3564525842379285192}
+  - component: {fileID: 5971289174375865452}
   m_Layer: 9
   m_Name: Shooter
   m_TagString: Enemy
@@ -541,9 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  gameManager: {fileID: 0}
   healthBar: {fileID: 6955990436954280444}
-  scoreManager: {fileID: 0}
 --- !u!114 &-3564525842379285192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,9 +556,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  gameManager: {fileID: 0}
   healthBar: {fileID: 6955990436954280444}
-  scoreManager: {fileID: 0}
   shootTime: 4
   bullet: {fileID: 8630619459524828284, guid: 4dbf167ffc7dc7f4bafa646fb6374b43, type: 3}
   bulletForce: 1000
+--- !u!50 &5971289174375865452
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7397003448775736193}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

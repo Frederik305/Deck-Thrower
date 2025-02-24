@@ -64,31 +64,6 @@ public class RoomDataEditor : Editor
             }
         }
 
-        Transform spawnPointsTransform = roomData.transform.Find("spawnPoints");
-        if (spawnPointsTransform != null)
-        {
-            // Create a list to store spawn point tile positions (2D)
-            List<Vector2Int> spawnPointTilePositions = new List<Vector2Int>();
-
-            // Iterate through all children of the spawnPoints GameObject
-            foreach (Transform child in spawnPointsTransform)
-            {
-                // Convert the world position of the spawn point to the tilemap cell position
-                Vector3Int tilePos = tilemap.WorldToCell(child.position); // Converts world position to tile position (Vector3Int)
-
-                // Add the tile position to the list (we convert to Vector2Int for easier handling in RoomData)
-                spawnPointTilePositions.Add(new Vector2Int(tilePos.x, tilePos.y));
-
-            }
-
-            // Assign the spawn point tile positions to roomData
-            roomData.spawnPoints = spawnPointTilePositions;
-        }
-        else
-        {
-            Debug.LogWarning("No 'spawnPoints' child GameObject found.");
-        }
-
         // 3. Apply to RoomData
         roomData.exits = exits;
         roomData.tiles = tileDataList;

@@ -7,7 +7,6 @@ public class RoomData : MonoBehaviour
     public Vector2Int size;
     public List<ExitPoint> exits = new();
     public List<TileData> tiles = new();
-    public List<Vector2Int> spawnPoints = new();
 
     [System.Serializable]
     public class ExitPoint

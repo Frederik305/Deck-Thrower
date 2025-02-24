@@ -13,6 +13,7 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private Tilemap portalCollisions;
     [SerializeField] private List<TileBase> tileReferences;
     [SerializeField] private int maxRooms = 10;
+    [SerializeField] private List<GameObject> enemies;
 
     [Header("Rooms probabilities (0.5 = 50%)")]
     [SerializeField] private float chancesBossRoom = 0.0f;
@@ -37,7 +38,7 @@ public class DungeonGenerator : MonoBehaviour
 
         // Select a random start room
         RoomData startRoom = startRooms[Random.Range(0, startRooms.Count)];
-        PlaceRoom(startRoom, Vector2Int.zero);
+        PlaceRoomWithoutSpawns(startRoom, Vector2Int.zero);
 
         // Try to add additional rooms using your current placement logic.
         for (int i = 1; i < maxRooms; i++)
@@ -98,7 +99,7 @@ public class DungeonGenerator : MonoBehaviour
 
                             if (!Overlaps(bossRoomVariant, bossRoomPosition))
                             {
-                                PlaceRoom(bossRoomVariant, bossRoomPosition);
+                                PlaceRoomWithSpawns(bossRoomVariant, bossRoomPosition);
                                 return true; // Successfully placed the BossRoom
                             }
                         }
@@ -142,7 +143,7 @@ public class DungeonGenerator : MonoBehaviour
 
                             if (!Overlaps(endRoomVariant, endRoomPosition))
                             {
-                                PlaceRoom(endRoomVariant, endRoomPosition);
+                                PlaceRoomWithoutSpawns(endRoomVariant, endRoomPosition);
                                 return; // Exit after placing the EndRoom
                             }
                         }
@@ -200,7 +201,7 @@ public class DungeonGenerator : MonoBehaviour
 
                                 if (!Overlaps(newRoom, newRoomExitPosition))
                                 {
-                                    PlaceRoom(newRoom, newRoomExitPosition);
+                                    PlaceRoomWithSpawns(newRoom, newRoomExitPosition);
                                     // Only update history when placement is successful:
                                     lastPickedRoomIds.Enqueue(randomIndex);
                                     if (lastPickedRoomIds.Count > 3)
@@ -214,7 +215,7 @@ public class DungeonGenerator : MonoBehaviour
                         else
                         {
                             // Place the room normally.
-                            PlaceRoom(newRoom, newRoomPosition);
+                            PlaceRoomWithSpawns(newRoom, newRoomPosition);
                             // Only update history when placement is successful:
                             lastPickedRoomIds.Enqueue(randomIndex);
                             if (lastPickedRoomIds.Count > 3)
@@ -364,8 +365,51 @@ public class DungeonGenerator : MonoBehaviour
         };
     }
 
+    private void PlaceRoomWithSpawns(RoomData roomData, Vector2Int gridPos)
+    {
+        int enemiesSpawned = 0;
 
-    private void PlaceRoom(RoomData roomData, Vector2Int gridPos)
+        // Mark all tiles as occupied.
+        foreach (var tile in roomData.tiles)
+        {
+            occupiedTiles.Add(gridPos + tile.position);
+        }
+
+        placedRooms.Add(new RoomInstance(roomData, gridPos));
+
+        // Render room and collision tiles.
+        foreach (var tile in roomData.tiles)
+        {
+            Vector3Int worldPos = new Vector3Int(gridPos.x + tile.position.x, gridPos.y + tile.position.y, 0);
+            TileBase tileBase = GetTileByName(tile.tileName);
+            if (tile.tileName.Contains("Wall"))
+            {
+                tilemapCollisions.SetTile(worldPos, tileBase);
+            }
+            if (tile.tileName.Contains("Door"))
+            {
+                doorsCollisions.SetTile(worldPos, tileBase);
+            }
+            if (tile.tileName.Contains("Portal"))
+            {
+                portalCollisions.SetTile(worldPos, tileBase);
+            }
+            else if (tileBase != null && !tile.tileName.Contains("Wall") && !tile.tileName.Contains("Door") && !tile.tileName.Contains("Portal"))
+            {
+                tilemap.SetTile(worldPos, tileBase);
+
+                if (Random.value < 0.1f && enemiesSpawned < 3)
+                {
+                    Vector3 spawnPos = tilemap.CellToWorld(worldPos);
+                    spawnPos += tilemap.cellSize / 2f; // Offset to center of tile
+                    Instantiate(enemies[Random.Range(0, enemies.Count)], spawnPos, Quaternion.identity);
+                    enemiesSpawned++;
+                }
+            }
+        }
+    }
+
+    private void PlaceRoomWithoutSpawns(RoomData roomData, Vector2Int gridPos)
     {
         // Mark all tiles as occupied.
         foreach (var tile in roomData.tiles)

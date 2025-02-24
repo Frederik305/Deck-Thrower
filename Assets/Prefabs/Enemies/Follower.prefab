@@ -192,7 +192,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &5824662035464880550
 CircleCollider2D:
@@ -243,9 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  gameManager: {fileID: 0}
   healthBar: {fileID: 2361848982942113223}
-  scoreManager: {fileID: 0}
 --- !u!114 &729466576678290846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,9 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  gameManager: {fileID: 0}
   healthBar: {fileID: 2361848982942113223}
-  scoreManager: {fileID: 0}
   homingAmount: 100
 --- !u!1 &6078706620557169636
 GameObject:
