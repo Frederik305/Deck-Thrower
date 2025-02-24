@@ -55,7 +55,6 @@ public class cardMovement : MonoBehaviour
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null)
             {
-                player.GetComponent<shoot>().pickupCard(inventoryIndex);
                 Destroy(gameObject);
             }
         }
