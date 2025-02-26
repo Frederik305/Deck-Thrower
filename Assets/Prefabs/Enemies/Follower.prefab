@@ -244,6 +244,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   healthBar: {fileID: 2361848982942113223}
+  deactivationDistance: 20
+  reactivationDistance: 18
+  Bouncer: {fileID: 3731329003049251491, guid: 63a92faba4e4258469d2c80bfc7e7539, type: 3}
+  Follower: {fileID: 5824662035464880547}
+  Shooter: {fileID: 7397003448775736317, guid: 4a05561c841b1ec4d87da85a59000ec9, type: 3}
 --- !u!114 &729466576678290846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +263,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   healthBar: {fileID: 2361848982942113223}
+  deactivationDistance: 20
+  reactivationDistance: 18
+  Bouncer: {fileID: 3731329003049251491, guid: 63a92faba4e4258469d2c80bfc7e7539, type: 3}
+  Follower: {fileID: 5824662035464880547}
+  Shooter: {fileID: 7397003448775736317, guid: 4a05561c841b1ec4d87da85a59000ec9, type: 3}
   homingAmount: 100
 --- !u!1 &6078706620557169636
 GameObject:
