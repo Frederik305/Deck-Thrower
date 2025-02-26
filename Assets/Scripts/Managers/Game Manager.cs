@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         scoreManager = GetComponent<ScoreManager>();
         lootScreen = GameObject.FindGameObjectWithTag("Loot Screen");
 
@@ -100,6 +101,7 @@ private void Update()
         //Show the number of rounds reached and the number of kills
         roundDisplay.text = (currentWave-1).ToString();
         killDisplay.text = numKills.ToString();
+        Time.timeScale = 0f;
     }
 
     public void BackToMenu()
@@ -107,6 +109,7 @@ private void Update()
         FindObjectOfType<AudioManager>().playSound("Button Click");
 
         SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
     }
 
     public void Restart()
@@ -114,6 +117,7 @@ private void Update()
         FindObjectOfType<AudioManager>().playSound("Button Click");
 
         SceneManager.LoadScene(1);
+        Time.timeScale = 1f;
     }
 
     /*private void endWave () {

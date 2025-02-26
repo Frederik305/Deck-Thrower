@@ -10,57 +10,77 @@ public class LootScreen : MonoBehaviour
     public Shoot shootScript; // Référence au script Shoot
     public GameObject lootCard;
     private Canvas canvasLoot;
-    private Transform canvasLootTransform;
+    public Transform canvasLootTransform;
+    public Transform magazineDisplay;
     private List<GameObject> cardsInstance = new List<GameObject>();
+    private List<GameObject> magazineCards = new List<GameObject>();
+    private Canvas canvasMagazine;
+    private int cardToAddIndex;
+
 
     void Start()
     {
+        
         canvasLoot=gameObject.GetComponent<Canvas>();
-        canvasLootTransform = gameObject.GetComponent<Transform>();
-        unlockedCards.Add(0);
-        //gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        canvasLoot.enabled=false;
+        canvasMagazine = GameObject.Find("Canvas Magazine").GetComponent<Canvas>();
+
+        
+
     }
     //LS
     public void activate(GameObject[] cardTypes)
     {
-        List<int> lockedCards = Enumerable.Range(0, cardTypes.Length)
-                                              .Where(index => !unlockedCards.Contains(index))
-                                              .ToList();
-        Debug.Log(lockedCards.Count);
-        if (lockedCards.Count>0) {
-            Time.timeScale = 0f;
 
 
+        
+        Time.timeScale = 0f;
 
 
-            shootScript.setEnableShooting(false);
-            canvasLoot.enabled = true;
+        DisplayCardsChoice();
+        DisplayMagazine();
 
-            lockedCards = lockedCards.OrderBy(_ => Random.value).Take(3).ToList();
-            int cardLockedToDisplay = lockedCards.Count() < 3 ? lockedCards.Count : 3;
+        shootScript.setEnableShooting(false);
+        canvasLoot.enabled = true;
+        canvasMagazine.enabled = false;
 
+            
+            
+            
+        
+    }
+    //LS
+    private void DisplayMagazine(){
+        foreach (GameObject card in shootScript.availableCards)
+        {
+            SpriteRenderer cardSpriteRenderer = card.GetComponent<SpriteRenderer>();
 
-            for (int i = 0; i < cardLockedToDisplay; i++)
+            if (cardSpriteRenderer != null)
             {
-                GameObject card = Instantiate(lootCard, canvasLootTransform);
-                cardsInstance.Add(card);
+                
+                GameObject magazineCard = Instantiate(lootCard, magazineDisplay);
 
-                int index = lockedCards[i];
+                
+                Image newCardImage = magazineCard.GetComponent<Image>();
 
-                card.GetComponent<Image>().sprite = cardTypes[index].GetComponent<SpriteRenderer>().sprite;
-                card.GetComponent<LootOption>().setTypeIndex(index);
-
-                // Ajoute un bouton pour débloquer la carte
-                int selectedCardIndex = index;
-                card.GetComponent<Button>().onClick.AddListener(() => UnlockCard(cardTypes[selectedCardIndex], index));
+                if (newCardImage != null)
+                {
+                   
+                    newCardImage.sprite = cardSpriteRenderer.sprite;
+                    newCardImage.preserveAspect = true;
+                }
+                magazineCard.GetComponent<Button>().onClick.AddListener(() => ChangeCard(card));
+                magazineCard.GetComponent<Button>().enabled = false;
+                magazineCards.Add(magazineCard);
+                magazineCard.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
             }
+            
+
         }
     }
     //LS
-    public void UnlockCard(GameObject newCard,int index)
-    {
-        unlockedCards.Add(index);
-        shootScript.UnlockCard(newCard);
+    void ChangeCard(GameObject card){
+        
         Time.timeScale = 1f;
         canvasLoot.enabled = false;
         shootScript.setEnableShooting(true);
@@ -72,8 +92,70 @@ public class LootScreen : MonoBehaviour
                 Destroy(instance); // Détruire chaque instance
             }
         }
+        foreach (GameObject instance in magazineCards)
+        {
+            if (instance != null)
+            {
+                Destroy(instance); // Détruire chaque instance
+            }
+        }
         // Vider la liste après avoir détruit toutes les instances
         cardsInstance.Clear();
+        magazineCards.Clear();
+        shootScript.SwitchCard(card,cardToAddIndex);
+        canvasMagazine.enabled = true;
+    }
+    //LS
+    private void DisplayCardsChoice() {
+        
 
+        List<(int index, GameObject card)> indexedCards = shootScript.cards
+            .Select((card, index) => (index, card))  // Associe chaque carte à son index dans la liste
+            .OrderBy(_ => Random.value)  // Mélange la liste
+            .Take(3)  // Sélectionne les 3 premières cartes
+            .ToList();
+
+        foreach (var item in indexedCards)
+        {
+            GameObject card = Instantiate(lootCard, canvasLootTransform);
+            cardsInstance.Add(card);
+
+            Image cardImage = card.GetComponent<Image>();
+            cardImage.sprite = item.card.GetComponent<SpriteRenderer>().sprite;
+            cardImage.preserveAspect = true; // Préserver le ratio d'aspect
+            
+
+            // Ajoute un bouton pour débloquer la carte
+            
+            card.GetComponent<Button>().onClick.AddListener(() => SelectCard(card,item.index));
+            card.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
+        }
+    }
+    //LS
+    public void SelectCard(GameObject clickedCard,int index)
+    {
+        cardToAddIndex=index;
+        
+        // Réduit la taille de toutes les cartes
+        foreach (GameObject card in cardsInstance)
+        {
+            if (card != clickedCard)
+            {
+                // Réduit la taille des autres cartes
+                card.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
+            }
+        }
+
+        // Agrandit légèrement la carte cliquée
+        clickedCard.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+
+        foreach (GameObject card in magazineCards)
+        {
+            Button cardButton = card.GetComponent<Button>();
+            if (cardButton != null)
+            {
+                cardButton.enabled = true;  // Activer le bouton
+            }
+        }
     }
 }

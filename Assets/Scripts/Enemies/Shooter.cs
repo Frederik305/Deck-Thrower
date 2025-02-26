@@ -8,9 +8,6 @@ public class Shooter : Enemy
     private GameObject player;
     public float bulletForce = 15f;
     private Transform transform;
-    public float deactivationDistance = 20f; // Distance maximale avant désactivation
-    public float reactivationDistance = 18f; // Distance minimale avant réactivation
-    public bool isActive = true;
 
     protected override void Start()
     {
@@ -22,30 +19,12 @@ public class Shooter : Enemy
 
     void Update()
     {
-        if (isActive)
+        timer += Time.deltaTime;
+        if (timer >= shootTime)
         {
-            timer += Time.deltaTime;
-            if (timer >= shootTime)
-            {
-                Shoot();
-                timer = 0;
-            }
+            Shoot();
+            timer = 0;
         }
-        
-        if (player.transform != null)
-        {
-            float distance = Vector2.Distance(transform.position, player.transform.position);
-            if (distance > deactivationDistance)
-            {
-                isActive = false;
-            }
-            else if (distance < reactivationDistance)
-            {
-                isActive = true;
-            }
-        }
-
-        
     }
 
     public void Shoot()
