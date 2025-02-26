@@ -16,11 +16,5 @@ public class ScoreManager : MonoBehaviour
     {
         return score;
     }
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        Debug.Log(GetScore());
-    }
+    
 }

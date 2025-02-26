@@ -9,9 +9,9 @@ public class Shoot : MonoBehaviour
     public GameObject[] cards;
     //public GameObject baseCards; // Cartes de base
     
-    private List<GameObject> availableCards= new List<GameObject>();
+    public List<GameObject> availableCards= new List<GameObject>();
     
-    public int magazineSize = 5; // Nombre de cartes dans le chargeur
+    public int magazineSize = 6; // Nombre de cartes dans le chargeur
     private List<GameObject> magazine = new List<GameObject>();
 
     public GameObject icon;
@@ -27,13 +27,12 @@ public class Shoot : MonoBehaviour
 
     void Start()
     {
-        availableCards.Add(cards[0]); // Commence avec seulement les cartes de base
+        
+        
         FillMagazine(); // Remplit le chargeur immédiatement au début
-        if (reloadBar != null)
-        {
-            reloadBar.gameObject.SetActive(false); // Cache la barre au début
-        }
+        
     }
+    //LS
 
     void Update()
     {   
@@ -92,7 +91,7 @@ public class Shoot : MonoBehaviour
             yield return null;
         }
 
-        
+        ShuffleDeck(availableCards);
         FillMagazine();
         Debug.Log("Magasin rechargé !");
         isReloading = false;
@@ -110,7 +109,7 @@ public class Shoot : MonoBehaviour
         magazine.Clear();
 
         // Mélanger les cartes disponibles
-        ShuffleDeck(availableCards);
+        
 
         // Ajouter les cartes mélangées au magazine
         for (int i = 0; i < magazineSize; i++)
@@ -131,23 +130,17 @@ public class Shoot : MonoBehaviour
     }
 
     //LS
-    /*public void UnlockCard(GameObject newCard)
-    {
-        if (!availableCards.Contains(newCard))
-        {
-            availableCards.Add(newCard);
-            Debug.Log("Nouvelle carte ajoutée au chargeur : " + newCard.name);
-             FillMagazine(); // Remplit le chargeur immédiatement au début
-        }
-    }*/
-
-    public void SwitchCard(GameObject cardToDrop, GameObject cardToAdd)
+    public void SwitchCard(GameObject cardToDrop, int cardToAddIndex)
     {
         int index = availableCards.IndexOf(cardToDrop);
-        availableCards[index] = cardToAdd;
+        availableCards[index] = cards[cardToAddIndex];
+        CancelReloading();
+
+        FillMagazine();
 
     }
 
+    //LS
     void ShuffleDeck(List<GameObject> list)
     {
         System.Random rng = new System.Random();
@@ -161,5 +154,22 @@ public class Shoot : MonoBehaviour
             list[n] = value;
         }
     }
+    public void CancelReloading()
+    {
+        if (isReloading)
+        {
+            StopCoroutine(ReloadMagazine());
+            isReloading = false;
+            enableShooting = true;
+
+            if (reloadBar != null)
+            {
+                reloadBar.gameObject.SetActive(false); // Cacher la barre de progression
+            }
+
+            Debug.Log("Rechargement annulé !");
+        }
+    }
+
 
 }

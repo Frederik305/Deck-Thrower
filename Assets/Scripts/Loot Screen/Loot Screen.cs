@@ -13,14 +13,20 @@ public class LootScreen : MonoBehaviour
     public Transform canvasLootTransform;
     public Transform magazineDisplay;
     private List<GameObject> cardsInstance = new List<GameObject>();
+    private List<GameObject> magazineCards = new List<GameObject>();
+    private Canvas canvasMagazine;
+    private int cardToAddIndex;
 
 
     void Start()
     {
-        canvasLoot=gameObject.GetComponent<Canvas>();
-        canvasLootTransform = gameObject.GetComponent<Transform>();
         
-        //gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        canvasLoot=gameObject.GetComponent<Canvas>();
+        canvasLoot.enabled=false;
+        canvasMagazine = GameObject.Find("Canvas Magazine").GetComponent<Canvas>();
+
+        
+
     }
     //LS
     public void activate(GameObject[] cardTypes)
@@ -36,12 +42,14 @@ public class LootScreen : MonoBehaviour
 
         shootScript.setEnableShooting(false);
         canvasLoot.enabled = true;
+        canvasMagazine.enabled = false;
 
             
             
             
         
     }
+    //LS
     private void DisplayMagazine(){
         foreach (GameObject card in shootScript.availableCards)
         {
@@ -49,48 +57,30 @@ public class LootScreen : MonoBehaviour
 
             if (cardSpriteRenderer != null)
             {
-                // Instantiate the card model (empty object that will hold the model)
-                GameObject newCard = Instantiate(lootCard, magazineDisplay);
+                
+                GameObject magazineCard = Instantiate(lootCard, magazineDisplay);
 
-                // Get the SpriteRenderer component of the instantiated model
-                Image newCardImage = newCard.GetComponent<Image>();
+                
+                Image newCardImage = magazineCard.GetComponent<Image>();
 
                 if (newCardImage != null)
                 {
-                    // Apply the sprite from the card's SpriteRenderer to the new card model's SpriteRenderer
+                   
                     newCardImage.sprite = cardSpriteRenderer.sprite;
+                    newCardImage.preserveAspect = true;
                 }
-                
-                
+                magazineCard.GetComponent<Button>().onClick.AddListener(() => ChangeCard(card));
+                magazineCard.GetComponent<Button>().enabled = false;
+                magazineCards.Add(magazineCard);
+                magazineCard.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
             }
+            
 
         }
     }
-    private void DisplayCardsChoice() {
-        int cardLockedToDisplay =  3;
-
-        lockedCards = cards.OrderBy(_ => Random.value).Take(3).ToList();
-        for (int i = 0; i < cardLockedToDisplay; i++)
-        {
-            GameObject card = Instantiate(lootCard, canvasLootTransform);
-            cardsInstance.Add(card);
-
-            //int index = lockedCards[i];
-
-            card.GetComponent<Image>().sprite = cardTypes[index].GetComponent<SpriteRenderer>().sprite;
-            card.GetComponent<LootOption>().setTypeIndex(index);
-
-            // Ajoute un bouton pour débloquer la carte
-            int selectedCardIndex = index;
-            card.GetComponent<Button>().onClick.AddListener(() => UnlockCard(cardTypes[selectedCardIndex], index));
-        }
-    }
-
     //LS
-    public void UnlockCard(GameObject newCard,int index)
-    {
-        unlockedCards.Add(index);
-        //shootScript.UnlockCard(newCard);
+    void ChangeCard(GameObject card){
+        
         Time.timeScale = 1f;
         canvasLoot.enabled = false;
         shootScript.setEnableShooting(true);
@@ -102,8 +92,70 @@ public class LootScreen : MonoBehaviour
                 Destroy(instance); // Détruire chaque instance
             }
         }
+        foreach (GameObject instance in magazineCards)
+        {
+            if (instance != null)
+            {
+                Destroy(instance); // Détruire chaque instance
+            }
+        }
         // Vider la liste après avoir détruit toutes les instances
         cardsInstance.Clear();
+        magazineCards.Clear();
+        shootScript.SwitchCard(card,cardToAddIndex);
+        canvasMagazine.enabled = true;
+    }
+    //LS
+    private void DisplayCardsChoice() {
+        
 
+        List<(int index, GameObject card)> indexedCards = shootScript.cards
+            .Select((card, index) => (index, card))  // Associe chaque carte à son index dans la liste
+            .OrderBy(_ => Random.value)  // Mélange la liste
+            .Take(3)  // Sélectionne les 3 premières cartes
+            .ToList();
+
+        foreach (var item in indexedCards)
+        {
+            GameObject card = Instantiate(lootCard, canvasLootTransform);
+            cardsInstance.Add(card);
+
+            Image cardImage = card.GetComponent<Image>();
+            cardImage.sprite = item.card.GetComponent<SpriteRenderer>().sprite;
+            cardImage.preserveAspect = true; // Préserver le ratio d'aspect
+            
+
+            // Ajoute un bouton pour débloquer la carte
+            
+            card.GetComponent<Button>().onClick.AddListener(() => SelectCard(card,item.index));
+            card.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
+        }
+    }
+    //LS
+    public void SelectCard(GameObject clickedCard,int index)
+    {
+        cardToAddIndex=index;
+        
+        // Réduit la taille de toutes les cartes
+        foreach (GameObject card in cardsInstance)
+        {
+            if (card != clickedCard)
+            {
+                // Réduit la taille des autres cartes
+                card.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
+            }
+        }
+
+        // Agrandit légèrement la carte cliquée
+        clickedCard.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+
+        foreach (GameObject card in magazineCards)
+        {
+            Button cardButton = card.GetComponent<Button>();
+            if (cardButton != null)
+            {
+                cardButton.enabled = true;  // Activer le bouton
+            }
+        }
     }
 }
