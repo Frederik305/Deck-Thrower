@@ -10,8 +10,8 @@ public class Enemy : MonoBehaviour
     protected GameManager gameManager;
     public Slider healthBar; // Référence au Slider (barre de vie)
     protected ScoreManager scoreManager;
-    public float deactivationDistance = 20f; // Distance maximale avant désactivation
-    public float reactivationDistance = 18f; // Distance minimale avant réactivation
+    //public float deactivationDistance = 20f; // Distance maximale avant désactivation
+    //public float reactivationDistance = 18f; // Distance minimale avant réactivation
     private Transform player;
     private Rigidbody2D rb;
 
@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
     {
         if (player != null)
         {
-            float distance = Vector2.Distance(transform.position, player.position);
+            /*float distance = Vector2.Distance(transform.position, player.position);
             if (distance > deactivationDistance)
             {
                 rb.linearVelocity = Vector2.zero; // Arrêter l'ennemi
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
             else if (distance < reactivationDistance && rb.linearVelocity == Vector2.zero)
             {
                 rb.linearVelocity = transform.up * 2f; // Redonner une vitesse de base à l'ennemi
-            }
+            }*/
         }
     }
 

@@ -37,11 +37,23 @@ public class Bouncer : Enemy
             float distance = Vector2.Distance(transform.position, player.transform.position);
             if (distance > deactivationDistance)
             {
-                isActive = false;
+                if (isActive)
+                {
+                    rb.linearVelocity = Vector2.zero; // Arrêter l'ennemi
+                    rb.angularVelocity = 0f;   // Arrêter la rotation
+                }
+                isActive = false;        
             }
             else if (distance < reactivationDistance)
             {
+                if (!isActive)
+                {
+                    transform.Rotate(0, 0, Random.Range(0, 360));
+                    rb.linearVelocity = transform.up * speed;
+                    rb.AddTorque(torque);
+                }
                 isActive = true;
+
             }
         }
     }

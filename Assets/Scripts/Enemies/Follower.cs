@@ -35,6 +35,9 @@ public class Follower : Enemy
             float distance = Vector2.Distance(transform.position, player.transform.position);
             if (distance > deactivationDistance)
             {
+                rb.linearVelocity = Vector2.zero; // Arrêter l'ennemi
+                rb.angularVelocity = 0f;   // Arrêter la rotation
+            
                 isActive = false;
             }
             else if (distance < reactivationDistance)
