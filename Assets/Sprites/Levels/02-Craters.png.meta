@@ -334,7 +334,16 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      02-Craters_0: -4806095521622993306
+      02-Craters_1: -3344275323720125326
+      02-Craters_2: -8142264979207190692
+      02-Craters_3: 3930623547550447739
+      02-Craters_4: 3909536426441934081
+      02-Craters_5: -2308255193599834902
+      02-Craters_6: -1949597588954335971
+      02-Craters_7: 8748965100581159028
+      02-Craters_8: 3208941063795328494
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
