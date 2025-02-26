@@ -155,7 +155,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1076066333514686694, guid: c711b283e8c486e4caf6340bef00c9c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -192,7 +192,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &5824662035464880550
 CircleCollider2D:
@@ -244,11 +244,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   healthBar: {fileID: 2361848982942113223}
-  deactivationDistance: 20
-  reactivationDistance: 18
-  Bouncer: {fileID: 3731329003049251491, guid: 63a92faba4e4258469d2c80bfc7e7539, type: 3}
-  Follower: {fileID: 5824662035464880547}
-  Shooter: {fileID: 7397003448775736317, guid: 4a05561c841b1ec4d87da85a59000ec9, type: 3}
 --- !u!114 &729466576678290846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,9 +260,7 @@ MonoBehaviour:
   healthBar: {fileID: 2361848982942113223}
   deactivationDistance: 20
   reactivationDistance: 18
-  Bouncer: {fileID: 3731329003049251491, guid: 63a92faba4e4258469d2c80bfc7e7539, type: 3}
-  Follower: {fileID: 5824662035464880547}
-  Shooter: {fileID: 7397003448775736317, guid: 4a05561c841b1ec4d87da85a59000ec9, type: 3}
+  isActive: 1
   homingAmount: 100
 --- !u!1 &6078706620557169636
 GameObject:
