@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Wall-Metal_02-64x64_0: 4343941761435413022
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

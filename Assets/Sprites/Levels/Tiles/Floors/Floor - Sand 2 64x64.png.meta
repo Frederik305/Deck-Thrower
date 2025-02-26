@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Floor - Sand 2 64x64_0: 8621620232661315534
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

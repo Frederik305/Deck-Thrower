@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Wall-Glass_04-64x64_0: 8801887154091043805
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

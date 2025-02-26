@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Wall-Concrete_02-64x64_0: -4407017330754570796
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

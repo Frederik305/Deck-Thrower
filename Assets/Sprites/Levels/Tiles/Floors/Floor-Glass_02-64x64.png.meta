@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Floor-Glass_02-64x64_0: -1426078342104322828
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
