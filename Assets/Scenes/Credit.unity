@@ -178,9 +178,6 @@ MonoBehaviour:
       m_Calls: []
   m_text: '
 
-    
-
-    
 
 
 
@@ -189,67 +186,13 @@ MonoBehaviour:
 
 
 
-    
+
+
+
+
 
     Jacob Barbulescu
 
-    
-
-
-    
-
-
-
-
-
-
-    Catherine
-
-    Dieulande
-
-    Fred
-
-    Jules
-
-    Logan
-
-    Noemie
-
-    Pierre-Luc
-
-
-
-
-
-
-
-
-
-
-
-
-    Fred
-
-    Jules
-
-    Logan
-
-
-
-
-
-
-
-
-
-
-
-    Dieulande
-
-    Noemie
-
-    Pierre-Luc
-
 
 
 
@@ -274,9 +217,66 @@ MonoBehaviour:
 
     Pierre-Luc
 
-    
 
-    
+
+
+
+
+
+
+
+
+
+
+    Fred
+
+    Jules
+
+    Logan
+
+
+
+
+
+
+
+
+
+
+
+    Dieulande
+
+    Noemie
+
+    Pierre-Luc
+
+
+
+
+
+
+
+
+
+
+
+    Catherine
+
+    Dieulande
+
+    Fred
+
+    Jules
+
+    Logan
+
+    Noemie
+
+    Pierre-Luc
+
+
+
+
 
 
 
@@ -558,8 +558,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\n\n\nOriginal Creator\n\r\n\n\nProgrammers\r\n\r\n\n\r\r\n\r\n\n\r\nGameplay
-    Programmers \r\n\r\n\n\n\nInterface Programmers\n\r\n\r\n\n\n\nTesters\r\n\r\n\n\r"
+  m_text: "\n\n\n\nOriginal Creator\n\r\n\n\n\nProgrammers\r\n\r\n\n\r\r\n\n\r\n\n\r\nGameplay
+    Programmers \r\n\r\n\n\n\n\nInterface Programmers\n\r\n\r\n\n\n\n\nTesters\r\n\r\n\n\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 628a3488aed3ce8418b0a082c0f0fe70, type: 2}
   m_sharedMaterial: {fileID: -6322700462543736125, guid: 628a3488aed3ce8418b0a082c0f0fe70, type: 2}
@@ -1884,13 +1884,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Credits
 
-    
 
-    
 
-    
 
-    
+
+
+
+
 
 '
   m_isRightToLeft: 0
