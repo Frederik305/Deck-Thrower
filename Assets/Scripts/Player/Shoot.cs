@@ -132,9 +132,10 @@ public class Shoot : MonoBehaviour
     //LS
     public void SwitchCard(GameObject cardToDrop, int cardToAddIndex)
     {
+        CancelReloading();
         int index = availableCards.IndexOf(cardToDrop);
         availableCards[index] = cards[cardToAddIndex];
-        CancelReloading();
+        
 
         FillMagazine();
 
