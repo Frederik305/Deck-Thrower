@@ -208,6 +208,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   healthBar: {fileID: 4254594519575161107}
+  deactivationDistance: 20
+  reactivationDistance: 18
+  Bouncer: {fileID: 3731329003049251491}
+  Follower: {fileID: 5824662035464880547, guid: 186837416399fcc479404fb4274a733f, type: 3}
+  Shooter: {fileID: 7397003448775736317, guid: 4a05561c841b1ec4d87da85a59000ec9, type: 3}
 --- !u!58 &3731329003049251490
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -258,7 +263,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   healthBar: {fileID: 4254594519575161107}
-  speed: 25
+  deactivationDistance: 20
+  reactivationDistance: 18
+  Bouncer: {fileID: 3731329003049251491}
+  Follower: {fileID: 5824662035464880547, guid: 186837416399fcc479404fb4274a733f, type: 3}
+  Shooter: {fileID: 7397003448775736317, guid: 4a05561c841b1ec4d87da85a59000ec9, type: 3}
+  speed: 15
   torque: 100
 --- !u!1 &3952292704176983024
 GameObject:
