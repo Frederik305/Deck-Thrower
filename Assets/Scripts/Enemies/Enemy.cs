@@ -42,5 +42,6 @@ public class Enemy : MonoBehaviour
         gameManager.UpdateEnemyCount();
         scoreManager.AddScore(1);
         Destroy(gameObject);
+        
     }
 }
