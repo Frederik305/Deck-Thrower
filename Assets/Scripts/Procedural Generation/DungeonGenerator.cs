@@ -14,6 +14,7 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private List<TileBase> tileReferences;
     [SerializeField] private int maxRooms = 10;
     [SerializeField] private List<GameObject> enemies;
+    [SerializeField] private GameObject player;
 
     [Header("Rooms probabilities (0.5 = 50%)")]
     [SerializeField] private float chancesBossRoom = 0.0f;
@@ -22,9 +23,24 @@ public class DungeonGenerator : MonoBehaviour
     private HashSet<Vector2Int> occupiedTiles = new();
     private List<RoomInstance> placedRooms = new();
     private Queue<int> lastPickedRoomIds = new();
+    private List<GameObject> enemyInstance = new();
 
     private void Start()
     {
+        GenerateDungeon();
+    }
+
+    public void ReGenerateDungeon()
+    {
+        occupiedTiles.Clear();
+        placedRooms.Clear();
+        lastPickedRoomIds.Clear();
+
+        foreach (GameObject enemy in enemyInstance)
+        {
+            Destroy(enemy);
+        }
+
         GenerateDungeon();
     }
 
@@ -35,6 +51,10 @@ public class DungeonGenerator : MonoBehaviour
         // Filter only starting rooms
         List<RoomData> startRooms = roomPrefabs.FindAll(room => room.roomType == RoomType.StartingRoom);
         if (startRooms.Count == 0) return; // Ensure there is at least one starting room
+
+        GameObject player = GameObject.FindWithTag("Player");
+
+        player.transform.position = new Vector3(10, 5, 0);
 
         // Select a random start room
         RoomData startRoom = startRooms[Random.Range(0, startRooms.Count)];
@@ -402,7 +422,7 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     Vector3 spawnPos = tilemap.CellToWorld(worldPos);
                     spawnPos += tilemap.cellSize / 2f; // Offset to center of tile
-                    Instantiate(enemies[Random.Range(0, enemies.Count)], spawnPos, Quaternion.identity);
+                    enemyInstance.Add(Instantiate(enemies[Random.Range(0, enemies.Count)], spawnPos, Quaternion.identity));
                     enemiesSpawned++;
                 }
             }
