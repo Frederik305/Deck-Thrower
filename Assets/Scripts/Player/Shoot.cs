@@ -9,9 +9,9 @@ public class Shoot : MonoBehaviour
     public GameObject[] cards;
     //public GameObject baseCards; // Cartes de base
     
-    private List<GameObject> availableCards= new List<GameObject>();
+    public List<GameObject> availableCards= new List<GameObject>();
     
-    public int magazineSize = 5; // Nombre de cartes dans le chargeur
+    public int magazineSize = 6; // Nombre de cartes dans le chargeur
     private List<GameObject> magazine = new List<GameObject>();
 
     public GameObject icon;
@@ -27,13 +27,12 @@ public class Shoot : MonoBehaviour
 
     void Start()
     {
-        availableCards.Add(cards[0]); // Commence avec seulement les cartes de base
+        
+        
         FillMagazine(); // Remplit le chargeur immédiatement au début
-        if (reloadBar != null)
-        {
-            reloadBar.gameObject.SetActive(false); // Cache la barre au début
-        }
+        
     }
+    //LS
 
     void Update()
     {   
@@ -92,7 +91,7 @@ public class Shoot : MonoBehaviour
             yield return null;
         }
 
-        
+        ShuffleDeck(availableCards);
         FillMagazine();
         Debug.Log("Magasin rechargé !");
         isReloading = false;
@@ -108,24 +107,70 @@ public class Shoot : MonoBehaviour
     void FillMagazine()
     {
         magazine.Clear();
+
+        // Mélanger les cartes disponibles
+        
+
+        // Ajouter les cartes mélangées au magazine
         for (int i = 0; i < magazineSize; i++)
         {
-            int randomIndex = Random.Range(0, availableCards.Count);
-            magazine.Add(availableCards[randomIndex]);
+            // Assure-toi que la liste availableCards contient suffisamment d'éléments
+            if (i < availableCards.Count)
+            {
+                magazine.Add(availableCards[i]);
+            }
+            else
+            {
+                Debug.LogWarning("Il n'y a pas assez de cartes dans availableCards pour remplir le magazine !");
+                break;
+            }
         }
         Debug.Log("Chargeur initial rempli !");
         cardsMagazine.DisplayCardsMagazine(magazine);
     }
 
     //LS
-    public void UnlockCard(GameObject newCard)
+    public void SwitchCard(GameObject cardToDrop, int cardToAddIndex)
     {
-        if (!availableCards.Contains(newCard))
+        CancelReloading();
+        int index = availableCards.IndexOf(cardToDrop);
+        availableCards[index] = cards[cardToAddIndex];
+        
+
+        FillMagazine();
+
+    }
+
+    //LS
+    void ShuffleDeck(List<GameObject> list)
+    {
+        System.Random rng = new System.Random();
+        int n = list.Count;
+        while (n > 1)
         {
-            availableCards.Add(newCard);
-            Debug.Log("Nouvelle carte ajoutée au chargeur : " + newCard.name);
-             FillMagazine(); // Remplit le chargeur immédiatement au début
+            n--;
+            int k = rng.Next(n + 1);
+            GameObject value = list[k];
+            list[k] = list[n];
+            list[n] = value;
         }
     }
+    public void CancelReloading()
+    {
+        if (isReloading)
+        {
+            StopCoroutine(ReloadMagazine());
+            isReloading = false;
+            enableShooting = true;
+
+            if (reloadBar != null)
+            {
+                reloadBar.gameObject.SetActive(false); // Cacher la barre de progression
+            }
+
+            Debug.Log("Rechargement annulé !");
+        }
+    }
+
 
 }

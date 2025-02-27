@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         scoreManager = GetComponent<ScoreManager>();
         lootScreen = GameObject.FindGameObjectWithTag("Loot Screen");
 
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
 
         numKills = 0;
 
-        //SpawnEnemies();
+        SpawnEnemies();
 
         //endWave();
     }
@@ -86,10 +87,10 @@ private void Update()
         numKills++;
 
         //If there are no more enemies, end the wave
-        /*if (numEnemies <= 0)
+        if (numEnemies <= 0)
         {
             SpawnEnemies();
-        }*/
+        }
     }
 
     public void GameOver ()
@@ -100,6 +101,7 @@ private void Update()
         //Show the number of rounds reached and the number of kills
         roundDisplay.text = (currentWave-1).ToString();
         killDisplay.text = numKills.ToString();
+        Time.timeScale = 0f;
     }
 
     public void BackToMenu()
@@ -107,6 +109,7 @@ private void Update()
         FindObjectOfType<AudioManager>().playSound("Button Click");
 
         SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
     }
 
     public void Restart()
@@ -114,6 +117,7 @@ private void Update()
         FindObjectOfType<AudioManager>().playSound("Button Click");
 
         SceneManager.LoadScene(1);
+        Time.timeScale = 1f;
     }
 
     /*private void endWave () {
@@ -152,7 +156,7 @@ private void Update()
         player.GetComponent<playerMovement>().raiseHealth();
     }*/
 
-    /*public void SpawnEnemies ()
+    public void SpawnEnemies ()
     {
         Transform spawner = GameObject.FindGameObjectWithTag("Spawn").transform;
 
@@ -184,5 +188,5 @@ private void Update()
             //Remove spawn point from array list so we can't use it again
             spawnPoints.Remove(spawnPoint);
         }
-    }*/
+    }
 }
