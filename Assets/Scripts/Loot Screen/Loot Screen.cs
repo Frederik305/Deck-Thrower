@@ -10,8 +10,8 @@ public class LootScreen : MonoBehaviour
     public Shoot shootScript; // Référence au script Shoot
     public GameObject lootCard;
     private Canvas canvasLoot;
-    public Transform canvasLootTransform;
-    public Transform magazineDisplay;
+    private Transform canvasLootTransform;
+    private Transform magazineDisplay;
     private List<GameObject> cardsInstance = new List<GameObject>();
     private List<GameObject> magazineCards = new List<GameObject>();
     private Canvas canvasMagazine;
@@ -24,7 +24,8 @@ public class LootScreen : MonoBehaviour
         canvasLoot=gameObject.GetComponent<Canvas>();
         canvasLoot.enabled=false;
         canvasMagazine = GameObject.Find("Canvas Magazine").GetComponent<Canvas>();
-
+        canvasLootTransform = GameObject.Find("CardsChoiceDisplay").GetComponent<Transform>();
+        magazineDisplay=GameObject.Find("CardsDisplay").GetComponent<Transform>();
         
 
     }
