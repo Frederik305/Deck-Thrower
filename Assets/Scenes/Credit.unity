@@ -176,9 +176,131 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\r\n\r\n\n\n\n\n\n\n\n\r\nJacob Barbulescu\r\n\r\n\n\r\n\n\n\n\n\nCatherine\nDieulande\nFred\nJules\nLogan\nNo\xE9mie\nPierre-Luc\n\n\n\n\n\n\n\n\n\n\n\nFred\nJules\nLogan\n\n\n\n\n\n\n\n\n\n\nDieulande\nNo\xE9mie\nPierre-Luc\n\n\n\n\n\n\n\n\n\n\nCatherine\nDieulande\nFred\nJules\nLogan\nNo\xE9mie\nPierre-Luc\r\n\r\n\r\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\"Merci
-    d'avoir jou\xE9 \xE0 notre jeu. Votre soutien rend tout cela possible. \xC0 bient\xF4t
-    pour une nouvelle aventure\u202F!\""
+  m_text: '
+
+    
+
+    
+
+
+
+
+
+
+
+
+    
+
+    Jacob Barbulescu
+
+    
+
+
+    
+
+
+
+
+
+
+    Catherine
+
+    Dieulande
+
+    Fred
+
+    Jules
+
+    Logan
+
+    Noemie
+
+    Pierre-Luc
+
+
+
+
+
+
+
+
+
+
+
+
+    Fred
+
+    Jules
+
+    Logan
+
+
+
+
+
+
+
+
+
+
+
+    Dieulande
+
+    Noemie
+
+    Pierre-Luc
+
+
+
+
+
+
+
+
+
+
+
+    Catherine
+
+    Dieulande
+
+    Fred
+
+    Jules
+
+    Logan
+
+    Noemie
+
+    Pierre-Luc
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "Thank
+    you for playing our game. Your support make this project possible. See you soon
+    for a new adventure!"'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 628a3488aed3ce8418b0a082c0f0fe70, type: 2}
   m_sharedMaterial: {fileID: -6322700462543736125, guid: 628a3488aed3ce8418b0a082c0f0fe70, type: 2}
@@ -361,8 +483,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\n\n\nId\xE9e original\n\r\n\n\nD\xE9veloppeur\r\n\r\n\n\r\r\n\r\n\n\r\nProgrammeurs
-    Gameplay\r\n\r\n\n\n\nProgrammeurs Interface\n\r\n\r\n\n\n\nTesteurs\r\n\r\n\n\r"
+  m_text: "\n\n\n\nOriginal Creator\n\r\n\n\nProgrammers\r\n\r\n\n\r\r\n\r\n\n\r\nGameplay
+    Programmers\r\n\r\n\n\n\nInterface Programmers \n\r\n\r\n\n\n\nTesters\r\n\r\n\n\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 628a3488aed3ce8418b0a082c0f0fe70, type: 2}
   m_sharedMaterial: {fileID: -6322700462543736125, guid: 628a3488aed3ce8418b0a082c0f0fe70, type: 2}
@@ -821,7 +943,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Cr\xE9dit\r\n\r\n\r\n\r\n\r\n"
+  m_text: 'Credits
+
+    
+
+    
+
+    
+
+    
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 43ce2a5277643ed4886ec052d3d0f892, type: 2}
   m_sharedMaterial: {fileID: 294691494190310304, guid: 43ce2a5277643ed4886ec052d3d0f892, type: 2}
