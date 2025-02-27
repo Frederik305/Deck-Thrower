@@ -52,8 +52,6 @@ MonoBehaviour:
   unlockedCards: 
   shootScript: {fileID: 0}
   lootCard: {fileID: 3134027376963875453, guid: a413e3629de18b04dae5e342bf7c1ec1, type: 3}
-  canvasLootTransform: {fileID: 0}
-  magazineDisplay: {fileID: 0}
 --- !u!114 &8883055195147395468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,10 +110,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1835066465046465590}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.009277344, y: 169.8}
-  m_SizeDelta: {x: -0.018555, y: 179.48}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0.009216309, y: 160}
+  m_SizeDelta: {x: 949.16003, y: 193.3005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6554191846934813132
 MonoBehaviour:
@@ -132,8 +130,6 @@ MonoBehaviour:
   unlockedCards: 
   shootScript: {fileID: 0}
   lootCard: {fileID: 3134027376963875453, guid: a413e3629de18b04dae5e342bf7c1ec1, type: 3}
-  canvasLootTransform: {fileID: 0}
-  magazineDisplay: {fileID: 0}
 --- !u!114 &3436544576292824659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,8 +274,6 @@ MonoBehaviour:
   unlockedCards: 
   shootScript: {fileID: 0}
   lootCard: {fileID: 3134027376963875453, guid: a413e3629de18b04dae5e342bf7c1ec1, type: 3}
-  canvasLootTransform: {fileID: 3131080261198430390}
-  magazineDisplay: {fileID: 2899093330075900940}
 --- !u!1 &7288483753386867821
 GameObject:
   m_ObjectHideFlags: 0
