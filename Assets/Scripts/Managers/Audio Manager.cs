@@ -7,6 +7,8 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public Audio[] audios;
+    // Added a public variable to track the sound state (muted or not)
+    public bool isMuted = false; // By default, the sound is not muted
 
     //Keeps tracks of whether or not an instance of the AudioManager exists (since it will persist between scenes)
     private static AudioManager currentInstance;
@@ -58,4 +60,16 @@ public class AudioManager : MonoBehaviour
 
         sound.source.Play();
     }
+public void SetSound(bool isOn)
+    {
+        // Inverts the state of isMuted based on the isOn parameter
+        isMuted = !isOn; 
+
+        // Applies the isMuted state to each audio source
+        foreach (Audio audio in audios)
+        {
+            audio.source.mute = isMuted; 
+        }
+    }
 }
+
