@@ -10,7 +10,7 @@ public class MenuManager : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().playSound("Button Click");
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(3);
     }
 
     public void openCredit ()

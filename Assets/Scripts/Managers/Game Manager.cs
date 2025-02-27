@@ -93,7 +93,7 @@ private void Update()
 
         numKills++;
 
-        AddScore(10);
+        AddScore(1);
 
         //If there are no more enemies, end the wave
         /*if (numEnemies <= 0)
@@ -126,7 +126,7 @@ private void Update()
     {
         FindObjectOfType<AudioManager>().playSound("Button Click");
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(3);
         Time.timeScale = 1f;
     }
 
