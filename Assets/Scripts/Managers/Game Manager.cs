@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 
         numKills = 0;
 
-        SpawnEnemies();
+        //SpawnEnemies();
 
         //endWave();
     }
@@ -87,10 +87,10 @@ private void Update()
         numKills++;
 
         //If there are no more enemies, end the wave
-        if (numEnemies <= 0)
+        /*if (numEnemies <= 0)
         {
             SpawnEnemies();
-        }
+        }*/
     }
 
     public void GameOver ()
@@ -156,7 +156,7 @@ private void Update()
         player.GetComponent<playerMovement>().raiseHealth();
     }*/
 
-    public void SpawnEnemies ()
+    /*public void SpawnEnemies ()
     {
         Transform spawner = GameObject.FindGameObjectWithTag("Spawn").transform;
 
@@ -188,5 +188,5 @@ private void Update()
             //Remove spawn point from array list so we can't use it again
             spawnPoints.Remove(spawnPoint);
         }
-    }
+    }*/
 }

@@ -116,7 +116,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &3302341218639318828
 MonoBehaviour:
@@ -178,7 +178,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.1, y: 0.12}
+  m_Size: {x: 0.07258916, y: 0.11241104}
   m_EdgeRadius: 0
 --- !u!114 &4237823993424244445
 MonoBehaviour:
@@ -195,3 +195,4 @@ MonoBehaviour:
   homingAmount: 2
   detectionRadius: 5
   cardSpeed: 10
+  rotationSpeed: 5

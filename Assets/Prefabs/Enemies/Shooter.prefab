@@ -337,7 +337,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.123}
+  m_AnchoredPosition: {x: 0, y: 1.543}
   m_SizeDelta: {x: 100, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6955990436954280444
@@ -404,6 +404,7 @@ GameObject:
   - component: {fileID: 7397003448775736192}
   - component: {fileID: 7397003448775736317}
   - component: {fileID: -3564525842379285192}
+  - component: {fileID: -5614086693891969857}
   m_Layer: 9
   m_Name: Shooter
   m_TagString: Enemy
@@ -421,7 +422,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3120083599609329656}
@@ -470,7 +471,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 661413570170886605, guid: 2cc734a6084f7054c89e1def44feb5ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -516,7 +517,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.00007642619, y: -0.004785694}
+  m_Offset: {x: 0.0041372254, y: 0.0008369647}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -526,7 +527,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.09910917, y: 0.11042862}
+  m_Size: {x: 0.24717258, y: 0.21663442}
   m_EdgeRadius: 0
 --- !u!114 &7397003448775736317
 MonoBehaviour:
@@ -559,3 +560,33 @@ MonoBehaviour:
   shootTime: 4
   bullet: {fileID: 8630619459524828284, guid: 4dbf167ffc7dc7f4bafa646fb6374b43, type: 3}
   bulletForce: 1000
+  deactivationDistance: 20
+  reactivationDistance: 18
+  isActive: 1
+--- !u!50 &-5614086693891969857
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7397003448775736193}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 10
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
