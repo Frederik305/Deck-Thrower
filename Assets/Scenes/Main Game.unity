@@ -1931,6 +1931,7 @@ MonoBehaviour:
   - {fileID: 7397003448775736193, guid: 4a05561c841b1ec4d87da85a59000ec9, type: 3}
   roundDisplay: {fileID: 323287748}
   killDisplay: {fileID: 1820504397}
+  scoreDisplay: {fileID: 323287748}
 --- !u!4 &926664402
 Transform:
   m_ObjectHideFlags: 0

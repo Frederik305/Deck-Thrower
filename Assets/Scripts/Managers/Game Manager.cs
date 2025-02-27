@@ -30,9 +30,11 @@ public class GameManager : MonoBehaviour
     private ScoreManager scoreManager;
 
     private int numKills;
+    private int numScores;
 
     public TextMeshProUGUI roundDisplay;
     public TextMeshProUGUI killDisplay;
+    public TextMeshProUGUI scoreDisplay;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +53,11 @@ public class GameManager : MonoBehaviour
         currentWave = 1;
 
         numKills = 0;
+
+        numScores = 0;
+
+        //Mettre à jour l'affichage du score au démarrage
+        UpdateScoreDisplay();
 
         //SpawnEnemies();
 
@@ -86,6 +93,8 @@ private void Update()
 
         numKills++;
 
+        AddScore(10);
+
         //If there are no more enemies, end the wave
         /*if (numEnemies <= 0)
         {
@@ -102,6 +111,7 @@ private void Update()
         roundDisplay.text = (currentWave-1).ToString();
         killDisplay.text = numKills.ToString();
         Time.timeScale = 0f;
+        UpdateScoreDisplay();
     }
 
     public void BackToMenu()
@@ -118,6 +128,18 @@ private void Update()
 
         SceneManager.LoadScene(1);
         Time.timeScale = 1f;
+    }
+
+    public void AddScore(int points)
+    {
+        numScores += points;
+        scoreManager.AddScore(points);
+        UpdateScoreDisplay();
+    }
+
+    public void UpdateScoreDisplay()
+    {
+        scoreDisplay.text = numScores.ToString();
     }
 
     /*private void endWave () {
