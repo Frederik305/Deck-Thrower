@@ -267,10 +267,12 @@ MonoBehaviour:
   - {fileID: 3302341218639318831, guid: eeaa7733aa62bd147b4d1942b8e86853, type: 3}
   - {fileID: 3302341218639318831, guid: 80312a0fc66369f42bf23d7676469286, type: 3}
   - {fileID: 3302341218639318831, guid: dbf2352f32ad3b145b712a9f14e73681, type: 3}
+  availableCards: []
   magazineSize: 5
   icon: {fileID: 1111820496638473168, guid: 90d27991b7cfb5941a3b9550a166ecbf, type: 3}
   iconSelectedSize: 1.1
   iconWidth: 2.5
+  cardsMagazine: {fileID: 0}
   reloadTime: 2
   reloadBar: {fileID: 6773525613904583951}
 --- !u!1 &4532991641184385972
