@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Bouncer : MonoBehaviour
+public class Bouncer : Enemy
 {
     public float speed;
     public float torque;
@@ -10,15 +8,15 @@ public class Bouncer : MonoBehaviour
     private Transform transform;
     private Rigidbody2D rb;
 
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start(); // Appelle la méthode Start() de EnemyBase si nécessaire
+
         transform = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
 
         transform.Rotate(0, 0, Random.Range(0, 360));
         rb.linearVelocity = transform.up * speed;
-
         rb.AddTorque(torque);
     }
 
@@ -26,4 +24,5 @@ public class Bouncer : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().playSound("Bounce");
     }
+
 }

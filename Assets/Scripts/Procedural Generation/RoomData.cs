@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class RoomData : MonoBehaviour
 {
+    public RoomType roomType;
     public Vector2Int size;
     public List<ExitPoint> exits = new();
     public List<TileData> tiles = new();
@@ -22,4 +23,13 @@ public class RoomData : MonoBehaviour
     }
 
     public enum Direction { North, South, East, West }
+    public enum RoomType
+    {
+        RegularRoom,
+        StartingRoom,
+        EndRoom,
+        BossRoom,
+        TraderRoom,
+        SecretRoom,
+    }
 }

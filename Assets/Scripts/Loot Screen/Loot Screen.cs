@@ -2,42 +2,160 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LootScreen : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public List<int> unlockedCards = new List<int>(); // Liste des cartes débloquées
+    public Shoot shootScript; // Référence au script Shoot
+    public GameObject lootCard;
+    private Canvas canvasLoot;
+    public Transform canvasLootTransform;
+    public Transform magazineDisplay;
+    private List<GameObject> cardsInstance = new List<GameObject>();
+    private List<GameObject> magazineCards = new List<GameObject>();
+    private Canvas canvasMagazine;
+    private int cardToAddIndex;
+
+
     void Start()
     {
-        //Sets container of the cards to inactive so they don't show
-        //gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        
+        canvasLoot=gameObject.GetComponent<Canvas>();
+        canvasLoot.enabled=false;
+        canvasMagazine = GameObject.Find("Canvas Magazine").GetComponent<Canvas>();
+
+        
+
     }
+    //LS
+    public void activate(GameObject[] cardTypes)
+    {
 
-    public void activate(GameObject[] cardTypes) {
-        //Sets cardHolder to the empty object holding each loot card
-        GameObject cardHolder = gameObject.transform.GetChild(0).gameObject;
 
-        //Creates an arraylist of each card type's index in the main array. This is so we can prevent showing the same type twice.
-        ArrayList indexes = new ArrayList();
-        indexes.AddRange(Enumerable.Range(0, cardTypes.Length).ToArray());
+        
+        Time.timeScale = 0f;
 
-        //Sets container of the cards to active so they display
-        cardHolder.SetActive(true);
 
-        //Goes through each card and randomly assigns it a card type
-        for (int x = 0; x < 3; x++) {
-            GameObject card = cardHolder.transform.GetChild(x).gameObject;
+        DisplayCardsChoice();
+        DisplayMagazine();
 
-            //The index of the array list we want to access
-            int indexIndex = Random.Range(0, indexes.Count);
-            //Put the stores index as our cardType index
-            int index = (int)indexes[indexIndex];
-            //Remove that cardType index so we don't draw it again
-            indexes.RemoveAt(indexIndex);
+        shootScript.setEnableShooting(false);
+        canvasLoot.enabled = true;
+        canvasMagazine.enabled = false;
 
-            //Set the loot card's sprite to the card type's
-            card.GetComponent<UnityEngine.UI.Image>().sprite = cardTypes[index].GetComponent<SpriteRenderer>().sprite;
-            //Store the value of the card type's index in the array so we can access it later after clicking on the loot card
-            card.GetComponent<LootOption>().setTypeIndex(index);
+            
+            
+            
+        
+    }
+    //LS
+    private void DisplayMagazine(){
+        foreach (GameObject card in shootScript.availableCards)
+        {
+            SpriteRenderer cardSpriteRenderer = card.GetComponent<SpriteRenderer>();
+
+            if (cardSpriteRenderer != null)
+            {
+                
+                GameObject magazineCard = Instantiate(lootCard, magazineDisplay);
+
+                
+                Image newCardImage = magazineCard.GetComponent<Image>();
+
+                if (newCardImage != null)
+                {
+                   
+                    newCardImage.sprite = cardSpriteRenderer.sprite;
+                    newCardImage.preserveAspect = true;
+                }
+                magazineCard.GetComponent<Button>().onClick.AddListener(() => ChangeCard(card));
+                magazineCard.GetComponent<Button>().enabled = false;
+                magazineCards.Add(magazineCard);
+                magazineCard.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
+            }
+            
+
+        }
+    }
+    //LS
+    void ChangeCard(GameObject card){
+        
+        Time.timeScale = 1f;
+        canvasLoot.enabled = false;
+        shootScript.setEnableShooting(true);
+
+        foreach (GameObject instance in cardsInstance)
+        {
+            if (instance != null)
+            {
+                Destroy(instance); // Détruire chaque instance
+            }
+        }
+        foreach (GameObject instance in magazineCards)
+        {
+            if (instance != null)
+            {
+                Destroy(instance); // Détruire chaque instance
+            }
+        }
+        // Vider la liste après avoir détruit toutes les instances
+        cardsInstance.Clear();
+        magazineCards.Clear();
+        shootScript.SwitchCard(card,cardToAddIndex);
+        canvasMagazine.enabled = true;
+    }
+    //LS
+    private void DisplayCardsChoice() {
+        
+
+        List<(int index, GameObject card)> indexedCards = shootScript.cards
+            .Select((card, index) => (index, card))  // Associe chaque carte à son index dans la liste
+            .OrderBy(_ => Random.value)  // Mélange la liste
+            .Take(3)  // Sélectionne les 3 premières cartes
+            .ToList();
+
+        foreach (var item in indexedCards)
+        {
+            GameObject card = Instantiate(lootCard, canvasLootTransform);
+            cardsInstance.Add(card);
+
+            Image cardImage = card.GetComponent<Image>();
+            cardImage.sprite = item.card.GetComponent<SpriteRenderer>().sprite;
+            cardImage.preserveAspect = true; // Préserver le ratio d'aspect
+            
+
+            // Ajoute un bouton pour débloquer la carte
+            
+            card.GetComponent<Button>().onClick.AddListener(() => SelectCard(card,item.index));
+            card.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
+        }
+    }
+    //LS
+    public void SelectCard(GameObject clickedCard,int index)
+    {
+        cardToAddIndex=index;
+        
+        // Réduit la taille de toutes les cartes
+        foreach (GameObject card in cardsInstance)
+        {
+            if (card != clickedCard)
+            {
+                // Réduit la taille des autres cartes
+                card.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
+            }
+        }
+
+        // Agrandit légèrement la carte cliquée
+        clickedCard.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+
+        foreach (GameObject card in magazineCards)
+        {
+            Button cardButton = card.GetComponent<Button>();
+            if (cardButton != null)
+            {
+                cardButton.enabled = true;  // Activer le bouton
+            }
         }
     }
 }
