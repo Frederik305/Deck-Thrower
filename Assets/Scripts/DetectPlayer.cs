@@ -4,9 +4,9 @@ using UnityEngine.Tilemaps;
 public class DetectPlayer : MonoBehaviour
 {
     [SerializeField] private Tilemap tilemap;
-    void OnTriggerEnter2D(Collider2D other)
+    [SerializeField] TileBase doorTile;
+    void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("TEST");
         if (other.gameObject.CompareTag("Player"))
         {
             Vector3 playerPosition = other.transform.position;
@@ -16,7 +16,10 @@ public class DetectPlayer : MonoBehaviour
             // Get the tile at that position
             TileBase tile = tilemap.GetTile(tilePosition);
 
-            Debug.Log("Player passed through a door at " + tilePosition);
+            if(tile == doorTile) 
+            {
+                Debug.Log("Player passed through a door at " + tilePosition);
+            }
         }
     }
 }

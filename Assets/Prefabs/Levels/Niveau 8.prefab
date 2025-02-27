@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1803000270073951004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 389566117209009992}
+  m_Layer: 0
+  m_Name: SpawnPoints (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &389566117209009992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803000270073951004}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.24, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2673381679353645036}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2164051731018583900
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,7 +62,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2673381679353645036}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &125890190596225906
@@ -2199,27 +2231,27 @@ MonoBehaviour:
     direction: 0
   tiles:
   - position: {x: 0, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 2}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 3}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 4}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 5}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 6}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 7}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 8}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 0, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 1, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 1, y: 2}
     tileName: Level Layout_42
   - position: {x: 1, y: 3}
@@ -2237,9 +2269,9 @@ MonoBehaviour:
   - position: {x: 1, y: 9}
     tileName: Level Layout_42
   - position: {x: 1, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 2, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 2, y: 2}
     tileName: Level Layout_42
   - position: {x: 2, y: 3}
@@ -2257,9 +2289,9 @@ MonoBehaviour:
   - position: {x: 2, y: 9}
     tileName: Level Layout_42
   - position: {x: 2, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 3, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 3, y: 2}
     tileName: Level Layout_42
   - position: {x: 3, y: 3}
@@ -2277,29 +2309,29 @@ MonoBehaviour:
   - position: {x: 3, y: 9}
     tileName: Level Layout_42
   - position: {x: 3, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 4, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 4, y: 2}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 4, y: 3}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 4, y: 4}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 4, y: 5}
     tileName: Level Layout_42
   - position: {x: 4, y: 6}
     tileName: Level Layout_42
   - position: {x: 4, y: 7}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 4, y: 8}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 4, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 4, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 5, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 5, y: 2}
     tileName: Level Layout_42
   - position: {x: 5, y: 3}
@@ -2317,9 +2349,9 @@ MonoBehaviour:
   - position: {x: 5, y: 9}
     tileName: Level Layout_42
   - position: {x: 5, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 6, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 6, y: 2}
     tileName: Level Layout_42
   - position: {x: 6, y: 3}
@@ -2337,9 +2369,9 @@ MonoBehaviour:
   - position: {x: 6, y: 9}
     tileName: Level Layout_42
   - position: {x: 6, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 7, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 7, y: 2}
     tileName: Level Layout_42
   - position: {x: 7, y: 3}
@@ -2357,27 +2389,27 @@ MonoBehaviour:
   - position: {x: 7, y: 9}
     tileName: Level Layout_42
   - position: {x: 7, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 8, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 8, y: 2}
     tileName: Level Layout_42
   - position: {x: 8, y: 3}
     tileName: Level Layout_42
   - position: {x: 8, y: 4}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 8, y: 5}
     tileName: Level Layout_42
   - position: {x: 8, y: 6}
     tileName: Level Layout_42
   - position: {x: 8, y: 7}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 8, y: 8}
     tileName: Level Layout_42
   - position: {x: 8, y: 9}
     tileName: Level Layout_42
   - position: {x: 8, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 1}
     tileName: Door Tile
   - position: {x: 9, y: 2}
@@ -2385,13 +2417,13 @@ MonoBehaviour:
   - position: {x: 9, y: 3}
     tileName: Level Layout_42
   - position: {x: 9, y: 4}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 5}
     tileName: Level Layout_42
   - position: {x: 9, y: 6}
     tileName: Level Layout_42
   - position: {x: 9, y: 7}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 9, y: 8}
     tileName: Level Layout_42
   - position: {x: 9, y: 9}
@@ -2405,13 +2437,13 @@ MonoBehaviour:
   - position: {x: 10, y: 3}
     tileName: Level Layout_42
   - position: {x: 10, y: 4}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 10, y: 5}
     tileName: Level Layout_42
   - position: {x: 10, y: 6}
     tileName: Level Layout_42
   - position: {x: 10, y: 7}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 10, y: 8}
     tileName: Level Layout_42
   - position: {x: 10, y: 9}
@@ -2419,27 +2451,27 @@ MonoBehaviour:
   - position: {x: 10, y: 10}
     tileName: Door Tile
   - position: {x: 11, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 11, y: 2}
     tileName: Level Layout_42
   - position: {x: 11, y: 3}
     tileName: Level Layout_42
   - position: {x: 11, y: 4}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 11, y: 5}
     tileName: Level Layout_42
   - position: {x: 11, y: 6}
     tileName: Level Layout_42
   - position: {x: 11, y: 7}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 11, y: 8}
     tileName: Level Layout_42
   - position: {x: 11, y: 9}
     tileName: Level Layout_42
   - position: {x: 11, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 12, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 12, y: 2}
     tileName: Level Layout_42
   - position: {x: 12, y: 3}
@@ -2457,9 +2489,9 @@ MonoBehaviour:
   - position: {x: 12, y: 9}
     tileName: Level Layout_42
   - position: {x: 12, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 13, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 13, y: 2}
     tileName: Level Layout_42
   - position: {x: 13, y: 3}
@@ -2477,9 +2509,9 @@ MonoBehaviour:
   - position: {x: 13, y: 9}
     tileName: Level Layout_42
   - position: {x: 13, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 14, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 14, y: 2}
     tileName: Level Layout_42
   - position: {x: 14, y: 3}
@@ -2497,29 +2529,29 @@ MonoBehaviour:
   - position: {x: 14, y: 9}
     tileName: Level Layout_42
   - position: {x: 14, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 15, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 15, y: 2}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 15, y: 3}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 15, y: 4}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 15, y: 5}
     tileName: Level Layout_42
   - position: {x: 15, y: 6}
     tileName: Level Layout_42
   - position: {x: 15, y: 7}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 15, y: 8}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 15, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 15, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 16, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 16, y: 2}
     tileName: Level Layout_42
   - position: {x: 16, y: 3}
@@ -2537,9 +2569,9 @@ MonoBehaviour:
   - position: {x: 16, y: 9}
     tileName: Level Layout_42
   - position: {x: 16, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 17, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 17, y: 2}
     tileName: Level Layout_42
   - position: {x: 17, y: 3}
@@ -2557,9 +2589,9 @@ MonoBehaviour:
   - position: {x: 17, y: 9}
     tileName: Level Layout_42
   - position: {x: 17, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 18, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 18, y: 2}
     tileName: Level Layout_42
   - position: {x: 18, y: 3}
@@ -2577,24 +2609,127 @@ MonoBehaviour:
   - position: {x: 18, y: 9}
     tileName: Level Layout_42
   - position: {x: 18, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 1}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 2}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 3}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 4}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 5}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 6}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 7}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 8}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 9}
-    tileName: Brick wall
+    tileName: Brick Wall
   - position: {x: 19, y: 10}
-    tileName: Brick wall
+    tileName: Brick Wall
+  spawnPoints:
+  - {x: 0, y: 0}
+  - {x: -4, y: 0}
+  - {x: 4, y: 0}
+--- !u!1 &2737011169384365945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3546983229444755952}
+  m_Layer: 0
+  m_Name: SpawnPoints (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3546983229444755952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737011169384365945}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.55, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2673381679353645036}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &7503983508159130308
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4110880171725661878}
+    m_Modifications:
+    - target: {fileID: 5564834262040948008, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564834262040948008, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564834262040948008, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564834262040948008, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564834262040948008, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564834262040948008, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564834262040948008, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564834262040948008, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564834262040948008, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564834262040948008, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7586999244860982319, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+      propertyPath: m_Name
+      value: spawnPoints
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5564834262040948008, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 389566117209009992}
+    - targetCorrespondingSourceObject: {fileID: 5564834262040948008, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3546983229444755952}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+--- !u!4 &2673381679353645036 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5564834262040948008, guid: b9d2d71c93b0eb4458df7b02c6615329, type: 3}
+  m_PrefabInstance: {fileID: 7503983508159130308}
+  m_PrefabAsset: {fileID: 0}
