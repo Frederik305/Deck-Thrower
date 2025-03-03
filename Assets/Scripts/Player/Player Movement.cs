@@ -101,7 +101,7 @@ public class playerMovement : MonoBehaviour
             return;
         }
 
-        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Bullet" || other.gameObject.tag == "Enemy")
         {
             health--;
             healthScript.lowerHealth(health);

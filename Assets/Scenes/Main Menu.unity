@@ -460,7 +460,12 @@ MonoBehaviour:
 
     LEFT CLICK : LAUNCH A CARD
 
-    MOUSE : AIM'
+    MOUSE : AIM
+
+    LEFT
+    SHIFT : SMALL DASH
+
+    SPACE BAR : LARGE DASH'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 47a7cb1d9052e024a9fe0c3391babbf5, type: 2}
   m_sharedMaterial: {fileID: 5552940363317589253, guid: 47a7cb1d9052e024a9fe0c3391babbf5, type: 2}
@@ -3601,7 +3606,7 @@ MonoBehaviour:
   m_text: Version        Alpha
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0299fb6f1e324454993854202e463153, type: 2}
-  m_sharedMaterial: {fileID: -572206460043353824, guid: 0299fb6f1e324454993854202e463153, type: 2}
+  m_sharedMaterial: {fileID: 5078455977059995299, guid: 0299fb6f1e324454993854202e463153, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5607,7 +5612,7 @@ MonoBehaviour:
   m_text: DECK  THROWER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0299fb6f1e324454993854202e463153, type: 2}
-  m_sharedMaterial: {fileID: -572206460043353824, guid: 0299fb6f1e324454993854202e463153, type: 2}
+  m_sharedMaterial: {fileID: 5078455977059995299, guid: 0299fb6f1e324454993854202e463153, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

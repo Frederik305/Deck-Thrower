@@ -1,71 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-public class Boss : MonoBehaviour
+
+public class Boss : Enemy
 {
-    //The enemy's health
-    public int health = 50;
+    public float shootTime = 1f;
+    private float timer;
+    public GameObject bullet;
+    private GameObject player;
+    public float bulletForce = 15f;
+    private Transform transform;
+    public float deactivationDistance = 20f; // Distance maximale avant désactivation
+    public float reactivationDistance = 18f; // Distance minimale avant réactivation
+    public bool isActive = true;
 
-    protected GameManager gameManager;
-    public Slider healthBar; // Référence au Slider (barre de vie)
-    protected ScoreManager scoreManager;
-    //public float deactivationDistance = 20f; // Distance maximale avant désactivation
-    //public float reactivationDistance = 18f; // Distance minimale avant réactivation
-    private Transform player;
-    private Rigidbody2D rb;
-
-    // Start is called before the first frame update
-    protected virtual void Start()
+    protected override void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        scoreManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoreManager>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        rb = GetComponent<Rigidbody2D>();
-        
-        
-        if (healthBar != null)
-        {
-            healthBar.maxValue = health;  // Définir la vie maximale
-            healthBar.value = health;     // Définir la vie actuelle
-        }
+        base.Start(); // Appelle la méthode Start() de EnemyBase si nécessaire
+        player = GameObject.FindGameObjectWithTag("Player");
+        transform = gameObject.GetComponent<Transform>();
+        timer = 0;
     }
 
-    private void Update()
+    void Update()
     {
-        if (player != null)
+        if (isActive)
         {
-            /*float distance = Vector2.Distance(transform.position, player.position);
+            timer += Time.deltaTime;
+            if (timer >= shootTime)
+            {
+                Shoot();
+                timer = 0;
+            }
+        }
+        
+        if (player.transform != null)
+        {
+            float distance = Vector2.Distance(transform.position, player.transform.position);
             if (distance > deactivationDistance)
             {
-                rb.linearVelocity = Vector2.zero; // Arrêter l'ennemi
-                rb.angularVelocity = 0f;   // Arrêter la rotation
+                isActive = false;
             }
-            else if (distance < reactivationDistance && rb.linearVelocity == Vector2.zero)
+            else if (distance < reactivationDistance)
             {
-                rb.linearVelocity = transform.up * 2f; // Redonner une vitesse de base à l'ennemi
-            }*/
+                isActive = true;
+            }
         }
     }
 
-    public void TakeDamage (int damage)
+    public void Shoot()
     {
-        health -= damage;
-        // Mise à jour de la barre de vie
-        if (healthBar != null)
-        {
-            healthBar.value = health; // Mettre à jour la barre de vie
-        }
-        //When out of health, die and let the Game Manager know
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-    protected virtual void Die()
-    {
-        gameManager.UpdateEnemyCount();
-        scoreManager.AddScore(1);
-        Destroy(gameObject);
+        Vector2 difference = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
+        difference = difference.normalized;
+
+        GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+        newBullet.GetComponent<Rigidbody2D>().AddForce(difference * bulletForce);
     }
 }

@@ -44,8 +44,6 @@ public class Shooter : Enemy
                 isActive = true;
             }
         }
-
-        
     }
 
     public void Shoot()

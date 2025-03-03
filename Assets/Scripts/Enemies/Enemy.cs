@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
-    //The enemy's health
-    public int health = 10;
+    public int health = 10;    //The enemy's health
 
     protected GameManager gameManager;
     public Slider healthBar; // Référence au Slider (barre de vie)
