@@ -81,12 +81,12 @@ public class playerMovement : MonoBehaviour
                 ver *= diagnolLimiter;
             }
             Vector2 movement = new Vector2(hor * speed, ver * speed);
-            rb.velocity = movement;
+            rb.linearVelocity = movement;
         
            // Active l'animation de marche seulement si le joueur bouge
         if (animator != null)
         {
-            if (rb.velocity.magnitude > 0.1f)
+            if (rb.linearVelocity.magnitude > 0.1f)
             {
                 animator.SetBool("isWalking", true);
             }
