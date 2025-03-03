@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class playerMovement : MonoBehaviour
 {
+    private Animator animator;
     public float speed = 10f;
     public float dashSpeed = 20f;
     public float dashDuration = 0.2f;
@@ -31,6 +32,7 @@ public class playerMovement : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         transform = GetComponent<Transform>();
         invincibilityCounter = 0;
@@ -49,13 +51,13 @@ public class playerMovement : MonoBehaviour
         {
             if (speed < 11f)
             {
-                speed = 50f;
+                speed = 30f;
             }
         }
         // Gradually remove the dash speed each frame until the speed is normal
         if (speed > 10f)
         {
-            speed = speed - 0.25f;
+            speed = speed - 0.30f;
         }
 
         //Track player and mouse coords
@@ -78,11 +80,26 @@ public class playerMovement : MonoBehaviour
                 hor *= diagnolLimiter;
                 ver *= diagnolLimiter;
             }
-            rb.linearVelocity = new Vector2(hor * speed, ver * speed);
+            Vector2 movement = new Vector2(hor * speed, ver * speed);
+            rb.linearVelocity = movement;
+        
+           // Active l'animation de marche seulement si le joueur bouge
+        if (animator != null)
+        {
+            if (rb.linearVelocity.magnitude > 0.1f)
+            {
+                animator.SetBool("isWalking", true);
+            }
+            else
+            {
+                animator.SetBool("isWalking", false);
+                animator.Play("Idle"); 
+            }
         }
 
         float playerAngle = Mathf.Atan2(mousePos.x - playerPos.x, mousePos.y - playerPos.y) * Mathf.Rad2Deg * -1;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, playerAngle));
+        }
     }
 
     IEnumerator Dash()
@@ -101,7 +118,7 @@ public class playerMovement : MonoBehaviour
             return;
         }
 
-        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Bullet" || other.gameObject.tag == "Enemy")
         {
             health--;
             healthScript.lowerHealth(health);

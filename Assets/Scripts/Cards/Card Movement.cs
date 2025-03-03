@@ -51,7 +51,7 @@ public class cardMovement : MonoBehaviour
            
             GameObject.Destroy(gameObject);
         }
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Boss")
         {
             Debug.Log("OUCHHHH");
             other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
