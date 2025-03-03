@@ -449,8 +449,7 @@ public class DungeonGenerator : MonoBehaviour
 
                 if (Random.value < 0.1f && enemiesSpawned < 3)
                 {
-                    Vector3 spawnPos = tilemap.CellToWorld(worldPos);
-                    spawnPos += tilemap.cellSize / 2f; // Offset to center of tile
+                    Vector3 spawnPos = tilemap.GetCellCenterWorld(worldPos);
                     enemyInstance.Add(Instantiate(enemies[Random.Range(0, enemies.Count)], spawnPos, Quaternion.identity));
                     enemiesSpawned++;
                 }
