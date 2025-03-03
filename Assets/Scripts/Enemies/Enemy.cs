@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
@@ -45,7 +46,12 @@ public class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         gameManager.UpdateEnemyCount();
+
         scoreManager.AddScore(1);
+        if (gameObject.tag == "Boss")
+        {
+            SceneManager.LoadScene(2);
+        }
         Destroy(gameObject);
     }
 }
