@@ -49,13 +49,13 @@ public class playerMovement : MonoBehaviour
         {
             if (speed < 11f)
             {
-                speed = 50f;
+                speed = 30f;
             }
         }
         // Gradually remove the dash speed each frame until the speed is normal
         if (speed > 10f)
         {
-            speed = speed - 0.25f;
+            speed = speed - 0.30f;
         }
 
         //Track player and mouse coords
