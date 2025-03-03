@@ -120,6 +120,16 @@ public class DungeonGenerator : MonoBehaviour
                             if (!Overlaps(bossRoomVariant, bossRoomPosition))
                             {
                                 PlaceRoomWithSpawns(bossRoomVariant, bossRoomPosition);
+
+                                Vector2 roomCenter = ComputeRoomCenter(bossRoomVariant, bossRoomPosition);
+
+                                GameObject enemyInstance = Instantiate(
+                                    enemies[Random.Range(0, enemies.Count)],
+                                    new Vector3(roomCenter.x, roomCenter.y, 0),
+                                    Quaternion.identity
+                                );
+                                enemyInstance.SetActive(false);
+
                                 return true; // Successfully placed the BossRoom
                             }
                         }
@@ -129,6 +139,25 @@ public class DungeonGenerator : MonoBehaviour
         }
         return false; // Couldn't place the BossRoom, return false
     }
+
+    private Vector2 ComputeRoomCenter(RoomData room, Vector2Int gridPos)
+    {
+        int minX = int.MaxValue, maxX = int.MinValue;
+        int minY = int.MaxValue, maxY = int.MinValue;
+        foreach (var tile in room.tiles)
+        {
+            Vector2Int pos = gridPos + tile.position;
+            if (pos.x < minX) minX = pos.x;
+            if (pos.y < minY) minY = pos.y;
+            if (pos.x > maxX) maxX = pos.x;
+            if (pos.y > maxY) maxY = pos.y;
+        }
+        float centerX = (minX + maxX + 1) / 2f;
+        float centerY = (minY + maxY + 1) / 2f;
+        return new Vector2(centerX, centerY);
+    }
+
+
 
     /// <summary>
     /// If there isn�t enough space for a BossRoom, attempts to place an EndRoom instead, aligning its door(s) with the last room.
@@ -420,8 +449,7 @@ public class DungeonGenerator : MonoBehaviour
 
                 if (Random.value < 0.1f && enemiesSpawned < 3)
                 {
-                    Vector3 spawnPos = tilemap.CellToWorld(worldPos);
-                    spawnPos += tilemap.cellSize / 2f; // Offset to center of tile
+                    Vector3 spawnPos = tilemap.GetCellCenterWorld(worldPos);
                     enemyInstance.Add(Instantiate(enemies[Random.Range(0, enemies.Count)], spawnPos, Quaternion.identity));
                     enemiesSpawned++;
                 }
