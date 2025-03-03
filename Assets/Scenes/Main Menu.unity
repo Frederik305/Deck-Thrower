@@ -3601,7 +3601,7 @@ MonoBehaviour:
   m_text: Version        Alpha
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0299fb6f1e324454993854202e463153, type: 2}
-  m_sharedMaterial: {fileID: -572206460043353824, guid: 0299fb6f1e324454993854202e463153, type: 2}
+  m_sharedMaterial: {fileID: 5078455977059995299, guid: 0299fb6f1e324454993854202e463153, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3694,7 +3694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &996253326
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5607,7 +5607,7 @@ MonoBehaviour:
   m_text: DECK  THROWER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0299fb6f1e324454993854202e463153, type: 2}
-  m_sharedMaterial: {fileID: -572206460043353824, guid: 0299fb6f1e324454993854202e463153, type: 2}
+  m_sharedMaterial: {fileID: 5078455977059995299, guid: 0299fb6f1e324454993854202e463153, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
