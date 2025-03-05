@@ -2632,11 +2632,6 @@ MonoBehaviour:
     tileName: Brick Wall
   - position: {x: 19, y: 10}
     tileName: Brick Wall
-  spawnPoints:
-  - {x: 0, y: 0}
-  - {x: 8, y: -4}
-  - {x: -7, y: -3}
-  - {x: -4, y: 2}
 --- !u!1 &8242700744804727862
 GameObject:
   m_ObjectHideFlags: 0
