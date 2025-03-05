@@ -567,11 +567,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44a7224441c40444b0c06fe5f06034b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 100
   healthBar: {fileID: 6955990436954280444}
   shootTime: 1
   bullet: {fileID: 8630619459524828284, guid: 4dbf167ffc7dc7f4bafa646fb6374b43, type: 3}
-  bulletForce: 350
+  bulletForce: 300
   deactivationDistance: 20
   reactivationDistance: 18
   isActive: 1

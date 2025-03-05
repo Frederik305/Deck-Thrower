@@ -940,8 +940,8 @@ Tilemap:
   - first: {x: -9, y: -1, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 3
+      m_TileIndex: 2
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 3
       m_TileObjectToInstantiateIndex: 65535
@@ -1070,13 +1070,13 @@ Tilemap:
   - first: {x: 4, y: -1, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 3
-      m_TileSpriteIndex: 5
+      m_TileIndex: 0
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 3
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1073741825
+      m_AllTileFlags: 1073741826
   - first: {x: 5, y: -1, z: 0}
     second:
       serializedVersion: 2
@@ -1130,8 +1130,8 @@ Tilemap:
   - first: {x: 10, y: -1, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 3
+      m_TileIndex: 2
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 3
       m_TileObjectToInstantiateIndex: 65535
@@ -1140,8 +1140,8 @@ Tilemap:
   - first: {x: -9, y: 0, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 3
+      m_TileIndex: 2
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 3
       m_TileObjectToInstantiateIndex: 65535
@@ -1271,7 +1271,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 2
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 3
       m_TileObjectToInstantiateIndex: 65535
@@ -1330,8 +1330,8 @@ Tilemap:
   - first: {x: 10, y: 0, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 3
+      m_TileIndex: 2
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 3
       m_TileObjectToInstantiateIndex: 65535
@@ -1941,7 +1941,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 10
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 3
       m_TileObjectToInstantiateIndex: 65535
@@ -2139,26 +2139,26 @@ Tilemap:
       m_AllTileFlags: 1073741826
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 61
+  - m_RefCount: 62
     m_Data: {fileID: 11400000, guid: 0311e7e1c0337be49b3d8a5b321c2d75, type: 2}
-  - m_RefCount: 4
-    m_Data: {fileID: 11400000, guid: ec968437b20511a4a893de84c647412b, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 135
+  - m_RefCount: 4
+    m_Data: {fileID: 11400000, guid: 48aa79f341af49741928eaa376d93761, type: 2}
+  - m_RefCount: 134
     m_Data: {fileID: 11400000, guid: 7047948fc5048494e92ba22de68f1308, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 15
+  - m_RefCount: 16
     m_Data: {fileID: -853961465, guid: eeac9304eed494043b94b215c2b3fc94, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 1277920209, guid: eeac9304eed494043b94b215c2b3fc94, type: 3}
-  - m_RefCount: 4
-    m_Data: {fileID: 847808783, guid: 9d1696f8a90446a4bb4e2d7d4df0a15e, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 135
+  - m_RefCount: 1
+    m_Data: {fileID: -1884022421, guid: eeac9304eed494043b94b215c2b3fc94, type: 3}
+  - m_RefCount: 138
     m_Data: {fileID: -782678883, guid: 6356a208e0b63c64bbda7dfbff9252bb, type: 3}
   - m_RefCount: 34
     m_Data: {fileID: -1740920920, guid: eeac9304eed494043b94b215c2b3fc94, type: 3}
@@ -2168,8 +2168,8 @@ Tilemap:
     m_Data: {fileID: 801960337, guid: eeac9304eed494043b94b215c2b3fc94, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: -1626073545, guid: eeac9304eed494043b94b215c2b3fc94, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -1884022421, guid: eeac9304eed494043b94b215c2b3fc94, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 1507440269, guid: eeac9304eed494043b94b215c2b3fc94, type: 3}
   - m_RefCount: 1
@@ -2577,7 +2577,7 @@ MonoBehaviour:
   - position: {x: 13, y: 4}
     tileName: Level Layout_42
   - position: {x: 13, y: 5}
-    tileName: Level Layout_42
+    tileName: Brick Wall
   - position: {x: 13, y: 6}
     tileName: Brick Wall
   - position: {x: 13, y: 7}

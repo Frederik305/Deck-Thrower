@@ -1,3 +1,10 @@
+/*****************************************************
+ * Script Name : PauseManager.cs
+ * Author      : Pierre-Luc Ravacley
+ * Date        : 2025-02-18
+ * Description : Organise le backend des panels pauses.
+ * Version     : 1.0
+ *****************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

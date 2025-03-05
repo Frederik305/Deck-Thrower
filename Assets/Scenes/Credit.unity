@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creditsAnimator: {fileID: 1421228349}
-  animationDuration: 20
+  animationDuration: 15
   waitTimeAfterAnimation: 5
 --- !u!1 &239623067
 GameObject:
@@ -766,7 +766,7 @@ Transform:
   m_GameObject: {fileID: 1421228347}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -497, z: -8.673462}
+  m_LocalPosition: {x: 0, y: -484, z: -8.673462}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

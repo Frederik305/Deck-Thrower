@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 7494720700632398151}
   - component: {fileID: 4157926013081427533}
   - component: {fileID: 1777653787549274912}
-  - component: {fileID: 7674641185479912723}
+  - component: {fileID: 5323374082834222832}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -281,7 +281,7 @@ MonoBehaviour:
   cardsMagazine: {fileID: 0}
   reloadTime: 2
   reloadBar: {fileID: 6773525613904583951}
---- !u!95 &7674641185479912723
+--- !u!95 &5323374082834222832
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
