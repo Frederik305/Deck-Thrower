@@ -1,54 +1,38 @@
 using UnityEngine;
 
+// Classe restructurée par Logan avec l'héritage de Enemy
 public class Follower : Enemy
 {
-    private GameObject player;
+    public float homingAmount = 1f; // Détermine la force d'attraction de l'ennemi vers le joueur
 
-    private Transform transform;
-    private Rigidbody2D rb;
-    public float deactivationDistance = 20f; // Distance maximale avant désactivation
-    public float reactivationDistance = 18f; // Distance minimale avant réactivation
-    public bool isActive = true;
-
-    public float homingAmount = 1f;
-
-    protected override void Start() {
-        base.Start(); // Appel au `Start()` de la classe de base Enemy
-        player = GameObject.FindGameObjectWithTag("Player");
-
-        transform = GetComponent<Transform>();
-        rb = GetComponent<Rigidbody2D>();
+    // Start est appelé avant la première mise à jour
+    protected override void Start()
+    {
+        base.Start(); // Appelle la méthode Start() de la classe parente (Enemy)
+        isActive = true; // L'ennemi est activé au début
     }
 
-    // Update is called once per frame
+    // FixedUpdate est appelé à chaque frame fixe (pour la physique)
     void FixedUpdate()
     {
         if (isActive)
         {
-            Vector2 difference = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
-            //Add a force in the direction of the player
+            // Calcul de la différence de position entre l'ennemi et le joueur
+            Vector2 difference = player.position - transform.position;
+
+            // Applique une force d'attraction à l'ennemi vers le joueur en fonction de la différence de position
+            // La force est multipliée par homingAmount pour ajuster l'intensité de l'attraction
             rb.AddForce(difference * homingAmount * Time.deltaTime);
         }
-        
-        if (player.transform != null)
-        {
-            float distance = Vector2.Distance(transform.position, player.transform.position);
-            if (distance > deactivationDistance)
-            {
-                rb.linearVelocity = Vector2.zero; // Arrêter l'ennemi
-                rb.angularVelocity = 0f;   // Arrêter la rotation
-            
-                isActive = false;
-            }
-            else if (distance < reactivationDistance)
-            {
-                isActive = true;
-            }
-        }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        FindObjectOfType<AudioManager>().playSound("Light Bounce");
+
+        // Gère l'activation ou la désactivation de l'ennemi selon la distance avec le joueur
+        HandleActivation();
     }
 
+    // Cette méthode est appelée lorsqu'une collision avec un autre objet se produit
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Joue un son de rebond léger lorsque l'ennemi entre en collision
+        FindObjectOfType<AudioManager>().playSound("Light Bounce");
+    }
 }

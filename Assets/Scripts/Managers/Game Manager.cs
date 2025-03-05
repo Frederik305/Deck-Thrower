@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     //lootScreen is the ui screen that holds the loot cards for the player to choose
     private GameObject lootScreen;
+
+    [SerializeField] private PauseMenu pauseMenu;
     //cardTypes is an array of each card type (taken from Shoot)
     private GameObject[] cardTypes;
 
@@ -59,9 +61,6 @@ public class GameManager : MonoBehaviour
         //Mettre à jour l'affichage du score au démarrage
         UpdateScoreDisplay();
 
-        //SpawnEnemies();
-
-        //endWave();
     }
     
 private int nextThreshold = 3; // Prochain palier de score
@@ -72,8 +71,8 @@ private void Update()
     // Si le joueur appuie sur Échap, terminer la partie
     if (Input.GetKeyDown(KeyCode.Escape))
     {
-        player.SetActive(false);
-        GameOver();
+        
+        pauseMenu.Pause();
     }
 
     // Vérifier si le score a dépassé le seuil actuel
@@ -95,11 +94,6 @@ private void Update()
 
         AddScore(1);
 
-        //If there are no more enemies, end the wave
-        /*if (numEnemies <= 0)
-        {
-            SpawnEnemies();
-        }*/
     }
 
     public void GameOver ()
@@ -142,73 +136,4 @@ private void Update()
         scoreDisplay.text = numScores.ToString();
     }
 
-    /*private void endWave () {
-        //lootScreen.GetComponent<LootScreen>().activate(cardTypes);
-
-        player.GetComponent<shoot>().setEnableShooting(false);
-
-        //This prevents the endWave function form running multiple times
-        roundEnd = true;
-    }
-
-    //Once loot picked, get rid of loot screen and spawn in new enemies
-    public void startWave(GameObject selectedCard)
-    {
-        //Card selected, so play the card selected sound
-        FindObjectOfType<AudioManager>().playSound("Card Select");
-
-        //Get rid of the loot screen
-        lootScreen.transform.GetChild(0).gameObject.SetActive(false);
-
-        //Enable shooting again
-        player.GetComponent<shoot>().setEnableShooting(true);
-
-        //Adds the card the player chose to their inventory
-        //player.GetComponent<shoot>().addCard(selectedCard.GetComponent<LootOption>().getTypeIndex());
-
-        spawnEnemies();
-
-        roundEnd = false;
-        
-        currentWave++;
-
-        //Make the player invincible for the very start of the round (prevents having an enemy spawn on you and hurting you)
-        player.GetComponent<playerMovement>().resetInvincibilityCounter();
-        //Also, give them one extra health
-        player.GetComponent<playerMovement>().raiseHealth();
-    }*/
-
-    /*public void SpawnEnemies ()
-    {
-        Transform spawner = GameObject.FindGameObjectWithTag("Spawn").transform;
-
-        ArrayList spawnPoints = new ArrayList();
-
-        for (int x = 0; x < spawner.childCount; x++)
-        {
-            //Stores every spawn point in our array list
-            spawnPoints.Add(spawner.GetChild(x));
-        }
-
-        numEnemies = 5;
-
-        for (int x = 0; x < numEnemies; x++)
-        {
-            //If we are out of spawn points, then stop
-            if (spawnPoints.Count <= 0)
-            {
-                numEnemies = x;
-                break;
-            }
-
-            //Choose a random spawn point
-            Transform spawnPoint = (Transform)spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
-
-            //Spawn a random enemy type there
-            Instantiate(enemies[UnityEngine.Random.Range(0, enemies.Length)], spawnPoint);
-
-            //Remove spawn point from array list so we can't use it again
-            spawnPoints.Remove(spawnPoint);
-        }
-    }*/
 }

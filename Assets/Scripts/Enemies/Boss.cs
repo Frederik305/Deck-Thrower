@@ -2,56 +2,46 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
+    // Paramètres de tir
     public float shootTime = 1f;
     private float timer;
     public GameObject bullet;
-    private GameObject player;
     public float bulletForce = 15f;
-    private Transform transform;
-    public float deactivationDistance = 20f; // Distance maximale avant désactivation
-    public float reactivationDistance = 18f; // Distance minimale avant réactivation
-    public bool isActive = true;
 
+    // Paramètres de distance pour l'activation et la désactivation
+
+    //public bool isActive = true;
+
+    // Méthode Start() qui initialise l'ennemi, appelée une fois au démarrage
     protected override void Start()
     {
-        base.Start(); // Appelle la méthode Start() de EnemyBase si nécessaire
-        player = GameObject.FindGameObjectWithTag("Player");
-        transform = gameObject.GetComponent<Transform>();
-        timer = 0;
+        base.Start(); // Appel à la méthode Start() de la classe parente Enemy
+        isActive = true;
+        timer = 0;    // Initialisation du timer
     }
 
+    // Mise à jour appelée à chaque frame
     void Update()
     {
         if (isActive)
         {
-            timer += Time.deltaTime;
-            if (timer >= shootTime)
+            timer += Time.deltaTime; // Ajoute le temps écoulé au timer
+            if (timer >= shootTime)  // Vérifie si le temps de tir est écoulé
             {
-                Shoot();
-                timer = 0;
+                Shoot();  // Appelle la méthode Shoot()
+                timer = 0; // Réinitialise le timer
             }
         }
-        
-        if (player.transform != null)
-        {
-            float distance = Vector2.Distance(transform.position, player.transform.position);
-            if (distance > deactivationDistance)
-            {
-                isActive = false;
-            }
-            else if (distance < reactivationDistance)
-            {
-                isActive = true;
-            }
-        }
+
     }
 
+    // Méthode pour tirer un projectile vers le joueur
     public void Shoot()
     {
-        Vector2 difference = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
-        difference = difference.normalized;
+        Vector2 difference = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
+        difference = difference.normalized; // Normalise la direction
 
-        GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-        newBullet.GetComponent<Rigidbody2D>().AddForce(difference * bulletForce);
+        GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity); // Crée une balle
+        newBullet.GetComponent<Rigidbody2D>().AddForce(difference * bulletForce); // Applique une force au Rigidbody2D
     }
 }
