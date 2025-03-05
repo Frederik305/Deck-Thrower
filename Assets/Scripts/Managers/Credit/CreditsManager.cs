@@ -1,3 +1,10 @@
+/*****************************************************
+ * Script Name : CreditManager.cs
+ * Author      : Pierre-Luc Ravacley
+ * Date        : 2025-02-18
+ * Description : Organise le backend de la scene Credit.
+ * Version     : 1.0
+ *****************************************************/
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
