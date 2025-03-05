@@ -14,6 +14,7 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private List<TileBase> tileReferences;
     [SerializeField] private int maxRooms = 10;
     [SerializeField] private List<GameObject> enemies;
+    [SerializeField] private GameObject boss;
     [SerializeField] private GameObject player;
 
     [Header("Rooms probabilities (0.5 = 50%)")]
@@ -124,11 +125,10 @@ public class DungeonGenerator : MonoBehaviour
                                 Vector2 roomCenter = ComputeRoomCenter(bossRoomVariant, bossRoomPosition);
 
                                 GameObject enemyInstance = Instantiate(
-                                    enemies[Random.Range(0, enemies.Count)],
+                                    boss,
                                     new Vector3(roomCenter.x, roomCenter.y, 0),
                                     Quaternion.identity
                                 );
-                                enemyInstance.SetActive(false);
 
                                 return true; // Successfully placed the BossRoom
                             }

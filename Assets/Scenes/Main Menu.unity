@@ -460,7 +460,12 @@ MonoBehaviour:
 
     LEFT CLICK : LAUNCH A CARD
 
-    MOUSE : AIM'
+    MOUSE : AIM
+
+    LEFT
+    SHIFT : SMALL DASH
+
+    SPACE BAR : LARGE DASH'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 47a7cb1d9052e024a9fe0c3391babbf5, type: 2}
   m_sharedMaterial: {fileID: 5552940363317589253, guid: 47a7cb1d9052e024a9fe0c3391babbf5, type: 2}

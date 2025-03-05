@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Shooter : Enemy
+public class Boss : Enemy
 {
     public float shootTime = 1f;
     private float timer;

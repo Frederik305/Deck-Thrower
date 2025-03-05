@@ -51,13 +51,13 @@ public class playerMovement : MonoBehaviour
         {
             if (speed < 11f)
             {
-                speed = 50f;
+                speed = 30f;
             }
         }
         // Gradually remove the dash speed each frame until the speed is normal
         if (speed > 10f)
         {
-            speed = speed - 0.25f;
+            speed = speed - 0.30f;
         }
 
         //Track player and mouse coords
@@ -81,12 +81,12 @@ public class playerMovement : MonoBehaviour
                 ver *= diagnolLimiter;
             }
             Vector2 movement = new Vector2(hor * speed, ver * speed);
-            rb.velocity = movement;
+            rb.linearVelocity = movement;
         
            // Active l'animation de marche seulement si le joueur bouge
         if (animator != null)
         {
-            if (rb.velocity.magnitude > 0.1f)
+            if (rb.linearVelocity.magnitude > 0.1f)
             {
                 animator.SetBool("isWalking", true);
             }
@@ -118,7 +118,7 @@ public class playerMovement : MonoBehaviour
             return;
         }
 
-        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Bullet" || other.gameObject.tag == "Enemy")
         {
             health--;
             healthScript.lowerHealth(health);
