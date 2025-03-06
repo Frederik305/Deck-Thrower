@@ -20,10 +20,16 @@ public class DungeonGenerator : MonoBehaviour
     [Header("Rooms probabilities (0.5 = 50%)")]
     [SerializeField] private float chancesBossRoom = 0.0f;
 
-
+    // List that temporaly holds all the positions where there is a tile
     private HashSet<Vector2Int> occupiedTiles = new();
+
+    // List that temporaly holds all placed rooms
     private List<RoomInstance> placedRooms = new();
+
+    // List that temporaly holds the id of the last placed rooms
     private Queue<int> lastPickedRoomIds = new();
+
+    // List that temporaly holds all the enemy instances
     private List<GameObject> enemyInstance = new();
 
     private void Start()
