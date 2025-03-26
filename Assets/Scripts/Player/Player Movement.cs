@@ -25,7 +25,7 @@ public class playerMovement : MonoBehaviour
     private float invincibilityCounter;
 
     private GameManager gameManager;
-    private Health healthScript;
+    public Health healthScript;
 
     private bool isDashing = false;
     private float lastDashTime = -Mathf.Infinity;

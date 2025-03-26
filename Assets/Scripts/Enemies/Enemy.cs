@@ -14,7 +14,6 @@ public class Enemy : MonoBehaviour
     protected ScoreManager scoreManager; // Référence au ScoreManager pour gérer le score
     protected Transform player; // Référence au joueur
     protected Rigidbody2D rb; // Référence au Rigidbody2D pour gérer la physique de l'ennemi
-
     public float deactivationDistance = 20f; // Distance à laquelle l'ennemi sera désactivé
     public float reactivationDistance = 18f; // Distance à laquelle l'ennemi sera réactivé
     public bool isActive = true; // Si l'ennemi est actif ou non

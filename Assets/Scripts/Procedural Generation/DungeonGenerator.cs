@@ -14,12 +14,12 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private List<TileBase> tileReferences;
     [SerializeField] private int maxRooms = 10;
     [SerializeField] private List<GameObject> enemies;
+    [SerializeField] private GameObject barrel;
     [SerializeField] private GameObject boss;
     [SerializeField] private GameObject player;
 
     [Header("Rooms probabilities (0.5 = 50%)")]
     [SerializeField] private float chancesBossRoom = 0.0f;
-
 
     private HashSet<Vector2Int> occupiedTiles = new();
     private List<RoomInstance> placedRooms = new();
@@ -157,8 +157,6 @@ public class DungeonGenerator : MonoBehaviour
         return new Vector2(centerX, centerY);
     }
 
-
-
     /// <summary>
     /// If there isn�t enough space for a BossRoom, attempts to place an EndRoom instead, aligning its door(s) with the last room.
     /// </summary>
@@ -251,6 +249,7 @@ public class DungeonGenerator : MonoBehaviour
                                 if (!Overlaps(newRoom, newRoomExitPosition))
                                 {
                                     PlaceRoomWithSpawns(newRoom, newRoomExitPosition);
+                                    PlaceBarrels(placedRooms); // Place Barrels in the room
                                     // Only update history when placement is successful:
                                     lastPickedRoomIds.Enqueue(randomIndex);
                                     if (lastPickedRoomIds.Count > 3)
@@ -265,6 +264,7 @@ public class DungeonGenerator : MonoBehaviour
                         {
                             // Place the room normally.
                             PlaceRoomWithSpawns(newRoom, newRoomPosition);
+                            PlaceBarrels(placedRooms); // Place Barrels in the room
                             // Only update history when placement is successful:
                             lastPickedRoomIds.Enqueue(randomIndex);
                             if (lastPickedRoomIds.Count > 3)
@@ -278,7 +278,6 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
     }
-
 
     int GetWeightedRandomIndex(List<RoomData> rooms)
     {
@@ -454,6 +453,57 @@ public class DungeonGenerator : MonoBehaviour
                     enemiesSpawned++;
                 }
             }
+        } 
+    }
+
+    //Takes a list of possible positions inside the room and randomly places the barrels
+    private void PlaceBarrels(List<RoomInstance> placedRooms)
+    {
+        if (tilemap == null)
+        {
+            Debug.LogWarning("Tilemap non assignée !");
+            return;
+        }
+
+        List<Vector3> possiblePositions = new List<Vector3>();
+
+        foreach (var room in placedRooms)
+        {
+            foreach (var tile in room.roomData.tiles)
+            {
+                TileBase tileBase = GetTileByName(tile.tileName);
+                if (tileBase != null && !tile.tileName.Contains("Wall") && !tile.tileName.Contains("Door") && !tile.tileName.Contains("Portal"))
+                {
+                    Vector3Int worldPos = new Vector3Int
+                    (
+                        room.gridPosition.x + tile.position.x,
+                        room.gridPosition.y + tile.position.y,
+                        0
+                    );
+                    Vector3 spawnPosition = tilemap.GetCellCenterWorld(worldPos);
+                    spawnPosition.z = 0f;
+                    possiblePositions.Add(spawnPosition);
+                }
+            }
+        }
+
+        Shuffle(possiblePositions);
+
+        for (int i = 0; i < Mathf.Min(1, possiblePositions.Count); i++)
+        {
+            GameObject barrelInstance = Instantiate(barrel, possiblePositions[i], Quaternion.identity);
+        }
+    }
+
+    // Takes a list and shuffles the items in it
+    void Shuffle<T>(List<T> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            int randomIndex = Random.Range(i, list.Count);
+            T temp = list[i];
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
         }
     }
 
