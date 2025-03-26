@@ -15,6 +15,7 @@ public class cardMovement : MonoBehaviour
 
     //How long it will take before player can pick the card up again
     public float collisionTimer = .5f;
+    
     //How long the card has been thrown out for
     private float timeAlive;
 
@@ -60,6 +61,12 @@ public class cardMovement : MonoBehaviour
         if (other.gameObject.tag == "Bullet")
         {
             Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "Barrel")
+        {
+            other.gameObject.GetComponent<EnemyBarrel>().Explode();
+            Destroy(other.gameObject);
+            Debug.Log("Explosion");
         }
 
         FindObjectOfType<AudioManager>().playSound("Card Bounce");

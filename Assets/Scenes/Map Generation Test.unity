@@ -2203,9 +2203,11 @@ MonoBehaviour:
   - {fileID: 3731329003049251495, guid: 63a92faba4e4258469d2c80bfc7e7539, type: 3}
   - {fileID: 5824662035464880549, guid: 186837416399fcc479404fb4274a733f, type: 3}
   - {fileID: 7397003448775736193, guid: 4a05561c841b1ec4d87da85a59000ec9, type: 3}
+  barrel: {fileID: 3941761902083706103, guid: 52e0eeefa8c175d44b62a18d611c6047, type: 3}
   boss: {fileID: 7397003448775736193, guid: 361ff283c41bfd84c82c1603fd01b2f8, type: 3}
   player: {fileID: 1374802121}
   chancesBossRoom: 0.5
+  barrelSpawner: {fileID: 0}
 --- !u!4 &1308809587
 Transform:
   m_ObjectHideFlags: 0
