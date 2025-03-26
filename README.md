@@ -25,6 +25,7 @@ In the dungeon you can find a merchant who will trade you card to build your per
 - <img src="https://github.com/user-attachments/assets/1db59499-abe2-43ca-ba27-94a119d46ce3"> The Follower- These guys will make a mad dash towards you, ignoring anything between you and them
 - <img src="https://github.com/user-attachments/assets/56ae83af-1189-425a-a8ee-645eb0205258"> The Bouncer- These not-so-gentle giants will blindly bounce all over the room, crashing into any and every thing there is (including you!)
 - <img src="https://github.com/user-attachments/assets/1dca57d6-8035-4a37-a6cd-731a723489e2"> The Shooter- These guys will fire bouncy bullets at you to keep you on your toes, even if you're across the map
+- <img src="https://github.com/Frederik305/Deck-Thrower/blob/main/Assets/Sprites/Enemies/Barrel.png"> The Barrel- These barrels will explode when hit with a card and cause damage to whoever is in a 3 feet radius
 
 
 ## Controls
